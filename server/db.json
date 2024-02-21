@@ -1,0 +1,308 @@
+{
+  "board": [
+    {
+      "id": "1",
+      "title": "test one board"
+    },
+    {
+      "id": "3",
+      "title": "test three board"
+    },
+    {
+      "id": "2",
+      "title": "test another board"
+    }
+  ],
+  "board_column": [
+    {
+      "title": "ToDo",
+      "color": "#00aaff",
+      "final_stage": false,
+      "board_id": "1",
+      "id": "1"
+    },
+    {
+      "title": "Doing",
+      "color": "#eeff00",
+      "final_stage": false,
+      "board_id": "1",
+      "id": "2"
+    },
+    {
+      "title": "Done",
+      "color": "#00ff4c",
+      "final_stage": true,
+      "board_id": "1",
+      "id": "3"
+    },
+    {
+      "title": "DoingDelete",
+      "color": "#a20606",
+      "final_stage": false,
+      "board_id": "2",
+      "id": "4"
+    },
+    {
+      "title": "ToDoDelete",
+      "color": "#5d1313",
+      "final_stage": true,
+      "board_id": "2",
+      "id": "5"
+    },
+    {
+      "id": "82df",
+      "title": "Тестовая ",
+      "color": "#9f1d1d",
+      "final_stage": false
+    },
+    {
+      "id": "cbae",
+      "title": "Тестовая",
+      "color": "#aa0303",
+      "final_stage": true
+    },
+    {
+      "id": "2477"
+    },
+    {
+      "title": "Тестовая3",
+      "color": "#fafafa",
+      "final_stage": false,
+      "board_id": "3",
+      "id": "41fb"
+    },
+    {
+      "id": "db6b",
+      "title": "Тест",
+      "color": "#396CE6",
+      "final_stage": false,
+      "board_id": "4617"
+    },
+    {
+      "id": "13a7",
+      "title": "Тест 2",
+      "color": "#834AF2",
+      "final_stage": true,
+      "board_id": "4617"
+    },
+    {
+      "id": "34b1",
+      "title": "Тест",
+      "color": "#28F7E3",
+      "final_stage": false,
+      "board_id": "6479"
+    },
+    {
+      "id": "862e",
+      "title": "Тест",
+      "color": "#4B0F71",
+      "final_stage": false,
+      "board_id": "6479"
+    },
+    {
+      "id": "8bdd",
+      "title": "Тест",
+      "color": "#E24AFE",
+      "final_stage": true,
+      "board_id": "6479"
+    },
+    {
+      "id": "d5f8",
+      "title": "Тест",
+      "color": "#6ba890",
+      "final_stage": true,
+      "board_id": "e49b"
+    },
+    {
+      "title": "Тест 32",
+      "color": "#2137b5",
+      "final_stage": false,
+      "board_id": "ff58",
+      "id": "8ac3"
+    },
+    {
+      "id": "3ee5",
+      "title": "Тест ",
+      "color": "#5e9d58",
+      "final_stage": true,
+      "board_id": "b487"
+    },
+    {
+      "id": "07e6",
+      "title": "111",
+      "color": "#C019D6",
+      "final_stage": true,
+      "board_id": "3c65"
+    },
+    {
+      "id": "8232",
+      "title": "1112",
+      "color": "#84EE15",
+      "final_stage": false,
+      "board_id": "3c65"
+    },
+    {
+      "id": "4e58",
+      "title": "Тестовый этап",
+      "color": "#a7792f",
+      "final_stage": true,
+      "board_id": "f12a"
+    },
+    {
+      "title": "Тестовая колонка",
+      "color": "#C15018",
+      "final_stage": false,
+      "board_id": "3",
+      "id": "1155"
+    }
+  ],
+  "task": [
+    {
+      "id": "1",
+      "board_column_id": "d9b2",
+      "title": "ToDo",
+      "description": "Test description",
+      "sub_task": [
+        {
+          "id": "1",
+          "title": "ToDo sub task1",
+          "final": true
+        },
+        {
+          "id": "2",
+          "title": "ToDo sub task2",
+          "final": false
+        },
+        {
+          "id": "3",
+          "title": "ToDo sub task3",
+          "final": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "board_column_id": "3",
+      "title": "ToDo2",
+      "description": "Test description2",
+      "sub_task": []
+    },
+    {
+      "title": "Тестовая задача 2",
+      "description": "Описание для тестовой задачи",
+      "board_column_id": "c3ba",
+      "sub_task": [
+        {
+          "title": "Тестовая подзадача для задачи",
+          "final": true,
+          "id": "6ecc179e-a151-4db1-a198-acac8a9b9b4e"
+        }
+      ],
+      "id": "0c3d"
+    },
+    {
+      "id": "bb2b",
+      "title": "Тест задачи",
+      "description": "Тестовая задача",
+      "board_column_id": "",
+      "sub_task": []
+    },
+    {
+      "id": "ba0a",
+      "title": "1",
+      "description": "2",
+      "board_column_id": "07e6",
+      "sub_task": []
+    },
+    {
+      "title": "Тестовая задача",
+      "description": "Описание для тестовой задачи\nСделать что-то 1 раз\nсделать потом что-то 2 раза\nповторить первое что-то 1 раз\nещё раз\nи ещё раз \nи ещё много много раз\n",
+      "board_column_id": "4",
+      "sub_task": [
+        {
+          "title": "что-то 1 раз",
+          "final": true,
+          "id": "0cdf4a32-9f4e-422d-8e9c-c0eb45c10a7a"
+        },
+        {
+          "id": "fe100f2b-a9df-4355-b2f9-631f87b7f61d",
+          "title": "ну и что-то ещё",
+          "final": true
+        },
+        {
+          "id": "5010f808-01a6-4367-bf97-9d302d7f02b6",
+          "title": "раз",
+          "final": true
+        },
+        {
+          "id": "dce8fe76-4188-4f49-b513-cfee90930c54",
+          "title": "много",
+          "final": true
+        },
+        {
+          "id": "50e59027-736d-4b0e-827e-9b3ffc23c79a",
+          "title": "и ещё много",
+          "final": true
+        },
+        {
+          "id": "c672df51-84a0-4683-8c03-acdf795c8272",
+          "title": "и ещё раз",
+          "final": true
+        },
+        {
+          "id": "a13f9829-f1ed-4803-8b0c-466e71bf9675",
+          "title": "ещё раз",
+          "final": true
+        },
+        {
+          "title": "что-то 2 раза",
+          "final": true,
+          "id": "4852f71b-c110-421d-85f4-9178375679b6"
+        },
+        {
+          "title": "повтор что-то 1 раз",
+          "final": true,
+          "id": "bdc6cdb4-562f-4d7b-8838-3e897114ca1f"
+        }
+      ],
+      "id": "98ed"
+    },
+    {
+      "id": "3da1",
+      "title": "Тест 1",
+      "description": "тест",
+      "board_column_id": "c3ba",
+      "sub_task": []
+    },
+    {
+      "id": "704b",
+      "title": "Тестовая задача",
+      "description": "Тест",
+      "board_column_id": "2",
+      "sub_task": [
+        {
+          "id": "5fb75d79-2b31-4020-8721-dadaeff85c7a",
+          "title": "Подзадача 1",
+          "final": false
+        },
+        {
+          "id": "0b6fea25-d9e8-433c-8886-b0bb451f53f1",
+          "title": "Тест",
+          "final": false
+        },
+        {
+          "id": "d4fd36b4-8bd3-433b-8361-7aefce4800b6",
+          "title": "Тест 2",
+          "final": false
+        }
+      ]
+    },
+    {
+      "id": "b0bf",
+      "title": "Тестовая задача",
+      "description": "Тест",
+      "board_column_id": "3",
+      "sub_task": []
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+@import "../../../syles/common";
+
+.commonInput {
+  color: var(--text-color);
+  background: transparent;
+  outline: none;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 5px;
+
+  &:active, &:hover, &:focus {
+    border-color: $primary_color;
+  }
+}
+
+.withOutLabel {
+  grid-template: 36px/ 1fr !important;
+}
+
+.input {
+  display: grid;
+  grid-template: 24px 36px/ 1fr;
+  gap: 5px;
+
+  .label {
+    font-size: $font-size_label;
+  }
+
+  input {
+    @extend .commonInput;
+  }
+}
+
+.inputTextArea {
+  @extend .input;
+  grid-template: 24px auto/ 1fr;
+
+  textarea {
+    @extend .commonInput;
+    resize: vertical;
+    max-height: 500px;
+  }
+}
+
+.select {
+  @extend .input;
+
+  select {
+    @extend .commonInput;
+  }
+
+  option {
+    color: var(--text-color);
+    background: var(--background-color);
+  }
+}
+
+.errors {
+  font-size: $font-size_label;
+  color: $error_color;
+}

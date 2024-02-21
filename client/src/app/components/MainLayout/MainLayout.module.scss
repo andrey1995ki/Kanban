@@ -1,0 +1,60 @@
+@import "src/assets/syles/common";
+
+.mainLayout {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: $weight_sider 1fr;
+  grid-template-rows: $height_header 1fr;
+  grid-template-areas: "HL HL HL" "CL CL CL"
+}
+
+.mainLayout--sider {
+  @extend .mainLayout;
+  grid-template-areas: "HL HL HL" "SL CL CL"
+}
+
+.layout {
+  display: grid;
+  grid-area: CL;
+
+  .content {
+    border-top: 1px solid var(--border-color);
+    padding: 15px;
+    overflow-x: auto;
+    position: relative;
+
+    .showSider {
+      position: fixed;
+      bottom: 20px;
+      height: 40px;
+      width: 40px;
+      font-size: 25px;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      background: var(--light-background-color);
+      cursor: pointer;
+
+      &:hover {
+        border-color: $primary_color;
+        background: transparent;
+        color: $primary_color;
+      }
+    }
+  }
+}
+
+.stDecorators {
+  display: grid;
+  height: 70vh;
+  grid-template-columns: $weight_sider 20px;
+  grid-template-areas: "CL CL"
+}
+
+.stDecorators--sider {
+  @extend .stDecorators;
+  grid-template-areas: "SL CL"
+}

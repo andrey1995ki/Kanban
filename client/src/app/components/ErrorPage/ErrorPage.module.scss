@@ -1,0 +1,34 @@
+@import "src/assets/syles/common";
+
+.errorPage {
+  height: 100vh;
+  display: grid;
+  align-items: center;
+
+  .errorBlock {
+    display: grid;
+    align-items: start;
+    justify-items: center;
+    grid-template-rows: 120px 35px 400px;
+  }
+
+  .label {
+    font-size: 5rem;
+    color: $error_color;
+  }
+
+  .title {
+    h3 {
+      margin: 0;
+    }
+  }
+
+  .body {
+    width: 600px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 5px;
+    background: var(--light-background-color);
+  }
+}

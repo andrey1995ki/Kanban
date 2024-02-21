@@ -1,0 +1,47 @@
+@import "../../../syles/common";
+
+.options {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  .optionsBtn{
+    position: relative;
+    width: 20px;
+  }
+}
+
+.optionsBlock {
+  position: absolute;
+  width: 150px;
+  z-index: 1;
+  background: var(--background-color);
+  top: 20px;
+  left: -165px;
+  border: 1px solid var(--border-color);
+  border-radius: 15px 0 15px 15px;
+  display: grid;
+  align-items: stretch;
+  justify-items: center;
+  padding: 10px;
+  align-content: stretch;
+  gap: 14px;
+
+  button {
+    height: 40px;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    color: inherit;
+    background: transparent;
+    cursor: pointer;
+
+    &:hover {
+      background: $primary_color_gradient;
+      border-color: $primary_color;
+      color: white;
+    }
+  }
+}
+

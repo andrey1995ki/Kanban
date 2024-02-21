@@ -1,0 +1,90 @@
+@import "../../../assets/syles/common";
+
+.boards {
+  display: grid;
+  justify-content: start;
+  gap: 25px;
+  height: 100%;
+}
+
+.column {
+  grid-row: 1 / 2;
+  height: 99%;
+  width: 350px;
+  display: grid;
+  padding: 5px;
+}
+
+.columnLayout {
+  @extend .column;
+  grid-template-columns: 1fr;
+  grid-template-rows: 25px 1fr;
+  gap: 10px;
+
+  .titleColumn {
+    display: grid;
+    grid-template-columns: 19px 1fr 12px;
+    align-items: center;
+    justify-content: start;
+    gap: 4px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .doneTitle {
+        color: $primary_color;
+      }
+    }
+  }
+
+  .color {
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid var(--border-color)
+  }
+
+  .tasks {
+    height: 79vh;
+    overflow-y: auto;
+    margin: 0 2px 2px 2px;
+  }
+}
+
+.createNew {
+  @extend .column;
+  background: var(--semi-light-background-color);
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: $primary_color;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 15px #645fc6;
+  }
+
+  .text {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 30px 1fr;
+
+    .textIcon {
+      font-size: 1.5em;
+      height: 25px;
+    }
+  }
+}
+
+.dragging {
+  border: 1px dashed $primary_color;
+  background: var(--semi-light-background-color);;
+  border-radius: 15px;
+}
+

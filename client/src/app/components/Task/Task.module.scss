@@ -1,0 +1,80 @@
+@import "src/assets/syles/common";
+
+.task {
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 25px;
+  padding: 15px 10px 10px 15px;
+  background: var(--light-background-color);
+  border-radius: 15px;
+  margin: 10px;
+  cursor: pointer;
+
+  h3 {
+    margin: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 0 15px $primary_color;
+  }
+
+  .subTaskTitle {
+    color: $mute_color;
+    font-size: 0.8rem;
+  }
+}
+
+.taskData {
+  display: grid;
+  justify-items: stretch;
+  gap: 8px;
+  margin-block: 10px;
+}
+
+.title {
+  display: grid;
+  grid-template-columns: 1fr 10px;
+  justify-items: start;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.description {
+  color: $mute_color;
+  font-size: $font-size_label;
+  white-space: pre;
+}
+
+.subTaskBlock {
+  display: grid;
+  justify-items: stretch;
+  gap: 8px;
+}
+
+.subTitle {
+  font-size: $font-size_label;
+}
+
+.subTask {
+  display: grid;
+  gap: 5px;
+}
+
+.subTaskData {
+  padding: 10px 5px;
+  background: var(--background-color);
+  color: $mute_color;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  gap: 5px;
+  align-items: center;
+}
+
+.subTaskDone {
+  text-decoration: line-through;
+}

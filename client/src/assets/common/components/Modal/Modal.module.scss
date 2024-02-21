@@ -1,0 +1,47 @@
+@import "../../../syles/common";
+
+.modalLayout {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #0000007a;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.modal {
+  background: var(--semi-light-background-color);
+  display: grid;
+  width: 480px;
+  border-radius: 15px;
+  padding: 10px;
+  position: relative;
+  grid-template: 30px 1fr / 1fr;
+  gap: 12px;
+
+  .closeModal {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 19px;
+    padding: 5px;
+
+    &:hover {
+      border-bottom: 1px solid #645fc663;
+      border-left: 1px solid #645fc663;
+      color: $primary_color;
+    }
+  }
+}
+
+.children {
+  margin: 0 5px;
+  min-height: 300px;
+  max-height: 750px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

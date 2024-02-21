@@ -1,0 +1,38 @@
+@import "src/assets/syles/common";
+
+.mainPage {
+  height: 100%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainBlock {
+  display: grid;
+  grid-template-rows: 90px 40px;
+}
+
+.title {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  grid-template-rows: 50px 40px;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.icon {
+  color: $default_color;
+  font-size: 3em;
+
+  > * {
+    background: $primary_color_gradient;
+    border-radius: 5px;
+  }
+}
+
+.mainText {
+  margin: 0;
+}

@@ -1,0 +1,141 @@
+@import "../../../assets/syles/common";
+
+.form {
+  display: grid;
+  gap: 8px;
+}
+
+.parameters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.parametersEdit {
+  @extend .parameters;
+  grid-column: 1/4;
+  align-items: center;
+  justify-items: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.field {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+}
+
+//.checkbox {
+//  display: grid;
+//  align-content: center;
+//  grid-template-rows: 0 1fr;
+//
+//  input[type='checkbox'] {
+//    opacity: 0;
+//    width: 0;
+//    height: 0;
+//  }
+//
+//  input[type='checkbox']:checked + .inputSpan {
+//    background-color: $primary_color;
+//    border-color: $primary_color;
+//    position: relative;
+//
+//    &:before {
+//      content: "✔";
+//      color: white;
+//      position: absolute;
+//      left: 2px;
+//      top: -6px;
+//      font-size: 21px;
+//    }
+//  }
+//
+//  .inputSpan {
+//    display: inline-block;
+//    width: 20px;
+//    height: 20px;
+//    border: 1px solid var(--border-color);
+//    cursor: pointer;
+//  }
+//}
+
+.color {
+  input[type='color'] {
+    border: 0;
+    outline: none;
+    background: transparent;
+    height: 33px;
+    width: 33px;
+  }
+
+  .inputSpan {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.editBoard {
+  display: grid;
+  margin: 5px;
+  border: 1px solid var(--border-color);
+  grid-template-columns: 1fr 34px 34px;
+}
+
+.editBoardText {
+  padding: 5px;
+
+  input {
+    width: 98%;
+    outline: none;
+    background: transparent;
+    border: 0;
+    color: var(--text-color);
+  }
+}
+
+.editBoardBtn {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+  border: 1px solid;
+  color: var(--text-color);
+
+  &:hover {
+    background: transparent;
+    border-color: var(--border-color);
+  }
+}
+
+.edit {
+  background: $primary_color;
+  border-color: $primary_color;
+}
+
+.delete {
+  background: $error_color;
+  border-color: $error_color;
+}
+
+.check {
+  background: #00a800;
+  border-color: #00a800;
+}
+.formArray{
+  display: grid;
+  grid-template-columns: 1fr 31px;
+
+  button{
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 20px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color:#8790a2;
+  }
+}

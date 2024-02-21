@@ -1,0 +1,67 @@
+@import "./assets/syles/common";
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.light-theme {
+  --background-color: #f4f7ff;
+  --semi-light-background-color: #eaeffb;
+  --light-background-color: #ffffff;
+  --border-color: #cccccc;
+  --text-color: #1e1e1e;
+}
+
+body {
+  --background-color: #21212d;
+  --semi-light-background-color: #222430;
+  --light-background-color: #2c2c38;
+  --border-color: #40404f;
+  --text-color: #fdffff;
+  color: var(--text-color);
+  background-color: var(--background-color);
+
+}
+
+body {
+  margin: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $primary_color;
+
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    --background-color: #f4f7ff;
+    --light-background-color: #ffffff;
+    --border-color: #cccccc;
+    --text-color: #131313;
+  }
+  body.dark-theme {
+    --background-color: rgb(33 33 45);
+    --light-background-color: rgb(44 44 56);
+    --border-color: #40404f;
+    --text-color: #fdffff;
+  }
+}

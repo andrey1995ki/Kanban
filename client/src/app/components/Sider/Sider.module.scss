@@ -1,0 +1,158 @@
+@import "../../../assets/syles/common";
+
+.sider {
+  display: grid;
+  grid-area: SL;
+  background: var(--light-background-color);
+  border-right: 1px solid var(--border-color);
+  grid-template-rows: 1fr auto 150px;
+  grid-template-areas: "menu" "." "actions";
+}
+
+.menu {
+  font-family: Verdana, sans-serif;
+  font-stretch: ultra-expanded;
+  grid-area: menu;
+
+  .boardCount {
+    color: $mute_color;
+    padding: 10px 0 10px 20px;
+  }
+
+  .boardsList {
+    overflow-y: auto;
+    max-height: 570px;
+    margin-bottom: 5px;
+  }
+
+  .board {
+    display: grid;
+    padding: 10px 0 10px 20px;
+    margin: 2.5px 15px 2.5px 0;
+    border: 1px solid transparent;
+    border-left: 0;
+    border-radius: 0 20px 20px 0;
+    grid-template-columns: 25px 1fr;
+    align-items: center;
+
+    .boardIcon {
+      height: 19px;
+    }
+
+    height: 20px;
+
+    &:hover {
+      border-color: $primary_color;
+      cursor: pointer;
+    }
+  }
+
+  .board--active {
+    @extend .board;
+    color: $default_color;
+    background: $primary_color_gradient;
+  }
+
+  .link {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: none;
+  }
+
+  .boardCreate {
+    @extend .board;
+    color: $primary_color;
+
+    .boardCreateText {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      align-items: center;
+    }
+  }
+}
+
+.actions {
+  grid-area: actions;
+  display: grid;
+  grid-template: 40px 20px /1fr;
+  justify-items: center;
+  align-content: center;
+  gap: 5px;
+
+  .theme {
+    background: var(--background-color);
+    height: 40px;
+    width: 178px;
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5px;
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      border-radius: 34px;
+
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .switchSlider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 25px;
+
+        &:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+          border-radius: 50%;
+        }
+      }
+
+      input:checked + .switchSlider {
+        background: $primary_color_gradient;
+      }
+
+      input:checked + .switchSlider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+    }
+  }
+  .hide{
+    color: $mute_color;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 15px 1fr;
+    gap: 4px;
+    cursor: pointer;
+    &:hover{
+      color: $primary_color;
+    }
+  }
+}
+
+.form {
+  display: grid;
+  gap: 8px;
+}

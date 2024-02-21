@@ -1,0 +1,68 @@
+@import "../../../assets/syles/common";
+
+.header {
+  grid-area: HL;
+  background: var(--light-background-color);
+  display: grid;
+  grid-template-columns: $weight_sider 1fr;
+  grid-template-rows: 1fr 62px 1fr;
+  grid-template-areas: "title ." "title header" "title .";
+}
+
+.title {
+  padding-left: 15px;
+  grid-area: title;
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  gap: 7px;
+  justify-items: start;
+  align-items: center;
+  border-right: 1px solid var(--border-color);
+
+  .siderName {
+    margin: 0;
+  }
+
+  .icon {
+    color: $default_color;
+    font-size: 1.5em;
+    height: 28px;
+
+    > * {
+      background: $primary_color_gradient;
+      border-radius: 5px;
+    }
+  }
+}
+
+.headerData {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 300px 1fr 220px;
+  grid-template-areas: "title . action";
+  padding-inline: 15px;
+
+  .headerTitle {
+    grid-area: title;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .headerAction {
+    grid-area: action;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 10px;
+    justify-items: end;
+    gap: 25px;
+  }
+
+}
+
+
+.errorEdit {
+  font-size: $font-size_label;
+  color: $error_color;
+}

@@ -1,0 +1,22 @@
+@import "../../../syles/common";
+
+.titleColumn {
+  animation: skeleton-loading 1s linear infinite alternate;
+  border-radius: 25px;
+}
+.task{
+  animation: skeleton-loading 1s linear infinite alternate;
+  cursor: auto !important;
+  &:hover{
+    box-shadow: none !important;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background: hsl(200, 20%, 80%);
+  }
+  100% {
+    background: hsla(0, 0%, 19%, 0.37);
+  }
+}
