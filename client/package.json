@@ -12,12 +12,16 @@
     "build-storybook": "storybook build",
     "createComponent": "generate-react component",
     "createSlice": "generate-react component --type=slice",
-    "server": "json-server -w ../server/db.json"
+    "server": "json-server -w ../server/db.json",
+    "graphql-server": "json-graphql-server ../server/db.js --p 3001"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.9",
     "@reduxjs/toolkit": "^2.1.0",
     "@storybook/addon-docs": "^7.6.16",
     "dayjs": "^1.11.10",
+    "graphql": "^14.7.0",
+    "json-graphql-server": "^2.3.2",
     "json-server": "^1.0.0-alpha.23",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
