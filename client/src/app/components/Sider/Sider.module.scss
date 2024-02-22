@@ -25,7 +25,7 @@
     margin-bottom: 5px;
   }
 
-  .branchTitle {
+  .board {
     display: grid;
     padding: 10px 0 10px 20px;
     margin: 2.5px 15px 2.5px 0;
@@ -48,7 +48,7 @@
   }
 
   .board--active {
-    @extend .branchTitle;
+    @extend .board;
     color: $default_color;
     background: $primary_color_gradient;
   }
@@ -60,7 +60,7 @@
   }
 
   .boardCreate {
-    @extend .branchTitle;
+    @extend .board;
     color: $primary_color;
 
     .boardCreateText {
