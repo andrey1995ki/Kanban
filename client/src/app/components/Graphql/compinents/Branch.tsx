@@ -1,25 +1,27 @@
+import {useQuery} from "@apollo/client";
 import {FC} from "react";
 import {ApolloResult, BranchProps} from "../Graphql.model";
-import style from "../Graphql.module.scss";
-import {useQuery} from "@apollo/client";
 import {Layout} from "./Layout";
+import {CREATE_TASK, TASKS} from "../../../graphql/query";
+import {TaskLayout} from "./TaskLayout";
 
-export const Branch: FC<BranchProps> = (props) => {
-    const {title, id, filterKey, type, inputType} = props
-    const {data, loading} = useQuery(type, {
+export const Branch:FC<BranchProps> = ({type,id, filterKey}) => {
+    const {data} = useQuery(type, {
         variables: {
             filter: {
                 [filterKey]: id
             }
         }
     })
-    console.log(title, data, loading);
+    console.log(data);
     return (
-        <div className={style.block}>
-            <Layout title={title} dependentType={type} inputType={inputType} cacheParam={'columns'} newParam={'newColumn'} id={id} idParam={'board_id'}>
-                {data?.columns.map((column: ApolloResult) => <div key={column.id}
-                                                                  className={style.branchTitle}>{column.title}</div>)}
-            </Layout>
-        </div>
+        <>
+            {data?.columns.map((column:ApolloResult)=>(
+                <Layout title={column.title} dependentType={TASKS} inputType={CREATE_TASK} cacheParam={'tasks'}
+                        newParam={'newTask'} id={column.id} idParam={'column_id'} key={column.id}>
+                    <TaskLayout id={column.id} filterKey={'column_id'} type={TASKS}/>
+                </Layout>
+            ))}
+        </>
     );
-};
+}

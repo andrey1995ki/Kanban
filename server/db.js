@@ -30,6 +30,7 @@ module.exports = {
             id: 1,
             column_id: 1,
             title: "ToDo",
+            done: false
         }
     ]
 }

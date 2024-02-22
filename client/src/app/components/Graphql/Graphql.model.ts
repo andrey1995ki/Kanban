@@ -2,13 +2,14 @@ import {DocumentNode} from "graphql";
 import {OperationVariables, TypedDocumentNode} from "@apollo/client";
 import {ReactElement} from "react";
 
-export interface BranchProps {
+export interface BranchLayoutProps {
     title: string
     id: number
     filterKey: 'board_id' | 'column_id'
     type: ApolloQueryType
     inputType: ApolloQueryType
 }
+export type BranchProps = Pick<BranchLayoutProps, 'id'|'type'|'filterKey'>
 
 export interface ExpandedProps {
     expand: boolean
@@ -28,6 +29,10 @@ export interface InputProps {
     id?:number
     idParam?:string
 }
+export interface ApolloPayload extends Partial<{[key:string]:string|number}>{
+    title:string
+
+}
 
 export interface LayoutProps {
     title: string
@@ -39,4 +44,7 @@ export interface LayoutProps {
     newParam:string
     id?:number
     idParam?:string
+}
+export interface TaskProps{
+    title: string
 }

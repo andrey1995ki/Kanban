@@ -21,6 +21,7 @@ export const COLUMNS = gql`
       columns: allColumns(filter:$filter){
         id
         title
+        board_id
       }
     }
 `
@@ -29,6 +30,25 @@ export const CREATE_COLUMN = gql`
         newColumn: createColumn(title:$title,board_id:$board_id){
             id
             title
+            board_id
         }
+    }
+`
+export const TASKS = gql`
+    query tasks($filter:TaskFilter) {
+      tasks: allTasks(filter:$filter){
+        id
+        title
+        done
+      }
+    }
+`
+export const CREATE_TASK = gql`
+    mutation createTask($title:String! $column_id: ID!){
+      newTask: createTask(title:$title column_id:$column_id done:false){
+        id
+        title
+        done
+      }
     }
 `
