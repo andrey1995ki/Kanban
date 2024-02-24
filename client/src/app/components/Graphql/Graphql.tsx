@@ -7,6 +7,7 @@ import {FC} from "react";
 import {BranchLayout} from "./compinents/BranchLayout";
 import {Layout} from "./compinents/Layout";
 import {ApolloResult} from "./Graphql.model";
+import {notLastChild} from "./Graphql.utils";
 
 export const Graphql: FC = () => {
     const {data, loading} = useQuery(ALL_BOARD)
@@ -20,9 +21,10 @@ export const Graphql: FC = () => {
                             cacheParam={'boards'}
                             newParam={'newBoard'}
                     >
-                        {data?.boards.map((board: ApolloResult) => (
+                        {data?.boards.map((board: ApolloResult, index:number) => (
                             <BranchLayout title={board.title} key={board.id} id={board.id} filterKey={'board_id'}
-                                          type={COLUMNS} inputType={CREATE_COLUMN}/>))}
+                                          type={COLUMNS} inputType={CREATE_COLUMN}
+                                          notLast={notLastChild(data?.boards.length,index)}/>))}
                     </Layout>
                 </div>
             </div>

@@ -43,6 +43,33 @@
   //grid-area: BB;
   grid-row: 2/3;
   grid-column: 2/3;
+  position: relative;
+  .block {
+    position: relative;
+
+    &:after {
+      content: "";
+      border-left: $tree_color;
+      border-bottom: $tree_color;
+      position: absolute;
+      top: 2px;
+      left: -14px;
+      height: 11px;
+      width: 10px;
+    }
+  }
+
+  .notLastBlock {
+    &:before {
+      content: "";
+      border-left: $tree_color;
+      border-bottom: $tree_color;
+      position: absolute;
+      top: 2px;
+      left: -14px;
+      height: 100%;
+    }
+  }
 }
 
 .actions {
@@ -50,13 +77,17 @@
   display: grid;
   grid-template-rows: 16px;
 }
-.moreActions{
+
+.moreActions {
   position: absolute;
   display: grid;
   grid-template-rows: 16px;
+  grid-template-columns: repeat(3, 20px);
+  justify-items: center;
   left: 25px;
-  svg{
+  svg {
     cursor: pointer;
+
     &:hover {
       background: $primary_color;
     }
@@ -74,38 +105,41 @@
 .branchTitle {
   @extend .blockTitle;
   position: relative;
-  justify-items: start!important;
-  &:after {
-    content: "";
-    border-left: 1px dashed;
-    border-bottom: 1px dashed;
-    position: absolute;
-    bottom: 10px;
-    left: -14px;
-    height: 11px;
-    width: 10px;
-  }
+  justify-items: start !important;
+  //&:after {
+  //  content: "";
+  //  border-left: 1px dashed;
+  //  border-bottom: 1px dashed;
+  //  position: absolute;
+  //  bottom: 10px;
+  //  left: -14px;
+  //  height: 11px;
+  //  width: 10px;
+  //}
 }
-.input{
-  position: relative;
+
+.input {
   display: grid;
   grid-template-columns: 200px 20px 20px;
   align-items: center;
   justify-items: start;
   gap: 8px;
+
   &:after {
     content: "";
-    border-left: 1px dashed;
-    border-bottom: 1px dashed;
+    border-left: $tree_color;
+    border-bottom: $tree_color;
     position: absolute;
-    top: 2px;
+    bottom: 10px;
     left: -14px;
-    height: 11px;
+    height: 80%;
     width: 10px;
   }
-  input{
+
+  input {
     width: 191px;
     outline: none;
+
     &:active, &:hover, &:focus {
       border-color: $primary_color;
     }
