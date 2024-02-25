@@ -1,8 +1,8 @@
-import style from "../../Graphql.module.scss";
-import {Loader} from "../../../../../assets/common/components/Loader/Loader";
+import style from "../../../Graphql.module.scss";
+import {Loader} from "../../../../../../assets/common/components/Loader/Loader";
 import {BsCheckSquareFill, BsXSquareFill} from "react-icons/bs";
 import {ChangeEvent, forwardRef, useState} from "react";
-import {InputLayoutProps} from "./Input.model";
+import {InputLayoutProps} from "./Mutation.model";
 
 export const InputLayout = forwardRef<HTMLInputElement, InputLayoutProps>(({
                                                                                value: initValue,
@@ -14,9 +14,16 @@ export const InputLayout = forwardRef<HTMLInputElement, InputLayoutProps>(({
     const change = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
+    const blur = ()=>{
+        const timer = setTimeout(()=>{
+            hide(false)
+            clearTimeout(timer)
+        },200)
+
+    }
     return (
         <div className={style.input}>
-            <input value={value} onChange={change} ref={ref}/>
+            <input value={value} onChange={change} ref={ref} autoFocus onBlur={blur}/>
             {
                 loading ?
                     <Loader/>

@@ -2,13 +2,13 @@ import {DocumentNode} from "graphql";
 import {OperationVariables, TypedDocumentNode} from "@apollo/client";
 import {Dispatch, ReactElement, SetStateAction} from "react";
 
-export interface BranchLayoutProps {
+export interface BoardLayoutProps {
     title: string
     id: number
     notLast?: boolean
 }
 
-export interface BranchProps {
+export interface BoardProps {
     id: number
     type: ApolloQueryType
     filterKey: string
@@ -20,43 +20,8 @@ export interface ExpandedProps {
 }
 
 export type ApolloResult = { id: number, title: string, done?: boolean }
-type ApolloQueryType = DocumentNode | TypedDocumentNode<any, OperationVariables>
+export type ApolloQueryType = DocumentNode | TypedDocumentNode<any, OperationVariables>
 
-export interface ApolloDataEnum {
-    Create: ApolloQueryType
-    Update?: ApolloQueryType
-    Delete?: ApolloQueryType
-    Dependent: ApolloQueryType
-    NewParam: string
-    CacheParam: string
-    DependsParam?: string
-}
-
-export interface InputProps {
-    type: ApolloQueryType
-    requestType?: 'update' | 'delete'
-    value?: string
-    hide: (hid: boolean) => void
-    dependentType: ApolloQueryType
-    id?: number
-    enumerate: ApolloDataEnum
-}
-
-export interface ApolloPayload extends Partial<{ [key: string]: string | number }> {
-    title: string
-
-}
-
-export interface LayoutProps {
-    title: string
-    children: ReactElement
-    mainBranch?: boolean
-    id?: number
-    notLast?: boolean
-    canChange?: boolean
-    enumerate: ApolloDataEnum
-    changeElem: ReactElement
-}
 
 export interface TaskProps {
     title: string
@@ -70,6 +35,7 @@ export interface ContextState {
     y: number
     show: boolean
 }
+
 export type SetContextMenuType = Dispatch<SetStateAction<ContextState>>
 
 export interface ContextMenuProps {

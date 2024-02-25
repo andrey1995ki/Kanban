@@ -4,7 +4,7 @@ import {Input} from "./Input";
 import '../../../../../../index.scss'
 
 const input: Meta<typeof Input> = {
-    title: "Components/Fields/Input",
+    title: "Components/Fields/Mutation",
     component: Input,
     tags: ['autodocs'],
     parameters: {

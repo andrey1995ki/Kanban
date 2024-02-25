@@ -16,6 +16,21 @@ export const CREATE_BOARD = gql`
         }
     }
 `
+export const CHANGE_BOARD = gql`
+    mutation updateBoard($board_id: ID! $title: String){
+      changeBoard: updateBoard(id:$board_id title:$title){
+        id
+        title
+      }
+    }
+`
+export const DELETE_BOARD = gql`
+    mutation removeBoard($id: ID!){
+      removeItem: removeBoard(id:$id){
+        id
+      }
+    }
+`
 export const COLUMNS = gql`
     query columns($filter:ColumnFilter) {
       columns: allColumns(filter:$filter){
@@ -32,6 +47,21 @@ export const CREATE_COLUMN = gql`
             title
             board_id
         }
+    }
+`
+export const CHANGE_COLUMN = gql`
+    mutation updateColumn($column_id: ID! $title: String){
+      changeColumn: updateColumn(id:$column_id title:$title){
+        id
+        title
+      }
+    }
+`
+export const DELETE_COLUMN = gql`
+    mutation removeColumn($id: ID!){
+      removeColumn(id:$id){
+        id
+      }
     }
 `
 export const TASKS = gql`
@@ -52,30 +82,26 @@ export const CREATE_TASK = gql`
       }
     }
 `
-export const CHANGE_BOARD = gql`
-    mutation updateBoard($board_id: ID! $title: String){
-      changeBoard: updateBoard(id:$board_id title:$title){
+export const CHANGE_TASK = gql`
+    mutation updateTask($task_id: ID! $title: String){
+      changeTask: updateTask(id:$task_id title:$title){
         id
         title
       }
     }
 `
-export const CHANGE_COLUMN = gql`
-    mutation updateColumn($column_id: ID! $title: String){
-      changeColumn: updateColumn(id:$column_id title:$title){
+export const DELETE_TASK = gql`
+    mutation removeTask($id: ID!){
+      removeItem: removeTask(id:$id){
         id
-        title
       }
     }
 `
-export const DELETE_COLUMN = gql`
-    mutation removeColumn($column_id: ID!){
-      deleteColumn: removeColumn(id:$column_id){
+export const TOGGLE_TASK = gql`
+    mutation updateTask($task_id: ID! $done: Boolean){
+      changeTask: updateTask(id:$task_id done:$done){
         id
-        title
+        done
       }
     }
 `
-// export const CHANGE_TASK = gql`
-//
-// `

@@ -1,8 +1,8 @@
 import {FC, useRef} from 'react';
-import {InputLayout} from "./InputLayout";
+import {InputLayout} from "../Common/InputLayout";
 import {useMutation} from "@apollo/client";
-import {ALL_BOARD, CREATE_BOARD} from "../../../../graphql/query";
-import {AddBoardsProps} from "./Input.model";
+import {ALL_BOARD, CREATE_BOARD} from "../../../../../graphql/query";
+import {AddBoardsProps} from "../Common/Mutation.model";
 
 export const AddBoards: FC<AddBoardsProps> = ({hide}) => {
     const ref = useRef<HTMLInputElement>(null)

@@ -4,13 +4,13 @@ import {useQuery} from "@apollo/client";
 import {ALL_BOARD} from "../../graphql/query";
 import {LoaderMain} from "../../../assets/common/components/Loader/LoaderMain";
 import {FC, useState} from "react";
-import {BranchLayout} from "./compinents/BranchLayout";
+import {BoardLayout} from "./compinents/Board/BoardLayout";
 import {Layout} from "./compinents/Layout/Layout";
 import {ApolloResult, ContextState} from "./Graphql.model";
 import {notLastChild, selectOnContext} from "./Graphql.utils";
 import {useBranch} from "../../../assets/common/hook/useBranch";
 import {ContextMenu} from "./compinents/ContextMenu";
-import {AddBoards} from "./compinents/Input/AddBoards";
+import {AddBoards} from "./compinents/Mutation/Board/AddBoards";
 import {LayoutTitle} from "./compinents/Layout/LayoutTitle";
 
 export const Graphql: FC = () => {
@@ -29,8 +29,8 @@ export const Graphql: FC = () => {
                     {
                         expanded &&
                         data?.boards.map((board: ApolloResult, index: number) => (
-                            <BranchLayout title={board.title} key={board.id} id={board.id}
-                                          notLast={notLastChild(data?.boards.length, index)}/>))
+                            <BoardLayout title={board.title} key={board.id} id={board.id}
+                                         notLast={notLastChild(data?.boards.length, index)}/>))
                     }
                     {
                         addElem &&

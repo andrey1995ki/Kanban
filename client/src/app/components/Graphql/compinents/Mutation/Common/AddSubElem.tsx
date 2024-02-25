@@ -1,23 +1,22 @@
 import {FC, useRef} from 'react';
 import {InputLayout} from "./InputLayout";
 import {useMutation} from "@apollo/client";
-import {COLUMNS, CREATE_COLUMN} from "../../../../graphql/query";
-import {AddColumnProps} from "./Input.model";
+import {AddItemProps} from "./Mutation.model";
 
-export const AddColumn: FC<AddColumnProps> = ({board_id, hide}) => {
+export const AddSubElem: FC<AddItemProps> = (props) => {
+    const {id, hide, filterParam, cacheParam, mutationType, cacheType, mutationName} = props
     const ref = useRef<HTMLInputElement>(null)
     const variables = {
-        "filter": {board_id: board_id}
+        "filter": {[filterParam]: id}
     }
-    const [funcMutation, {loading}] = useMutation(CREATE_COLUMN, {
+    const [funcMutation, {loading}] = useMutation(mutationType, {
         update(cache, {data}) {
-            const {columns}: any = cache.readQuery({query: COLUMNS, variables}) || [{}]
-            console.log(columns);
-            if (columns) {
+            const cacheData = cache.readQuery({query: cacheType, variables}) || [{}]
+            if (cacheData[cacheParam]) {
                 cache.writeQuery({
-                    query: COLUMNS,
+                    query: cacheType,
                     data: {
-                        columns: [...columns, data['newColumn']]
+                        [cacheParam]: [...cacheData[cacheParam], data[mutationName]]
                     },
                     variables
                 })
@@ -28,7 +27,7 @@ export const AddColumn: FC<AddColumnProps> = ({board_id, hide}) => {
         await funcMutation({
             variables: {
                 title: ref.current?.value,
-                board_id: board_id
+                [filterParam]: id
             }
         })
         hide(false)

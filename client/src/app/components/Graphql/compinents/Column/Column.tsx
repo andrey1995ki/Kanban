@@ -1,10 +1,10 @@
-import {FC} from 'react';
+import {FC} from "react";
+import {ApolloResult, BoardProps} from "../../Graphql.model";
 import {useQuery} from "@apollo/client";
-import {ApolloResult, BranchProps} from "../Graphql.model";
-import {Task} from "./Task";
-import {notLastChild} from "../Graphql.utils";
+import {Task} from "../Task/Task";
+import {notLastChild} from "../../Graphql.utils";
 
-export const TaskLayout: FC<BranchProps> = ({type, filterKey, id}) => {
+export const Column: FC<BoardProps> = ({type, id, filterKey}) => {
     const {data} = useQuery(type, {
         variables: {
             filter: {

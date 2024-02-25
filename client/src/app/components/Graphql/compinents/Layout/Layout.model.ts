@@ -11,4 +11,6 @@ export interface LayoutTitleProps {
     toggleExpanded: () => void
     setContextMenu: SetContextMenuType
     mainBranch?: boolean
+    children?: ReactNode
+    editable?: boolean
 }
