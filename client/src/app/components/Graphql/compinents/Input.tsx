@@ -6,35 +6,37 @@ import {useMutation} from "@apollo/client";
 import {Loader} from "../../../../assets/common/components/Loader/Loader";
 
 export const Input: FC<InputProps> = (props) => {
-    const {type, value: initValue, hide, dependentType, cacheParam, newParam, idParam, id,} = props
+    const {type, value: initValue, hide, dependentType, id, enumerate, requestType} = props
+    const {DependsParam, NewParam, CacheParam} = enumerate
     const [value, setValue] = useState<string>(initValue || '')
     const change = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
     let variables = {}
-    if (idParam && id) {
-        variables = {"filter": {[idParam]: id}}
+    if (DependsParam && id && !requestType) {
+        variables = {"filter": {[DependsParam]: id}}
     }
     const [funcMutation, {loading}] = useMutation(type, {
         update(cache, {data}) {
-            console.log(cache);
-            const cacheData = cache.readQuery({query: dependentType, variables})
-            console.log(cacheData[cacheParam], data[newParam])
-            cache.writeQuery({
-                query: dependentType,
-                data: {
-                    [cacheParam]: [...cacheData[cacheParam], data[newParam]]
-                },
-                variables
-            })
+            const cacheData = cache.readQuery({query: dependentType, variables}) || [{}]
+            console.log(cacheData[CacheParam], data[NewParam])
+            if (cacheData[CacheParam]) {
+                cache.writeQuery({
+                    query: dependentType,
+                    data: {
+                        [CacheParam]: [...cacheData[CacheParam], data[NewParam]]
+                    },
+                    variables
+                })
+            }
         }
     })
     const submit = async () => {
         const data: ApolloPayload = {
             title: value
         }
-        if (idParam && id) {
-            data[idParam] = id
+        if (DependsParam && id) {
+            data[DependsParam] = id
         }
         console.log(data);
         await funcMutation({

@@ -52,3 +52,30 @@ export const CREATE_TASK = gql`
       }
     }
 `
+export const CHANGE_BOARD = gql`
+    mutation updateBoard($board_id: ID! $title: String){
+      changeBoard: updateBoard(id:$board_id title:$title){
+        id
+        title
+      }
+    }
+`
+export const CHANGE_COLUMN = gql`
+    mutation updateColumn($column_id: ID! $title: String){
+      changeColumn: updateColumn(id:$column_id title:$title){
+        id
+        title
+      }
+    }
+`
+export const DELETE_COLUMN = gql`
+    mutation removeColumn($column_id: ID!){
+      deleteColumn: removeColumn(id:$column_id){
+        id
+        title
+      }
+    }
+`
+// export const CHANGE_TASK = gql`
+//
+// `

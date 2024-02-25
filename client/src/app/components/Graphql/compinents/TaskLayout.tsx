@@ -15,7 +15,7 @@ export const TaskLayout: FC<BranchProps> = ({type, filterKey, id}) => {
     return (
         <>
             {data?.tasks.map((task: ApolloResult, index: number) => <Task title={task.title} key={task.id} id={task.id}
-                                                                          done={task.done}
+                                                                          done={!!task.done}
                                                                           notLast={notLastChild(data?.tasks.length, index)}/>)}
         </>
     );

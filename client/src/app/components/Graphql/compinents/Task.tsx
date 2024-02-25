@@ -1,9 +1,9 @@
 import style from "../Graphql.module.scss";
 import {FC} from "react";
 import {TaskProps} from "../Graphql.model";
-import {BsCheckSquareFill, BsFillDashSquareFill, BsFillPencilFill, BsFillTrashFill} from "react-icons/bs";
+import {BsCheckSquareFill, BsFillDashSquareFill} from "react-icons/bs";
 
-export const Task: FC<TaskProps> = ({title, done, id, notLast}) => {
+export const Task: FC<TaskProps> = ({title, done, notLast}) => {
     return (
         <div className={`${style.block} ${notLast ? style.notLastBlock : ''}`}>
             <div className={style.branchTitle}>
@@ -13,10 +13,6 @@ export const Task: FC<TaskProps> = ({title, done, id, notLast}) => {
                         done ? <BsCheckSquareFill/>
                             : <BsFillDashSquareFill/>
                     }
-                    <div className={style.moreActions}>
-                        <BsFillPencilFill/>
-                        <BsFillTrashFill/>
-                    </div>
                 </div>
             </div>
         </div>
