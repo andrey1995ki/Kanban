@@ -9,7 +9,7 @@
 
 .mainBlock {
   display: grid;
-  grid-template-rows: 90px 40px;
+  grid-template-rows: 90px 120px;
 }
 
 .title {
@@ -35,4 +35,30 @@
 
 .mainText {
   margin: 0;
+}
+
+.data {
+  display: grid;
+  justify-items: center;
+}
+
+.toGraphQl {
+  display: grid;
+  justify-items: center;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.graphQl {
+  font-size: 3rem;
+
+  svg {
+    background: $primary_color_gradient;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 2px;
+    color: white;
+  }
 }

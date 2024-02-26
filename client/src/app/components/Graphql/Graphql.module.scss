@@ -44,6 +44,7 @@
   grid-row: 2/3;
   grid-column: 2/3;
   position: relative;
+
   .block {
     position: relative;
 
@@ -85,6 +86,7 @@
   grid-template-columns: repeat(3, 20px);
   justify-items: center;
   left: 25px;
+
   svg {
     cursor: pointer;
 
@@ -135,7 +137,8 @@
     }
   }
 }
-.contextMenu{
+
+.contextMenu {
   background: var(--light-background-color);
   border: 1px solid var(--border-color);
   border-radius: 15px;
@@ -144,6 +147,17 @@
   position: absolute;
   display: grid;
   gap: 5px;
-  padding: 10px 5px;
+  padding: 10px 0;
   align-items: center;
+
+  button {
+    border: 0;
+    color: var(--text-color);
+    background: transparent;
+    padding-block: 5px;
+
+    &:hover {
+      background: #c5c5c5;
+    }
+  }
 }

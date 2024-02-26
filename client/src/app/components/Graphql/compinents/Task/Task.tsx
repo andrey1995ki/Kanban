@@ -33,7 +33,11 @@ export const Task: FC<TaskProps> = ({title, done, notLast, id}) => {
                          contextState={contextMenu}>
                 <>
                     <ToggleTask id={id} setContextMenu={setContextMenu} done={done}/>
-                    <button onClick={() => selectOnContext(() => setEdit(true), setContextMenu)}>Переименовать</button>
+                    {
+                        !done &&
+                        <button
+                            onClick={() => selectOnContext(() => setEdit(true), setContextMenu)}>Переименовать</button>
+                    }
                     <DeleteTask id={id} setContextMenu={setContextMenu}/>
                 </>
             </ContextMenu>
