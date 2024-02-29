@@ -6,5 +6,5 @@ export interface ButtonProps {
     type?: 'default' | 'primary'
     loading?: boolean
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
-    buttonType?:'button' | 'submit'
+    buttonType?: 'button' | 'submit'
 }

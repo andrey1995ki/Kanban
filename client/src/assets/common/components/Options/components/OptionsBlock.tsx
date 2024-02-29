@@ -4,6 +4,10 @@ import {OptionsBlockProps} from "../Options.model";
 
 export const OptionsBlock: FC<OptionsBlockProps> = ({setShowOptions, optionsArray}) => {
     const ref = useRef<HTMLDivElement>(null)
+    /**
+     * Функция отслеживющая клик вне элемента
+     * @param e
+     */
     const mouseClick = (e: MouseEvent) => {
         if (ref.current && !ref.current.contains(e.target as Node)) {
             setShowOptions(false)

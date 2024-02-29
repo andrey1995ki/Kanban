@@ -6,14 +6,19 @@ import {useGetBoardColumnQuery} from "../../store/api/api";
 import {Skeleton} from "../../../assets/common/components/Skeleton";
 import {useDispatch} from "react-redux";
 import {setColumn} from "../../store/app/app.slice";
+// import {getTask} from "../../store/task/task.slice";
+import {AppDispatch} from "../../store/store";
 
 export const Columns: FC<ColumnsProps> = ({boardId}) => {
     const {showModal, toggleModal} = useModal()
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const {data: boardData, isLoading} = useGetBoardColumnQuery(boardId)
     useEffect(() => {
         boardData && dispatch(setColumn(boardData))
     }, [boardData, dispatch])
+    // useEffect(()=>{
+    //     dispatch(getTask(boardId))
+    // },[boardId,dispatch])
     if (isLoading && !boardData) {
         return <Skeleton/>
     }

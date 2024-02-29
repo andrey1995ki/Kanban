@@ -8,6 +8,10 @@ export const Task: FC<TaskProps> = memo((props) => {
     const {showModal, toggleModal} = useModal()
     const countSubTask = sub_task.length
     const countDoneSubTask = sub_task.filter((task) => task.final).length
+    /**
+     * Добавление информации в dataTransfer при перетаскивании задачи
+     * @param e
+     */
     const onDragElement = (e: React.DragEvent<HTMLDivElement>) => {
         if (e.dataTransfer?.effectAllowed) {
             e.dataTransfer.effectAllowed = draggable ? 'move' : 'all';

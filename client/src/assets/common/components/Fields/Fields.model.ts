@@ -5,10 +5,11 @@ export interface InputProps extends UseFormRegisterReturn {
     label?: string
     errors?: string
     placeholder?: string
-    disabled?:boolean
+    disabled?: boolean
 }
+
 export interface SelectProps extends UseFormRegisterReturn {
     label?: string
-    options:Array<ReactElement<unknown, string | JSXElementConstructor<unknown>>>
-    value?:string
+    options: Array<ReactElement<unknown, string | JSXElementConstructor<unknown>>>
+    value?: string
 }

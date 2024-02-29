@@ -1,3 +1,6 @@
+/**
+ * Функция для генерации случайного цвета
+ */
 export const randomColor = () => {
     const char = '0123456789ABCDEF'
     let color = '#';

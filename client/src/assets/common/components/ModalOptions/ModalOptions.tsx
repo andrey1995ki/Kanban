@@ -3,7 +3,7 @@ import style from '../../../../app/components/Forms/Forms.module.scss'
 import {ModalOptionsProps} from "./ModalOptions.model";
 import {FaPencilAlt, FaRegTrashAlt} from "react-icons/fa";
 
-export const ModalOptions:FC<ModalOptionsProps> =memo(({title,toggleEdit,confirmDeleteBoard }) => {
+export const ModalOptions: FC<ModalOptionsProps> = memo(({title, toggleEdit, confirmDeleteBoard}) => {
     return (
         <>
             <div className={style.editBoard}>

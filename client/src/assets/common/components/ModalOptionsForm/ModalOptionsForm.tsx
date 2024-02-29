@@ -40,6 +40,10 @@ export const ModalOptionsForm = <T, A = undefined>(props: ModalOptionsFormProps<
         }
         submit(formData as T)
     }
+    /**
+     * функция производит парсинг массива с описанием элементов в массив элементов
+     * @param elements
+     */
     const parseChildren = (elements: Array<ElementChildren<A>> | undefined) => {
         return elements?.map((elem, index) => (
             <label className={style.field} key={`${String(elem.name)}_${index}`}>

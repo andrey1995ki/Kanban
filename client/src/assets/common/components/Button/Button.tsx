@@ -4,8 +4,8 @@ import {ButtonProps} from "./Button.model";
 import {Loader} from "../Loader/Loader";
 
 export const Button: FC<ButtonProps> = (props) => {
-    const {title, type = 'default', icon, loading, onClick:clickFunc, buttonType='button'} = props
-    const onClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    const {title, type = 'default', icon, loading, onClick: clickFunc, buttonType = 'button'} = props
+    const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         clickFunc && clickFunc(e)
     }
     return (

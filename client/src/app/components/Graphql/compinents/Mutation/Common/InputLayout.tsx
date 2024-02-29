@@ -14,11 +14,11 @@ export const InputLayout = forwardRef<HTMLInputElement, InputLayoutProps>(({
     const change = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)
     }
-    const blur = ()=>{
-        const timer = setTimeout(()=>{
+    const blur = () => {
+        const timer = setTimeout(() => {
             hide(false)
             clearTimeout(timer)
-        },200)
+        }, 200)
 
     }
     return (

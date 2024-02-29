@@ -21,6 +21,10 @@ export const CreateColumn: FC<CreateColumnProps> = ({boardId, setShowModal}) => 
         }
     }, [isUninitialized, isSuccess, setShowModal])
     const errorMessage = errors?.title?.message as string | undefined
+    /**
+     * Функция для создания колонки
+     * @param data
+     */
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const payload: ApiAddBoardColumnPayload = {
             title: data.title,

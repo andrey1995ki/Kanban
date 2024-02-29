@@ -22,8 +22,8 @@ const textArea: Meta<typeof TextArea> = {
         ref: {
             description: 'ссылка на элемент textArea',
             control: false,
-            table:{
-                type: { summary: 'ForwardRef<HTMLInputElement>' }
+            table: {
+                type: {summary: 'ForwardRef<HTMLInputElement>'}
             }
         },
         name: {

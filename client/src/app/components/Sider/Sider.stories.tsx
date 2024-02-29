@@ -14,8 +14,8 @@ const sider: Meta<typeof SiderComponent> = {
         boards: {
             description: 'Массив досок',
             control: false,
-            table:{
-                type: { summary: 'Array<{id: string, title: string}>' }
+            table: {
+                type: {summary: 'Array<{id: string, title: string}>'}
             }
         },
         activeBoards: {
@@ -25,8 +25,8 @@ const sider: Meta<typeof SiderComponent> = {
         changeTheme: {
             description: 'Функция отвечающая за смену темы',
             control: false,
-            table:{
-                type: { summary: 'function(e: ChangeEvent<HTMLInputElement>)' }
+            table: {
+                type: {summary: 'function(e: ChangeEvent<HTMLInputElement>)'}
             }
         },
         isDarkTheme: {
@@ -36,15 +36,15 @@ const sider: Meta<typeof SiderComponent> = {
         setShowModal: {
             description: 'Функция вызывающая модальное окно добавления доски',
             control: false,
-            table:{
-                type: { summary: 'function()' }
+            table: {
+                type: {summary: 'function()'}
             }
         },
         setDisplaySider: {
             description: 'Функция скрывающая меню',
             control: false,
-            table:{
-                type: { summary: 'function()' }
+            table: {
+                type: {summary: 'function()'}
             }
         },
 

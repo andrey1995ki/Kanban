@@ -25,6 +25,11 @@ export const CreateBoard: FC<CreateBoardProps> = ({setShowModal}) => {
             setShowModal(false)
         }
     }, [isUninitialized, isSuccess, setShowModal])
+    /**
+     * Функция отправки формы, проверяет наличие доски с таким же названием и если такой доски нет создаёт её
+     * и осуществляет перенаправление на неё
+     * @param formData
+     */
     const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
         if (!boardsExist(boards, formData.title)) {
             const {id, title}: ApiBoardsResponse = await addBoard({title: formData?.title.trim()}).unwrap()
@@ -37,6 +42,7 @@ export const CreateBoard: FC<CreateBoardProps> = ({setShowModal}) => {
             })
         }
     }
+    // преобразование ошибки
     const errorMessage = errors?.title?.message as string | undefined
     return (
         <form className={style.form} onSubmit={handleSubmit(onSubmit)}>

@@ -1,4 +1,4 @@
-import {Input, TextArea, Select} from "../../../../assets/common/components/Fields";
+import {Input, Select, TextArea} from "../../../../assets/common/components/Fields";
 import {FieldValues, SubmitHandler, useFieldArray, useForm} from "react-hook-form";
 import {maxLengthValid} from "../Forms.validation";
 import {Button} from "../../../../assets/common/components/Button";
@@ -7,17 +7,21 @@ import {FaPlus, FaTimes} from "react-icons/fa";
 import {useSelector} from "react-redux";
 import {AppSelector} from "../../../store/app/app.selector";
 import {useAddTaskMutation, useChangeTaskMutation} from "../../../store/api/api";
-import {ApiAddTaskPayload, ApiTaskResponse} from "../../../store/api/api.model";
 import {AddTaskModel} from "./AddTask.model";
 import {FC, useEffect} from "react";
+// import {AppDispatch} from "../../../store/store";
+// import {useParams} from "react-router-dom";
+import {ApiAddTaskPayload} from "../../../store/api/api.model";
 
 export const AddTask: FC<AddTaskModel> = (props) => {
+    // const dispatch = useDispatch<AppDispatch>()
+    // const {boardId} = useParams()
     const {
         title, description, sub_task,
         editable, board_column_id, id: taskId, setShowModal, setEdit
     } = props
     const {columns} = useSelector(AppSelector)
-    const [addTask, {
+    const [addTaskAPi, {
         isLoading: addTaskLoading,
         isSuccess: addTaskSuccess,
         isUninitialized: addTaskUninitialized
@@ -51,12 +55,19 @@ export const AddTask: FC<AddTaskModel> = (props) => {
             setEdit && setEdit(false)
         }
     }, [changeTaskUninitialized, changeTaskSuccess, setEdit])
+    /**
+     * Функция для создания\изменения задачи
+     * @param formData
+     */
     const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
         if (editable) {
+            // await dispatch(editTask({taskData: {...formData as WSAddTaskPayload, board_id: boardId!}, taskId: taskId!}))
             await changeTask({...formData as ApiAddTaskPayload, taskId: taskId as string})
         } else {
-            await addTask(formData as ApiTaskResponse)
+            // await dispatch(addTask({...formData as WSAddTaskPayload, board_id: boardId!}))
+            await addTaskAPi(formData as ApiAddTaskPayload)
         }
+        setShowModal(false)
     }
     const options = columns.map(column => <option value={column.id} key={column.id}>{column.title}</option>)
     return (

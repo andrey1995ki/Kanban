@@ -21,7 +21,9 @@ export interface ApiTaskResponse {
     title: string
     description: string
     sub_task: Array<SubTaskData>
+    board_id?: string
 }
+
 
 export type ApiAddTaskPayload = Omit<ApiTaskResponse, 'id'>
 

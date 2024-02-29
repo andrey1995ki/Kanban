@@ -8,14 +8,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
                                                                    name,
                                                                    label,
                                                                    errors,
-                                                                   placeholder,disabled=false
+                                                                   placeholder, disabled = false
                                                                }, ref) => {
     return (
-        <div className={`${style.input} ${!label ? style.withOutLabel :''}`}>
+        <div className={`${style.input} ${!label ? style.withOutLabel : ''}`}>
             {
                 label && <label className={style.label}>{label}</label>
             }
-            <input placeholder={placeholder} name={name} ref={ref} onChange={onChange} onBlur={onBlur} type={'text'} disabled={disabled}/>
+            <input placeholder={placeholder} name={name} ref={ref} onChange={onChange} onBlur={onBlur} type={'text'}
+                   disabled={disabled}/>
             <span className={style.errors}>{errors}</span>
         </div>
     );

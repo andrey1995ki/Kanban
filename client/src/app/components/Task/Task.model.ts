@@ -15,7 +15,7 @@ export interface TaskComponentProps extends TaskProps {
     toggleModal: () => void
     countSubTask: number
     countDoneSubTask: number
-    onDragElement: (e:React.DragEvent<HTMLDivElement>)=>void
+    onDragElement: (e: React.DragEvent<HTMLDivElement>) => void
 }
 
 export interface TaskDataProps extends ApiTaskResponse {

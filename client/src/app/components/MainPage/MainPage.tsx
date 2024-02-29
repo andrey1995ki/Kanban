@@ -7,8 +7,8 @@ import {useNavigate} from "react-router-dom";
 export const MainPage: FC = () => {
     const navigate = useNavigate()
     return (
-        <div className={style.mainPage} >
-            <div className={style.mainBlock} >
+        <div className={style.mainPage}>
+            <div className={style.mainBlock}>
                 <div className={style.title}>
                     <div className={style.icon}>
                         <HiViewBoards/>

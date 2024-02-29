@@ -37,7 +37,8 @@ export interface DeleteItemProps {
 export interface DeleteLayoutProps extends DeleteItemProps {
     funcMutation: (param: { variables: any }) => void
 }
-export interface ToggleTaskProps{
+
+export interface ToggleTaskProps {
     id: number
     setContextMenu: SetContextMenuType
     done: boolean

@@ -1,4 +1,4 @@
 export interface CreateColumnProps {
     boardId: string
-    setShowModal: (showModal:boolean)=>void
+    setShowModal: (showModal: boolean) => void
 }

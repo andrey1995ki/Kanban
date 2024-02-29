@@ -1,8 +1,8 @@
 import {JSXElementConstructor, ReactElement} from "react";
 
-export interface ModalProps{
+export interface ModalProps {
     showModal: boolean
-    setShowModal:()=>void
+    setShowModal: () => void
     title?: string
     children: ReactElement<unknown, string | JSXElementConstructor<unknown>>
 }

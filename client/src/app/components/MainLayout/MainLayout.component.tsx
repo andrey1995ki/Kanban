@@ -18,7 +18,8 @@ export const MainLayoutComponent: FC<MainLayoutComponentProps> = ({
         <div className={style[`mainLayout${displaySider ? '--sider' : ''}`]}>
             <Header/>
             {
-                displaySider && <Sider setDisplaySider={setDisplaySider} scheme={scheme} isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}/>
+                displaySider && <Sider setDisplaySider={setDisplaySider} scheme={scheme} isDarkTheme={isDarkTheme}
+                                       setIsDarkTheme={setIsDarkTheme}/>
             }
             <div className={style.layout}>
                 <div className={style.content}>

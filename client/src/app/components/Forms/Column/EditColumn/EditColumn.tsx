@@ -9,19 +9,31 @@ export const EditColumn: FC<EditColumnProps> = ({title, setError, final_stage, c
     const [onEdit, setOnEdit] = useState(false)
     const [changeBoardName, {isLoading}] = useEditBoardColumnMutation()
     const [deleteBoard] = useDeleteBoardColumnMutation()
+    /**
+     * Функция переключения режима редактирования
+     * @param edit признак редактирования
+     */
     const toggleEdit = async (edit: boolean) => {
         await setOnEdit(edit)
     }
+    /**
+     * Функция для подтверждения удаления колонки
+     */
     const confirmDeleteBoard = () => {
         const deleted = confirm(`Удалить колонку: ${title} и все задачи в ней?`);
         if (deleted) {
             deleteBoard(id)
         }
     }
+    /**
+     * Функция изменения данных колонки
+     * @param data
+     */
     const submit = async (data: EditColumnPayload) => {
         await changeBoardName({id: id, body: {...data, board_id: board_id}})
         setOnEdit(false)
     }
+    // Массив для создания элементов в режиме редактирования
     const element: Array<ElementChildren<ApiBoardColumnResponse>> = [{
         type: 'color',
         label: 'Цвет этапа',

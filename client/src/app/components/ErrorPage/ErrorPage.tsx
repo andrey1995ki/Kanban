@@ -2,9 +2,11 @@ import {FC} from 'react';
 import style from './ErrorPage.module.scss'
 import {ErrorPageProps} from "./ErrorPage.model";
 import {BiSolidError} from "react-icons/bi";
+import {useRouteError} from "react-router-dom";
 
 export const ErrorPage: FC<ErrorPageProps> = () => {
-    // const error = useRouteError();
+    const error = useRouteError();
+    console.log(error);
     return (
         <div className={style.errorPage}>
             <div className={style.errorBlock}>

@@ -23,8 +23,8 @@ const select: Meta<typeof Select> = {
         ref: {
             description: 'ссылка на элемент select',
             control: false,
-            table:{
-                type: { summary: 'ForwardRef<HTMLInputElement>' }
+            table: {
+                type: {summary: 'ForwardRef<HTMLInputElement>'}
             }
         },
         name: {
@@ -37,8 +37,8 @@ const select: Meta<typeof Select> = {
         options: {
             description: 'Массив значений в формате',
             control: false,
-            table:{
-                type: { summary: 'Array<ReactElement>' }
+            table: {
+                type: {summary: 'Array<ReactElement>'}
             }
         },
         required: {

@@ -13,7 +13,6 @@ export const Header: FC = () => {
     const {boardId} = useParams();
     const {boards, columns} = useSelector(AppSelector)
     const title = boards?.find((board) => board.id === boardId)?.title || ''
-
     const showBtn = columns.length > 0 && boardId
     const {showModal, toggleModal} = useModal()
     const navigate = useNavigate();

@@ -22,8 +22,8 @@ const input: Meta<typeof Input> = {
         ref: {
             description: 'ссылка на элемент input',
             control: false,
-            table:{
-                type: { summary: 'ForwardRef<HTMLInputElement>' }
+            table: {
+                type: {summary: 'ForwardRef<HTMLInputElement>'}
             }
         },
         name: {

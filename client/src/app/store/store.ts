@@ -1,13 +1,16 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {API} from "./api/api";
 import AppSlice from './app/app.slice'
+import TaskSlice from './task/task.slice'
 
 const reducer = combineReducers({
     [API.reducerPath]: API.reducer,
-    app: AppSlice
+    app: AppSlice,
+    task: TaskSlice
 })
 export const store = configureStore({
     reducer,
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(API.middleware)
 })
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>

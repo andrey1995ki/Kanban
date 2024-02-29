@@ -9,14 +9,16 @@ export const ColumnsWrapper: FC = () => {
     const navigate = useNavigate()
     const {boardId} = useParams()
     const {boards} = useSelector(AppSelector)
-    const newBoard = boards.filter(board => board.id === boardId)
+    // Проверяем присутствует доска среди новосозданыхх
+    const newBoard = boards.filter(board => board.id === boardId)?.[0]
+    // Получаем список всех досок из API
     const {board} = API.useGetBoardsQuery('', {
         selectFromResult: ({data}) => ({
             board: data?.filter(board => board.id === boardId)
         }),
     })
     useEffect(() => {
-        if (board?.length === 0 && newBoard.length === 0) {
+        if (board?.length === 0 && newBoard) {
             navigate("/");
         }
     }, [board, navigate, newBoard])

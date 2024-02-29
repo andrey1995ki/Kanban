@@ -139,14 +139,16 @@
       }
     }
   }
-  .hide{
+
+  .hide {
     color: $mute_color;
     display: grid;
     align-items: center;
     grid-template-columns: 15px 1fr;
     gap: 4px;
     cursor: pointer;
-    &:hover{
+
+    &:hover {
       color: $primary_color;
     }
   }

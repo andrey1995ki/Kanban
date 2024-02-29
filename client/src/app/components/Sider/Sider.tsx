@@ -12,9 +12,16 @@ export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, 
     const {boards} = useSelector(AppSelector)
     const {showModal, toggleModal} = useModal()
     const {boardId} = useParams();
+    /**
+     * Функция для переключения класса отвечающего за тему
+     */
     const toggleTheme = () => {
         document.body.classList.toggle(scheme);
     }
+    /**
+     * Изменение темы через переключатель
+     * @param e
+     */
     const changeTheme = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const checkedDark = e.target.checked
         setIsDarkTheme(checkedDark)
@@ -28,6 +35,6 @@ export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, 
                 <CreateBoard setShowModal={toggleModal}/>
             </Modal>
         </>
-        )
+    )
 
 }

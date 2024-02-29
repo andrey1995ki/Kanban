@@ -22,8 +22,8 @@ const button: Meta<typeof Button> = {
         icon: {
             control: false,
             description: 'Иконка отображаемая слева от текста',
-            table:{
-                type: { summary: 'ReactElement' }
+            table: {
+                type: {summary: 'ReactElement'}
             }
 
         },
