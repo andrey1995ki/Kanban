@@ -4,29 +4,31 @@ import {maxLengthValid} from "../Forms.validation";
 import {Button} from "../../../../assets/common/components/Button";
 import style from "../Forms.module.scss";
 import {FaPlus, FaTimes} from "react-icons/fa";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppSelector} from "../../../store/app/app.selector";
 import {useAddTaskMutation, useChangeTaskMutation} from "../../../store/api/api";
 import {AddTaskModel} from "./AddTask.model";
 import {FC, useEffect} from "react";
-// import {AppDispatch} from "../../../store/store";
-// import {useParams} from "react-router-dom";
-import {ApiAddTaskPayload} from "../../../store/api/api.model";
+import {AppDispatch} from "../../../store/store";
+import {useParams} from "react-router-dom";
+// import {ApiAddTaskPayload} from "../../../store/api/api.model";
+import {addTask, editTask} from "../../../store/task/task.slice";
+import {WSAddTaskPayload} from "../../../websocket/websocket.model";
 
 export const AddTask: FC<AddTaskModel> = (props) => {
-    // const dispatch = useDispatch<AppDispatch>()
-    // const {boardId} = useParams()
+    const dispatch = useDispatch<AppDispatch>()
+    const {boardId} = useParams()
     const {
         title, description, sub_task,
         editable, board_column_id, id: taskId, setShowModal, setEdit
     } = props
     const {columns} = useSelector(AppSelector)
-    const [addTaskAPi, {
+    const [/*addTaskAPi*/, {
         isLoading: addTaskLoading,
         isSuccess: addTaskSuccess,
         isUninitialized: addTaskUninitialized
     }] = useAddTaskMutation()
-    const [changeTask, {
+    const [/*changeTask*/, {
         isLoading: changeTaskLoading,
         isSuccess: changeTaskSuccess,
         isUninitialized: changeTaskUninitialized
@@ -61,11 +63,11 @@ export const AddTask: FC<AddTaskModel> = (props) => {
      */
     const onSubmit: SubmitHandler<FieldValues> = async (formData) => {
         if (editable) {
-            // await dispatch(editTask({taskData: {...formData as WSAddTaskPayload, board_id: boardId!}, taskId: taskId!}))
-            await changeTask({...formData as ApiAddTaskPayload, taskId: taskId as string})
+            await dispatch(editTask({taskData: {...formData as WSAddTaskPayload, board_id: boardId!}, taskId: taskId!}))
+            // await changeTask({...formData as ApiAddTaskPayload, taskId: taskId as string})
         } else {
-            // await dispatch(addTask({...formData as WSAddTaskPayload, board_id: boardId!}))
-            await addTaskAPi(formData as ApiAddTaskPayload)
+            await dispatch(addTask({...formData as WSAddTaskPayload, board_id: boardId!}))
+            // await addTaskAPi(formData as ApiAddTaskPayload)
         }
         setShowModal(false)
     }
@@ -81,7 +83,6 @@ export const AddTask: FC<AddTaskModel> = (props) => {
             <div>
                 {fields.map((item, index) => (
                     <div key={item.id} className={style.formArray}>
-                        <input hidden={true} {...register(`sub_task.${index}.id`, {setValueAs: () => item.id})}/>
                         <Input {...register(`sub_task.${index}.title`, {
                             required: 'Описание обязательно',
                             maxLength: {...maxLengthValid(30)}

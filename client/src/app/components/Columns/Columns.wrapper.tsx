@@ -18,7 +18,7 @@ export const ColumnsWrapper: FC = () => {
         }),
     })
     useEffect(() => {
-        if (board?.length === 0 && newBoard) {
+        if (board?.length === 0 && !newBoard) {
             navigate("/");
         }
     }, [board, navigate, newBoard])

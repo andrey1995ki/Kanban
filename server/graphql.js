@@ -1,4 +1,4 @@
-module.exports = {
+const graphql={
     boards: [
         {
             id: 1,
@@ -34,3 +34,4 @@ module.exports = {
         }
     ]
 }
+module.exports = graphql

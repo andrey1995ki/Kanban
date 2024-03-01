@@ -5,7 +5,6 @@ import {MdDoneOutline} from "react-icons/md";
 
 export const ColumnComponent: FC<ColumnComponentProps> = memo((props) => {
     const {color, final_stage, columnRef, title, dragOver, dragEnd, dropEvent, children} = props
-
     return (
         <div className={style.column} onDragOver={dragOver} onDragLeave={dragEnd} onDrop={dropEvent}
              ref={columnRef as React.RefObject<HTMLDivElement>}>
@@ -15,7 +14,7 @@ export const ColumnComponent: FC<ColumnComponentProps> = memo((props) => {
                     <div className={style.title}>
                         <span>{title}</span>
                         {
-                            final_stage && <MdDoneOutline className={style.doneTitle} title={'Финальный этап'}/>
+                            final_stage ? <MdDoneOutline className={style.doneTitle} title={'Финальный этап'}/> : null
                         }
                     </div>
                 </div>

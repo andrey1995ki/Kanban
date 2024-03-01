@@ -10,7 +10,7 @@ import {
 } from "./api.model";
 import {sortResponse} from "./api.utils";
 
-const baseUrl = 'http://localhost:3000/'
+const baseUrl = 'http://localhost:3001/kanban/api/'
 export const API = createApi({
     reducerPath: 'API',
     tagTypes: ['Task', 'Boards', 'Column'],

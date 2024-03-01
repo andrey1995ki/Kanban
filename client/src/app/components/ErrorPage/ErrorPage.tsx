@@ -5,8 +5,7 @@ import {BiSolidError} from "react-icons/bi";
 import {useRouteError} from "react-router-dom";
 
 export const ErrorPage: FC<ErrorPageProps> = () => {
-    const error = useRouteError();
-    console.log(error);
+    const error: any = useRouteError();
     return (
         <div className={style.errorPage}>
             <div className={style.errorBlock}>
@@ -19,7 +18,8 @@ export const ErrorPage: FC<ErrorPageProps> = () => {
                     </h3>
                 </div>
                 <div className={style.body}>
-                    <i></i>
+                    <i>{error?.message || ''}</i>
+                    <p>{error?.stack || ''}</p>
                 </div>
             </div>
         </div>

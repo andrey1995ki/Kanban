@@ -1,9 +1,10 @@
 import {WSAddTaskPayload, WSTaskResponse} from "./websocket.model";
 
-const socketUrl = "ws://localhost:8080";
+const socketUrl = "ws://localhost:3001/kanban";
 export const socket = new WebSocket(socketUrl);
 
 let taskCallback: (taskData: Array<WSTaskResponse>) => void
+let messagesCallback: (messages: string) => void
 
 const StartConnection = () => {
     socket.onopen = (ev) => {
@@ -18,6 +19,7 @@ const CloseConnections = () => {
 }
 const ListenerMessages = (m: MessageEvent) => {
     const message = JSON.parse(m.data)
+    if (message.messages) messagesCallback(message.messages)
     if (Array.isArray(message.data)) taskCallback(message.data)
 }
 
@@ -28,9 +30,10 @@ export const TaskApi = {
     stop() {
         CloseConnections()
     },
-    getTasks(callback: (taskData: Array<WSTaskResponse>) => void) {
-        taskCallback = callback
-        socket.send(JSON.stringify({type: 'read', path: 'task'}));
+    getTasks(callbackA: (taskData: Array<WSTaskResponse>) => void, callbackB: (messages: string) => void) {
+        taskCallback = callbackA
+        messagesCallback = callbackB
+        socket.send(JSON.stringify({type: 'read'}));
     },
     addTask(taskData: WSAddTaskPayload) {
         socket.send(
@@ -48,7 +51,6 @@ export const TaskApi = {
             JSON.stringify(
                 {
                     type: 'update',
-                    path: 'task',
                     id: taskId,
                     data: taskData
                 }
@@ -60,7 +62,6 @@ export const TaskApi = {
             JSON.stringify(
                 {
                     type: 'delete',
-                    path: 'task',
                     id: taskId,
                 }
             )

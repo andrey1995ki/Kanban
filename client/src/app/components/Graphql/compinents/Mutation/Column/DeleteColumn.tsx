@@ -7,11 +7,9 @@ import {DeleteLayout} from "../Common/DeleteLayout";
 export const DeleteColumn: FC<DeleteItemProps> = ({id, setContextMenu}) => {
     const [deleteColumn] = useMutation(DELETE_COLUMN, {
         update(cache, {data: {removeColumn}}) {
-            console.log(cache);
             cache.modify({
                 fields: {
                     allColumns(currentItem = []) {
-                        console.log(currentItem);
                         return currentItem.filter((item: any) => item.__ref !== `Column:${removeColumn.id}`)
                     }
                 }

@@ -21,4 +21,7 @@ export const router = createBrowserRouter([
         element: <MainLayout children={<ColumnsWrapper/>}/>,
         errorElement: <ErrorPage/>
     }
-])
+],
+    {
+        basename: '/kanban'
+    })

@@ -1,4 +1,4 @@
-import {editTaskData, SetTaskAction, TaskState} from "./task.model";
+import {DeleteMessagesAction, editTaskData, SetMessagesAction, SetTaskAction, TaskState} from "./task.model";
 import {createAsyncThunk, createSlice, current, PayloadAction} from "@reduxjs/toolkit";
 import {TaskApi} from "../../websocket/websocket";
 import {WSAddTaskPayload, WSTaskResponse} from "../../websocket/websocket.model";
@@ -6,7 +6,8 @@ import {WSAddTaskPayload, WSTaskResponse} from "../../websocket/websocket.model"
 const initialState: TaskState = {
     tasks: [],
     loading: false,
-    error: ''
+    error: '',
+    messages: []
 }
 
 export const getTask = createAsyncThunk(
@@ -14,11 +15,10 @@ export const getTask = createAsyncThunk(
     async function (boardId: string, {rejectWithValue, dispatch}) {
         try {
             TaskApi.start()
-            console.log(boardId);
             TaskApi.getTasks((taskData: Array<WSTaskResponse>) => dispatch(setTask({
                 boardId: boardId,
                 tasks: taskData
-            })))
+            })), (messages: string) => dispatch(setMessages({messages})))
         } catch (error: any) {
             TaskApi.stop()
             return rejectWithValue(error?.message || 'Ошибка')
@@ -71,13 +71,20 @@ const TaskSlice = createSlice({
                 state.tasks = [...state.tasks, {board: boardId, boardTasks: currBoardTask}]
             } else {
                 state.tasks = current(state).tasks.map(item => {
-                    console.log(item);
                     if (item.board === boardId) {
                         return {...item, boardTasks: currBoardTask}
                     } else return item
                 })
             }
 
+        },
+        setMessages: (state, actions: PayloadAction<SetMessagesAction>) => {
+            const {messages} = actions.payload
+            state.messages = [...current(state).messages,{id:(+new Date).toString(16), message: messages}]
+        },
+        deleteMessages: (state, actions: PayloadAction<DeleteMessagesAction>) => {
+            const {id} = actions.payload
+            state.messages = current(state).messages.filter(item=> item.id !== id)
         }
     },
     extraReducers: (builder) => {
@@ -93,5 +100,5 @@ const TaskSlice = createSlice({
         })
     },
 })
-export const {setTask} = TaskSlice.actions
+export const {setTask, setMessages, deleteMessages} = TaskSlice.actions
 export default TaskSlice.reducer
