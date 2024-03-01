@@ -40,9 +40,14 @@
 .data {
   display: grid;
   justify-items: center;
+  .modules{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
 }
 
-.toGraphQl {
+.toModule {
   display: grid;
   justify-items: center;
 
@@ -51,7 +56,7 @@
   }
 }
 
-.graphQl {
+.module {
   font-size: 3rem;
 
   svg {

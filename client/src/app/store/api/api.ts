@@ -10,7 +10,9 @@ import {
 } from "./api.model";
 import {sortResponse} from "./api.utils";
 
-const baseUrl = 'http://localhost:3001/kanban/api/'
+const url = import.meta.env.VITE_BASE_URL || ''
+const port = import.meta.env.VITE_BASE_API_PORT || ''
+const baseUrl = `http://localhost${port}${url}/api/`
 export const API = createApi({
     reducerPath: 'API',
     tagTypes: ['Task', 'Boards', 'Column'],

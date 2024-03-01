@@ -1,6 +1,9 @@
 import {WSAddTaskPayload, WSTaskResponse} from "./websocket.model";
 
-const socketUrl = "ws://localhost:3001/kanban";
+const url = import.meta.env.VITE_BASE_URL || ''
+const port = import.meta.env.VITE_BASE_API_PORT || ''
+console.log(port);
+const socketUrl = `ws://localhost${port}${url}/socket`;
 export const socket = new WebSocket(socketUrl);
 
 let taskCallback: (taskData: Array<WSTaskResponse>) => void

@@ -4,7 +4,8 @@ const SQLController = require('../DB/controller')
 
 const WSController = function (app) {
     const aWss = WSServer(app).getWss()
-    app.ws('/kanban/', (ws) => {
+    app.ws('/kanban/socket', (ws) => {
+        console.log('start ws server')
         const currentUserId = (+new Date).toString(16)
         ws.id = currentUserId
         ws.send('succses')

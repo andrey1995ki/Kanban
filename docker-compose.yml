@@ -1,0 +1,21 @@
+version: "3"
+services:
+  server:
+    environment:
+      - PORT=3001
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    container_name: kanban-server
+    hostname: server
+  client:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:80"
+    container_name: kanban
+    hostname: client
+    depends_on:
+      - server
+    restart: always

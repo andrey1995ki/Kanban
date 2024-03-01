@@ -10,21 +10,6 @@ export default ({mode})=>{
             react(),
             svgr()
         ],
-        base: `${BASE_URL}`,
-        server:{
-            watch:{
-                usePolling: true
-            },
-            host: true,
-            strictPort: true,
-            port: 5173,
-            proxy:{
-                '/storybook':{
-                    target: 'http://localhost:6006/',
-                    changeOrigin: true,
-                    rewrite: (path) => path.replace(/^\/api/, ''),
-                }
-            }
-        }
+        base: `${BASE_URL}`
     })
 }
