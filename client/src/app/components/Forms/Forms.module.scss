@@ -139,3 +139,9 @@
     color:#8790a2;
   }
 }
+
+.errorsBlocK{
+  display: grid;
+  justify-content: center;
+  color: $error_color;
+}

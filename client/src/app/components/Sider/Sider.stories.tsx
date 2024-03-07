@@ -75,7 +75,7 @@ const SiderPattern: Story = {
                     displaySider ?
                         <SiderComponent changeTheme={changeTheme} isDarkTheme={isDarkTheme}
                                         setDisplaySider={setDisplaySider} setShowModal={setShowModal} boards={boards}
-                                        activeBoards={activeBoards}/>
+                                        activeBoards={activeBoards} isAuth={true}/>
                         :
                         <div className={style.layout}>
                             <div className={style.content}>

@@ -15,6 +15,7 @@ export interface SiderComponentProps {
     activeBoards: string | undefined
     setShowModal: () => void
     setDisplaySider: (displaySider: boolean) => void
+    isAuth: boolean
 }
 
 export interface SiderButtonProps {

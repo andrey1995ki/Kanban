@@ -8,26 +8,31 @@ import {SiderButton} from "./components/SiderButton";
 import {FaEyeSlash} from "react-icons/fa";
 
 export const SiderComponent: FC<SiderComponentProps> = (props) => {
-    const {changeTheme, isDarkTheme, boards, activeBoards, setShowModal, setDisplaySider} = props
+    const {changeTheme, isDarkTheme, boards, activeBoards, setShowModal, setDisplaySider, isAuth} = props
     return (
         <div className={style.sider}>
             <div className={style.menu}>
-                <div className={style.boardCount}>Все доски ({boards?.length || 0})</div>
-                <div className={style.boardsList}>
-                    {
-                        boards?.map((board) => {
-                            const isActiveBoard = board.id === activeBoards
-                            return <SiderButton active={isActiveBoard} board={board} key={board.id}/>
-                        })
-                    }
-                </div>
-                <div className={style.boardCreate} onClick={() => setShowModal()}>
-                    <MdOutlineSpaceDashboard className={style.boardIcon}/>
-                    <div className={style.boardCreateText}>
-                        <FaPlus/>
-                        Создать новую доску
-                    </div>
-                </div>
+                {
+                    isAuth &&
+                    <>
+                        <div className={style.boardCount}>Все доски ({boards?.length || 0})</div>
+                        <div className={style.boardsList}>
+                            {
+                                boards?.map((board) => {
+                                    const isActiveBoard = board.id === activeBoards
+                                    return <SiderButton active={isActiveBoard} board={board} key={board.id}/>
+                                })
+                            }
+                        </div>
+                        <div className={style.boardCreate} onClick={() => setShowModal()}>
+                            <MdOutlineSpaceDashboard className={style.boardIcon}/>
+                            <div className={style.boardCreateText}>
+                                <FaPlus/>
+                                Создать новую доску
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
             <div className={style.actions}>
                 <div className={style.theme}><IoSunnyOutline/>

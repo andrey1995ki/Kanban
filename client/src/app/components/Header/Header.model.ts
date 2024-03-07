@@ -6,6 +6,8 @@ export interface HeaderComponentProps {
     navigate: (link: string) => void
     toggleModal: () => void
     children: ReactElement<unknown, string | JSXElementConstructor<unknown>>
+    isAuth: boolean
+    logout: () => void
 }
 
 export interface HeaderOptionsProps {

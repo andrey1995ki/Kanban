@@ -7,9 +7,11 @@ import {useParams} from "react-router-dom";
 import {useModal} from "../../../assets/common/hook/useModal";
 import {Modal} from "../../../assets/common/components/Modal";
 import {CreateBoard} from "../Forms/Board/CreateBoard/CreateBoard";
+import {UserSelector} from "../../store/user/user.selector";
 
 export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, isDarkTheme}) => {
     const {boards} = useSelector(AppSelector)
+    const {isAuth} = useSelector(UserSelector)
     const {showModal, toggleModal} = useModal()
     const {boardId} = useParams();
     /**
@@ -30,7 +32,7 @@ export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, 
     return (
         <>
             <SiderComponent changeTheme={changeTheme} isDarkTheme={isDarkTheme} boards={boards} activeBoards={boardId}
-                            setShowModal={toggleModal} setDisplaySider={setDisplaySider}/>
+                            setShowModal={toggleModal} setDisplaySider={setDisplaySider} isAuth={isAuth}/>
             <Modal showModal={showModal} setShowModal={toggleModal} title={'Добавить доску'}>
                 <CreateBoard setShowModal={toggleModal}/>
             </Modal>

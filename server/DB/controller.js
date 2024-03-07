@@ -205,7 +205,7 @@ class SQLController {
         return (
             async () => {
                 try {
-                    let user = await db.prepare(`SELECT password,id FROM users WHERE login = '${this._userLogin}'`).all()
+                    let user = await db.prepare(`SELECT password,id, user_name FROM users WHERE login = '${this._userLogin}'`).all()
                     return user?.[0] || false;
                 } catch (e) {
                     return undefined

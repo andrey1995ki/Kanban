@@ -2,15 +2,15 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const SQLController = require("../DB/controller");
 
-const generateAccessToken = (username, userid) => {
-    return jwt.sign({username, userid}, process.env.TOKEN_SECRET, {expiresIn: '24h'});
+const generateAccessToken = (login, userid, userName) => {
+    return jwt.sign({login, userid, userName}, process.env.TOKEN_SECRET, {expiresIn: '24h'});
 }
 
 class authController {
     async registration(req, res) {
         try {
-            const {username, password, name} = req.body
-            SQLController.fiendUser = username
+            const {login, password, name} = req.body
+            SQLController.fiendUser = login
             const fiendUser = await SQLController.fiendUser
             if (fiendUser) {
                 SQLController.fiendUser = undefined
@@ -34,15 +34,21 @@ class authController {
 
     async login(req, res) {
         try {
-            const {username, password} = req.body
-            SQLController.fiendUser = username
-            const {password: userPassword, id: userid} = await SQLController.fiendUser
+            const {login, password} = req.body
+            SQLController.fiendUser = login
+            const fiendUser = await SQLController.fiendUser
+            console.log(fiendUser);
+            if (!fiendUser) {
+                SQLController.fiendUser = undefined
+                return res.status(400).json({message: 'Введены не правильные логин или пароль'})
+            }
+            const {password: userPassword, id: userid, user_name: user} = fiendUser
             const validPassword = bcrypt.compareSync(password, userPassword);
             if (!validPassword) {
                 return res.status(400).json({message: 'Введены не правильные логин или пароль'})
             }
-            const token = generateAccessToken(username, userid);
-            res.json({token})
+            const token = generateAccessToken(login, userid,user);
+            res.json({token, login:login, id: userid,name: user})
         } catch (e) {
             res.status(400).json(e)
         }

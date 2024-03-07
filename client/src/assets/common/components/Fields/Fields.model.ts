@@ -6,6 +6,7 @@ export interface InputProps extends UseFormRegisterReturn {
     errors?: string
     placeholder?: string
     disabled?: boolean
+    isPassword?:boolean
 }
 
 export interface SelectProps extends UseFormRegisterReturn {
