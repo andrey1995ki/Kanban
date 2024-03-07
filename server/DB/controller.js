@@ -5,8 +5,12 @@ const selectColumn = 'SELECT CAST(id as TEXT) as id,board_id,title,color,final_s
 const selectSubTask = 'SELECT CAST(id as TEXT) as id,title,"final",task_id from sub_task'
 
 class SQLController {
+    _userLogin = undefined
+    _userName = undefined
+    _userPassword = undefined
 
     async boards(req, res) {
+        console.log(req);
         try {
             const data = await db.prepare(selectBoard)
             res.json(data.all())
@@ -182,7 +186,7 @@ class SQLController {
                 }
             }
             let taskName = await db.prepare(`SELECT title FROM task WHERE id = ${id}`).all()[0]
-            if (param.length>0){
+            if (param.length > 0) {
                 await db.prepare(
                     `UPDATE task SET ${param.join(', ')} WHERE id=?`
                 ).run(id)
@@ -192,6 +196,48 @@ class SQLController {
             ws.send(JSON.stringify({message: e}))
         }
     }
+
+    set fiendUser(userLogin) {
+        this._userLogin = userLogin
+    }
+
+    get fiendUser() {
+        return (
+            async () => {
+                try {
+                    let user = await db.prepare(`SELECT password,id FROM users WHERE login = '${this._userLogin}'`).all()
+                    return user?.[0] || false;
+                } catch (e) {
+                    return undefined
+                }
+            }
+        )()
+    }
+
+    set addUser(userData) {
+        this._userName = userData.name
+        this._userPassword = userData.password
+    }
+
+    get addUser() {
+        return (
+            async () => {
+                try {
+                    await db.prepare(
+                        'INSERT INTO users (login, password, user_name) VALUES(?, ?, ?)'
+                    )
+                        .run(this._userLogin, this._userPassword, this._userName)
+                    this._userLogin = undefined
+                    this._userName = undefined
+                    this._userPassword = undefined
+                    return true
+                } catch (e) {
+                    return undefined
+                }
+            }
+        )()
+    }
+
 
 }
 
