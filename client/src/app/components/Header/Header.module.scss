@@ -57,9 +57,14 @@
     grid-template-columns: 1fr 10px 10px;
     justify-items: end;
     gap: 15px;
-    .logout{
+
+    .logout {
       font-size: 20px;
       cursor: pointer;
+
+      &:hover {
+        color: $primary_color;
+      }
     }
   }
 
@@ -76,4 +81,42 @@
   display: grid;
   gap: 5px;
   grid-template-columns: 100px 1fr;
+}
+
+.accessBlockLoading {
+  height: 300px;
+}
+
+.accessBlock {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 215px 215px;
+  gap: 40px;
+
+  .accessColumn {
+    display: grid;
+    height: 400px;
+    grid-template-rows: 30px 1fr;
+    gap: 5px;
+
+    .column {
+      background: var(--light-background-color);
+      border: 1px solid var(--border-color);
+      border-radius: 25px;
+      padding: 20px;
+      overflow-y: auto;
+      .columnItem{
+        cursor: default;
+        margin: 5px 0;
+        font-size: 12px;
+        span{
+          font-size: 11px;
+          color: $mute_color
+        }
+      }
+    }
+    .dragging{
+      border: 1px dashed $primary_color;
+    }
+  }
 }

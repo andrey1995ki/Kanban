@@ -29,7 +29,7 @@ export const Header: FC = () => {
         <>
             <HeaderComponents title={title} showBtn={!!showBtn} toggleModal={toggleModal} navigate={navigate}
                               isAuth={isAuth} logout={logout}>
-                <HeaderOptions showBtn={!!showBtn}/>
+                <HeaderOptions showBtn={!!showBtn} boardId={boardId}/>
             </HeaderComponents>
             <Modal showModal={showModal} setShowModal={toggleModal} title={'Добавить задачу'}><AddTask
                 setShowModal={toggleModal}/></Modal>

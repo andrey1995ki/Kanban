@@ -2,22 +2,27 @@ import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {
     ApiAddBoardColumnPayload,
     ApiAddBoardPayload,
-    ApiAddTaskPayload, ApiAuthResponse,
+    ApiAddTaskPayload,
+    ApiAuthResponse,
     ApiBoardColumnResponse,
-    ApiBoardsResponse, ApiLogin, ApiLoginResponse, ApiRegistration,
+    ApiBoardsResponse, ApiChangeUserToBoardPayload,
+    ApiLogin,
+    ApiLoginResponse,
+    ApiRegistration,
     ApiTaskResponse,
     ApiToggleTaskPayload
 } from "./api.model";
 import {sortResponse} from "./api.utils";
 import {RootState} from "../store";
 import {getTokenInCooke} from "../user/user.utils";
+import Cookies from "js-cookie";
 
 const url = import.meta.env.VITE_BASE_URL || ''
 const port = import.meta.env.VITE_BASE_API_PORT || ''
 const baseUrl = `http://localhost${port}${url}/`
 export const API = createApi({
     reducerPath: 'API',
-    tagTypes: ['Task', 'Boards', 'Column'],
+    tagTypes: ['Task', 'Boards', 'Column', 'Users'],
     baseQuery: fetchBaseQuery({
         baseUrl: baseUrl,
         prepareHeaders: (headers, {getState}) => {
@@ -170,7 +175,7 @@ export const API = createApi({
                 body
             }),
             transformResponse: (response: ApiLoginResponse) => {
-                document.cookie = `token=${response.token}`
+                Cookies.set('token', response.token, { expires: 1 })
                 return response
             },
             invalidatesTags: [{type: 'Boards', id: 'LIST'}]
@@ -186,6 +191,46 @@ export const API = createApi({
             query: () => ({
                 url: `auth/user`
             }),
+        }),
+        getAllUsers: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, unknown>({
+            query: () => ({
+                url: `api/users`
+            }),
+        }),
+        getUserToBoard: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, string>({
+            query: (board_id) => ({
+                url: `api/board/${board_id}/users`
+            }),
+            providesTags: (result) => result
+                ? [...result.map(({id}) => ({type: 'Users', id} as const)),
+                    {type: 'Users', id: 'LIST'}]
+                : [{type: 'Users', id: 'LIST'}],
+        }),
+        addUserToBoards: builder.mutation<undefined, ApiChangeUserToBoardPayload>({
+            query(data) {
+                const {user_id, board_id} = data
+                return {
+                    url: `api/board/${board_id}/users`,
+                    method: 'PATCH',
+                    body: {
+                        user_id
+                    }
+                }
+            },
+            invalidatesTags: [{type: 'Users', id: 'LIST'}]
+        }),
+        deleteUserFromBoards: builder.mutation<undefined, ApiChangeUserToBoardPayload>({
+            query(data) {
+                const {user_id, board_id} = data
+                return {
+                    url: `api/board/${board_id}/users`,
+                    method: 'DELETE',
+                    body: {
+                        user_id
+                    }
+                }
+            },
+            invalidatesTags: [{type: 'Users', id: 'LIST'}]
         }),
     })
 })
@@ -207,5 +252,9 @@ export const {
     useDeleteTaskMutation,
     useLoginMutation,
     useRegistrationMutation,
-    useGetUserQuery
+    useGetUserQuery,
+    useGetAllUsersQuery,
+    useGetUserToBoardQuery,
+    useAddUserToBoardsMutation,
+    useDeleteUserFromBoardsMutation
 } = API

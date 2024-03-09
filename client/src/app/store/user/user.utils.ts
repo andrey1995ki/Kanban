@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export const getTokenInCooke = (): string | undefined => {
-    return document.cookie.match(/token=(.+?)(;|$)/)?.[1]
+    return Cookies.get('token')
 }

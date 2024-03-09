@@ -1,8 +1,9 @@
 const db = require('./db')
 
-const selectBoard = 'SELECT CAST(id as TEXT) as id,title from board'
+const selectBoard = 'SELECT CAST(board.id as TEXT) as id,board.title from board'
 const selectColumn = 'SELECT CAST(id as TEXT) as id,board_id,title,color,final_stage from board_column'
 const selectSubTask = 'SELECT CAST(id as TEXT) as id,title,"final",task_id from sub_task'
+
 
 class SQLController {
     _userLogin = undefined
@@ -10,9 +11,10 @@ class SQLController {
     _userPassword = undefined
 
     async boards(req, res) {
-        console.log(req);
+        const {userid} = req.user
         try {
-            const data = await db.prepare(selectBoard)
+            const query = selectBoard + ` join user_to_borad on user_to_borad.board_id = board.id WHERE user_to_borad.user_id = ${userid}`
+            const data = await db.prepare(query)
             res.json(data.all())
         } catch (e) {
             res.status(504).json(e)
@@ -54,10 +56,12 @@ class SQLController {
 
     async addBoard(req, res) {
         const {title} = req.body
+        const {userid} = req.user
         try {
             const insert = await db.prepare('INSERT INTO board (title) VALUES (?)').run(title)
             const lastId = await insert.lastInsertRowid
             const data = await db.prepare(selectBoard + ` where id=${lastId}`).all()
+            db.prepare('INSERT INTO user_to_borad (user_id, board_id) VALUES(1, ?), (?, ?);').run(lastId, userid, lastId)
             res.json(data[0])
         } catch (e) {
             res.status(504).json(e)
@@ -238,6 +242,48 @@ class SQLController {
         )()
     }
 
+    async users(req, res) {
+        const {userid} = req.user
+        try {
+            const data = await db.prepare(`SELECT id,login, user_name as name FROM users WHERE id not in (1,${userid})`)
+            res.json(data.all())
+        } catch (e) {
+            res.status(504).json(e)
+        }
+    }
+
+    async usersToBoards(req, res) {
+        const board_id = req.params.id
+        const {userid} = req.user
+        try {
+            const data = await db.prepare(`SELECT users.id,users.login, users.user_name as name FROM user_to_borad join users on users.id = user_to_borad.user_id WHERE user_id not in (1,${userid}) AND board_id = ${board_id}`)
+            res.json(data.all())
+        } catch (e) {
+            res.status(504).json(e)
+        }
+    }
+
+    async addUserToBoards(req, res) {
+        const {user_id} = req.body
+        const board_id = req.params.id
+        try {
+            await db.prepare('INSERT INTO user_to_borad (user_id, board_id) VALUES(?, ?);').run(user_id, board_id)
+            res.json()
+        } catch (e) {
+            res.status(504).json(e)
+        }
+    }
+
+    async removeUserToBoards(req, res) {
+        const {user_id} = req.body
+        const board_id = req.params.id
+        try {
+            await db.prepare('DELETE FROM user_to_borad WHERE user_id=? and board_id=?;').run(user_id, board_id)
+            res.json()
+        } catch (e) {
+            res.status(504).json(e)
+        }
+    }
 
 }
 

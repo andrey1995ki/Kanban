@@ -63,3 +63,8 @@ export interface ErrorResponse {
         message: string
     }
 }
+
+export interface ApiChangeUserToBoardPayload {
+    user_id: number
+    board_id: string
+}

@@ -1,6 +1,7 @@
 import {setUserAction, UserState} from "./user.model";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getTokenInCooke} from "./user.utils";
+import Cookies from "js-cookie";
 
 const initialState: UserState = {
     login: undefined,
@@ -25,12 +26,13 @@ const UserSlice = createSlice({
             state.isAuth = true
         },
         logoutUser: (state) => {
+            Cookies.remove('token', { path: '' })
             state.login = undefined
             state.name = undefined
             state.id = undefined
             state.token = undefined
             state.isAuth = false
-            document.cookie = "token=;max-age=-1"
+
         }
     }
 })

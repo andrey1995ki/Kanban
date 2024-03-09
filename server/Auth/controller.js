@@ -37,7 +37,6 @@ class authController {
             const {login, password} = req.body
             SQLController.fiendUser = login
             const fiendUser = await SQLController.fiendUser
-            console.log(fiendUser);
             if (!fiendUser) {
                 SQLController.fiendUser = undefined
                 return res.status(400).json({message: 'Введены не правильные логин или пароль'})
