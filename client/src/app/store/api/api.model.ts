@@ -38,3 +38,33 @@ export interface SubTaskData {
     final: boolean
 }
 
+export interface ApiRegistration {
+    login: string
+    password: string
+    name: string
+}
+
+export type ApiLogin = Omit<ApiRegistration, 'name'>
+
+export interface ApiAuthResponse {
+    messages: string
+}
+
+export interface ApiLoginResponse {
+    token: string
+    login: string
+    id: number
+    name: string
+}
+
+export interface ErrorResponse {
+    status: number
+    data: {
+        message: string
+    }
+}
+
+export interface ApiChangeUserToBoardPayload {
+    user_id: number
+    board_id: string
+}

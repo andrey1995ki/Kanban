@@ -4,7 +4,7 @@ import {Input} from "./Input";
 import '../../../../../../index.scss'
 
 const input: Meta<typeof Input> = {
-    title: "Components/Fields/Mutation",
+    title: "Components/Fields/Input",
     component: Input,
     tags: ['autodocs'],
     parameters: {
@@ -51,6 +51,10 @@ const input: Meta<typeof Input> = {
             defaultValue: {
                 summary: 'false'
             },
+        },
+        isPassword: {
+            description: 'Признак тоого что в поле вводится пароль',
+            type: 'boolean'
         }
 
     }
@@ -77,6 +81,7 @@ export const InputField: Story = {
         placeholder: '',
         disabled: false,
         required: false,
+        isPassword: false
     }
 };
 export const InputWithArgs: Story = {
@@ -88,5 +93,18 @@ export const InputWithArgs: Story = {
         placeholder: 'Текст внутри элемента',
         disabled: true,
         required: true,
+        isPassword: false
+    }
+};
+export const InputPassword: Story = {
+    ...InputPattern,
+    args: {
+        name: 'input',
+        label: 'Пароль',
+        errors: '',
+        placeholder: '',
+        disabled: false,
+        required: false,
+        isPassword: true
     }
 };

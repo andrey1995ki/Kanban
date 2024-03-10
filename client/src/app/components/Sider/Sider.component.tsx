@@ -6,28 +6,45 @@ import {FaPlus} from "react-icons/fa6";
 import {IoMoonOutline, IoSunnyOutline} from "react-icons/io5";
 import {SiderButton} from "./components/SiderButton";
 import {FaEyeSlash} from "react-icons/fa";
+import {AiOutlineLogout} from "react-icons/ai";
 
 export const SiderComponent: FC<SiderComponentProps> = (props) => {
-    const {changeTheme, isDarkTheme, boards, activeBoards, setShowModal, setDisplaySider} = props
+    const {
+        changeTheme,
+        isDarkTheme,
+        boards,
+        activeBoards,
+        setShowModal,
+        setDisplaySider,
+        isAuth,
+        logout,
+        name,
+        login
+    } = props
     return (
         <div className={style.sider}>
             <div className={style.menu}>
-                <div className={style.boardCount}>Все доски ({boards?.length || 0})</div>
-                <div className={style.boardsList}>
-                    {
-                        boards?.map((board) => {
-                            const isActiveBoard = board.id === activeBoards
-                            return <SiderButton active={isActiveBoard} board={board} key={board.id}/>
-                        })
-                    }
-                </div>
-                <div className={style.boardCreate} onClick={() => setShowModal()}>
-                    <MdOutlineSpaceDashboard className={style.boardIcon}/>
-                    <div className={style.boardCreateText}>
-                        <FaPlus/>
-                        Создать новую доску
-                    </div>
-                </div>
+                {
+                    isAuth &&
+                    <>
+                        <div className={style.boardCount}>Все доски ({boards?.length || 0})</div>
+                        <div className={style.boardsList}>
+                            {
+                                boards?.map((board) => {
+                                    const isActiveBoard = board.id === activeBoards
+                                    return <SiderButton active={isActiveBoard} board={board} key={board.id}/>
+                                })
+                            }
+                        </div>
+                        <div className={style.boardCreate} onClick={() => setShowModal()}>
+                            <MdOutlineSpaceDashboard className={style.boardIcon}/>
+                            <div className={style.boardCreateText}>
+                                <FaPlus/>
+                                Создать новую доску
+                            </div>
+                        </div>
+                    </>
+                }
             </div>
             <div className={style.actions}>
                 <div className={style.theme}><IoSunnyOutline/>
@@ -42,6 +59,15 @@ export const SiderComponent: FC<SiderComponentProps> = (props) => {
                     <span>Скрыть панель</span>
                 </div>
             </div>
+            {
+                isAuth &&
+                <div className={style.user} title={login}>
+                    {name}
+                    <div className={style.logout} onClick={() => logout()} title={'Выйти'}>
+                        <AiOutlineLogout/>
+                    </div>
+                </div>
+            }
         </div>
     );
 };

@@ -15,6 +15,10 @@ export interface SiderComponentProps {
     activeBoards: string | undefined
     setShowModal: () => void
     setDisplaySider: (displaySider: boolean) => void
+    isAuth: boolean
+    logout: () => void
+    name?: string
+    login?: string
 }
 
 export interface SiderButtonProps {

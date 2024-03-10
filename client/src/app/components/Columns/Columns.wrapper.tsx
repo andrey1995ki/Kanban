@@ -1,27 +1,16 @@
 import {FC, useEffect} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {API} from "../../store/api/api";
+import {useNavigate} from "react-router-dom";
 import {Columns} from "./Columns";
-import {useSelector} from "react-redux";
-import {AppSelector} from "../../store/app/app.selector";
+import {useShowBoard} from "../../../assets/common/hook/useShowBoard";
 
 export const ColumnsWrapper: FC = () => {
     const navigate = useNavigate()
-    const {boardId} = useParams()
-    const {boards} = useSelector(AppSelector)
-    // Проверяем присутствует доска среди новосозданыхх
-    const newBoard = boards.filter(board => board.id === boardId)?.[0]
-    // Получаем список всех досок из API
-    const {board} = API.useGetBoardsQuery('', {
-        selectFromResult: ({data}) => ({
-            board: data?.filter(board => board.id === boardId)
-        }),
-    })
+    const {toRedirect, boardId} = useShowBoard()
     useEffect(() => {
-        if (board?.length === 0 && !newBoard) {
+        if (toRedirect) {
             navigate("/");
         }
-    }, [board, navigate, newBoard])
+    }, [toRedirect, navigate])
 
     return (
         <Columns boardId={boardId as string}/>

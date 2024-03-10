@@ -4,12 +4,14 @@ import {Button} from "../../../assets/common/components/Button";
 import {FaPlus} from "react-icons/fa6";
 import {FC} from "react";
 import {HeaderComponentProps} from "./Header.model";
+import {AuthBlock} from "./components/AuthBlock";
 
 export const HeaderComponents: FC<HeaderComponentProps> = ({
                                                                title,
                                                                showBtn,
                                                                navigate,
                                                                toggleModal,
+                                                               isAuth,
                                                                children
                                                            }) => {
     return (
@@ -25,13 +27,20 @@ export const HeaderComponents: FC<HeaderComponentProps> = ({
                     <h2>{title ? title : ''}</h2>
                 </div>
                 <div className={style.headerAction}>
-                    <div>
-                        {
-                            showBtn && <Button title={'Добавить задачу'} type={'primary'} icon={<FaPlus/>}
-                                               onClick={() => toggleModal()}/>
-                        }
-                    </div>
-                    {children}
+                    {
+                        isAuth ?
+                            <>
+                                <div>
+                                    {
+                                        showBtn && <Button title={'Добавить задачу'} type={'primary'} icon={<FaPlus/>}
+                                                           onClick={() => toggleModal()}/>
+                                    }
+                                </div>
+                                {children}
+                            </>
+                            : <AuthBlock/>
+                    }
+
                 </div>
             </div>
         </div>

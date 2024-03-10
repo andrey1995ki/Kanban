@@ -61,6 +61,7 @@ export const HeaderDefault: Story = {
         ...HeaderPattern.args,
         title: '',
         showBtn: false,
+        isAuth: true
     }
 }
 export const HeaderWithData: Story = {
@@ -68,5 +69,14 @@ export const HeaderWithData: Story = {
         ...HeaderPattern.args,
         title: 'Шапка',
         showBtn: true,
+        isAuth: true
+    }
+}
+export const HeaderWithoutAuth: Story = {
+    args: {
+        ...HeaderPattern.args,
+        title: '',
+        showBtn: false,
+        isAuth: false
     }
 }

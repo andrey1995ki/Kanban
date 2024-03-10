@@ -3,24 +3,40 @@ import {
     ApiAddBoardColumnPayload,
     ApiAddBoardPayload,
     ApiAddTaskPayload,
+    ApiAuthResponse,
     ApiBoardColumnResponse,
-    ApiBoardsResponse,
+    ApiBoardsResponse, ApiChangeUserToBoardPayload,
+    ApiLogin,
+    ApiLoginResponse,
+    ApiRegistration,
     ApiTaskResponse,
     ApiToggleTaskPayload
 } from "./api.model";
 import {sortResponse} from "./api.utils";
+import {RootState} from "../store";
+import {getTokenInCooke} from "../user/user.utils";
+import Cookies from "js-cookie";
 
 const url = import.meta.env.VITE_BASE_URL || ''
 const port = import.meta.env.VITE_BASE_API_PORT || ''
-const baseUrl = `http://localhost${port}${url}/api/`
+const baseUrl = `http://localhost${port}${url}/`
 export const API = createApi({
     reducerPath: 'API',
-    tagTypes: ['Task', 'Boards', 'Column'],
-    baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
+    tagTypes: ['Task', 'Boards', 'Column', 'Users'],
+    baseQuery: fetchBaseQuery({
+        baseUrl: baseUrl,
+        prepareHeaders: (headers, {getState}) => {
+            const token = (getState() as RootState).user.token || getTokenInCooke()
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`)
+            }
+            return headers
+        },
+    }),
     endpoints: (builder) => ({
         getBoards: builder.query<Array<ApiBoardsResponse>, unknown>({
             query: () => ({
-                url: '/board'
+                url: 'api/board'
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Boards', id} as const)),
@@ -29,7 +45,7 @@ export const API = createApi({
         }),
         getBoardColumn: builder.query<Array<ApiBoardColumnResponse>, string>({
             query: (board_id) => ({
-                url: `/board_column?board_id=${board_id}`
+                url: `api/board_column?board_id=${board_id}`
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Column', id} as const)),
@@ -39,7 +55,7 @@ export const API = createApi({
         }),
         getTasks: builder.query<Array<ApiTaskResponse>, string>({
             query: (board_column_id) => ({
-                url: `/task?board_column_id=${board_column_id}`
+                url: `api/task?board_column_id=${board_column_id}`
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Task', id} as const)),
@@ -50,7 +66,7 @@ export const API = createApi({
             query(data) {
                 const {taskId, board_column_id} = data
                 return {
-                    url: `/task/${taskId}`,
+                    url: `api/task/${taskId}`,
                     method: 'PATCH',
                     body: {
                         board_column_id: board_column_id
@@ -61,7 +77,7 @@ export const API = createApi({
         }),
         addBoard: builder.mutation<ApiBoardsResponse, ApiAddBoardPayload>({
             query: (body) => ({
-                url: '/board',
+                url: 'api/board',
                 method: 'POST',
                 body
             }),
@@ -69,7 +85,7 @@ export const API = createApi({
         }),
         deleteBoard: builder.mutation<ApiBoardsResponse, string>({
             query: (id) => ({
-                url: `/board/${id}`,
+                url: `api/board/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Boards', id: 'LIST'}]
@@ -78,7 +94,7 @@ export const API = createApi({
             query(data) {
                 const {title, boardID} = data
                 return {
-                    url: `/board/${boardID}`,
+                    url: `api/board/${boardID}`,
                     method: 'PATCH',
                     body: {
                         title: title
@@ -89,7 +105,7 @@ export const API = createApi({
         }),
         addBoardColumn: builder.mutation<ApiBoardColumnResponse, ApiAddBoardColumnPayload>({
             query: (body) => ({
-                url: '/board_column',
+                url: 'api/board_column',
                 method: 'POST',
                 body
             }),
@@ -97,7 +113,7 @@ export const API = createApi({
         }),
         deleteBoardColumn: builder.mutation<ApiBoardColumnResponse, string>({
             query: (id) => ({
-                url: `/board_column/${id}`,
+                url: `api/board_column/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Column', id: 'LIST'}]
@@ -106,7 +122,7 @@ export const API = createApi({
             query(data) {
                 const {body, id} = data
                 return {
-                    url: `/board_column/${id}`,
+                    url: `api/board_column/${id}`,
                     method: 'PUT',
                     body
                 }
@@ -115,7 +131,7 @@ export const API = createApi({
         }),
         addTask: builder.mutation<ApiTaskResponse, ApiAddTaskPayload>({
             query: (body) => ({
-                url: '/task',
+                url: 'api/task',
                 method: 'POST',
                 body
             }),
@@ -125,7 +141,7 @@ export const API = createApi({
             query(data) {
                 const {body, taskId} = data
                 return {
-                    url: `/task/${taskId}`,
+                    url: `api/task/${taskId}`,
                     method: 'PATCH',
                     body: {
                         sub_task: body
@@ -138,7 +154,7 @@ export const API = createApi({
             query(data) {
                 const {taskId, ...body} = data
                 return {
-                    url: `/task/${taskId}`,
+                    url: `api/task/${taskId}`,
                     method: 'PUT',
                     body
                 }
@@ -147,10 +163,75 @@ export const API = createApi({
         }),
         deleteTask: builder.mutation<ApiTaskResponse, string>({
             query: (id) => ({
-                url: `/task/${id}`,
+                url: `api/task/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Task', id: 'LIST'}]
+        }),
+        login: builder.mutation<ApiLoginResponse, ApiLogin>({
+            query: (body) => ({
+                url: 'auth/login',
+                method: 'POST',
+                body
+            }),
+            transformResponse: (response: ApiLoginResponse) => {
+                Cookies.set('token', response.token, {expires: 1})
+                return response
+            },
+            invalidatesTags: [{type: 'Boards', id: 'LIST'}]
+        }),
+        registration: builder.mutation<ApiAuthResponse, ApiRegistration>({
+            query: (body) => ({
+                url: 'auth/registration',
+                method: 'POST',
+                body
+            }),
+        }),
+        getUser: builder.query<Omit<ApiLoginResponse, 'token'>, unknown>({
+            query: () => ({
+                url: `auth/user`
+            }),
+            keepUnusedDataFor: 1
+        }),
+        getAllUsers: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, unknown>({
+            query: () => ({
+                url: `api/users`
+            }),
+        }),
+        getUserToBoard: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, string>({
+            query: (board_id) => ({
+                url: `api/board/${board_id}/users`
+            }),
+            providesTags: (result) => result
+                ? [...result.map(({id}) => ({type: 'Users', id} as const)),
+                    {type: 'Users', id: 'LIST'}]
+                : [{type: 'Users', id: 'LIST'}],
+        }),
+        addUserToBoards: builder.mutation<undefined, ApiChangeUserToBoardPayload>({
+            query(data) {
+                const {user_id, board_id} = data
+                return {
+                    url: `api/board/${board_id}/users`,
+                    method: 'PATCH',
+                    body: {
+                        user_id
+                    }
+                }
+            },
+            invalidatesTags: [{type: 'Users', id: 'LIST'}]
+        }),
+        deleteUserFromBoards: builder.mutation<undefined, ApiChangeUserToBoardPayload>({
+            query(data) {
+                const {user_id, board_id} = data
+                return {
+                    url: `api/board/${board_id}/users`,
+                    method: 'DELETE',
+                    body: {
+                        user_id
+                    }
+                }
+            },
+            invalidatesTags: [{type: 'Users', id: 'LIST'}]
         }),
     })
 })
@@ -169,5 +250,12 @@ export const {
     useAddTaskMutation,
     useToggleSubTaskMutation,
     useChangeTaskMutation,
-    useDeleteTaskMutation
+    useDeleteTaskMutation,
+    useLoginMutation,
+    useRegistrationMutation,
+    useGetUserQuery,
+    useGetAllUsersQuery,
+    useGetUserToBoardQuery,
+    useAddUserToBoardsMutation,
+    useDeleteUserFromBoardsMutation
 } = API
