@@ -1,19 +1,27 @@
 import React, {FC} from 'react';
 import {SiderComponent} from "./Sider.component";
 import {SiderProps} from "./Sider.model";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppSelector} from "../../store/app/app.selector";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useModal} from "../../../assets/common/hook/useModal";
 import {Modal} from "../../../assets/common/components/Modal";
 import {CreateBoard} from "../Forms/Board/CreateBoard/CreateBoard";
 import {UserSelector} from "../../store/user/user.selector";
+import {AppDispatch} from "../../store/store";
+import {logoutUser} from "../../store/user/user.slice";
 
 export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, isDarkTheme}) => {
     const {boards} = useSelector(AppSelector)
-    const {isAuth} = useSelector(UserSelector)
+    const {isAuth,name, login} = useSelector(UserSelector)
     const {showModal, toggleModal} = useModal()
     const {boardId} = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch<AppDispatch>()
+    const logout = () => {
+        dispatch(logoutUser())
+        navigate('/')
+    }
     /**
      * Функция для переключения класса отвечающего за тему
      */
@@ -32,7 +40,7 @@ export const Sider: FC<SiderProps> = ({setDisplaySider, scheme, setIsDarkTheme, 
     return (
         <>
             <SiderComponent changeTheme={changeTheme} isDarkTheme={isDarkTheme} boards={boards} activeBoards={boardId}
-                            setShowModal={toggleModal} setDisplaySider={setDisplaySider} isAuth={isAuth}/>
+                            setShowModal={toggleModal} setDisplaySider={setDisplaySider} isAuth={isAuth} logout={logout} name={name} login={login}/>
             <Modal showModal={showModal} setShowModal={toggleModal} title={'Добавить доску'}>
                 <CreateBoard setShowModal={toggleModal}/>
             </Modal>

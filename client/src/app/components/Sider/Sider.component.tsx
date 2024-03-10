@@ -6,9 +6,21 @@ import {FaPlus} from "react-icons/fa6";
 import {IoMoonOutline, IoSunnyOutline} from "react-icons/io5";
 import {SiderButton} from "./components/SiderButton";
 import {FaEyeSlash} from "react-icons/fa";
+import {AiOutlineLogout} from "react-icons/ai";
 
 export const SiderComponent: FC<SiderComponentProps> = (props) => {
-    const {changeTheme, isDarkTheme, boards, activeBoards, setShowModal, setDisplaySider, isAuth} = props
+    const {
+        changeTheme,
+        isDarkTheme,
+        boards,
+        activeBoards,
+        setShowModal,
+        setDisplaySider,
+        isAuth,
+        logout,
+        name,
+        login
+    } = props
     return (
         <div className={style.sider}>
             <div className={style.menu}>
@@ -47,6 +59,15 @@ export const SiderComponent: FC<SiderComponentProps> = (props) => {
                     <span>Скрыть панель</span>
                 </div>
             </div>
+            {
+                isAuth &&
+                <div className={style.user} title={login}>
+                    {name}
+                    <div className={style.logout} onClick={() => logout()} title={'Выйти'}>
+                        <AiOutlineLogout/>
+                    </div>
+                </div>
+            }
         </div>
     );
 };

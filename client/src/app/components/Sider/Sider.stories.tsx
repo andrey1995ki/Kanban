@@ -75,7 +75,9 @@ const SiderPattern: Story = {
                     displaySider ?
                         <SiderComponent changeTheme={changeTheme} isDarkTheme={isDarkTheme}
                                         setDisplaySider={setDisplaySider} setShowModal={setShowModal} boards={boards}
-                                        activeBoards={activeBoards} isAuth={true}/>
+                                        activeBoards={activeBoards} isAuth={true}
+                                        logout={() => alert('Выход из системы')} name={'Фамилия Имя Отчество'}
+                                        login={'login'}/>
                         :
                         <div className={style.layout}>
                             <div className={style.content}>

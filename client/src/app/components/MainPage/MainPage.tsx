@@ -39,7 +39,6 @@ export const MainPage: FC = () => {
                             <h3>Открыть storybook</h3>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -54,18 +54,9 @@
     grid-area: action;
     display: grid;
     align-items: center;
-    grid-template-columns: 1fr 10px 10px;
+    grid-template-columns: 1fr 10px;
     justify-items: end;
     gap: 15px;
-
-    .logout {
-      font-size: 20px;
-      cursor: pointer;
-
-      &:hover {
-        color: $primary_color;
-      }
-    }
   }
 
 

@@ -175,7 +175,7 @@ export const API = createApi({
                 body
             }),
             transformResponse: (response: ApiLoginResponse) => {
-                Cookies.set('token', response.token, { expires: 1 })
+                Cookies.set('token', response.token, {expires: 1})
                 return response
             },
             invalidatesTags: [{type: 'Boards', id: 'LIST'}]
@@ -191,6 +191,7 @@ export const API = createApi({
             query: () => ({
                 url: `auth/user`
             }),
+            keepUnusedDataFor: 1
         }),
         getAllUsers: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, unknown>({
             query: () => ({

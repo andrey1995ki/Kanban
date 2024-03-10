@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppSelector} from "../../store/app/app.selector";
 import {useNavigate, useParams} from "react-router-dom";
 import {useModal} from "../../../assets/common/hook/useModal";
@@ -8,8 +8,6 @@ import {AddTask} from "../Forms/Task/AddTask";
 import {Modal} from "../../../assets/common/components/Modal";
 import {HeaderOptions} from "./components/HeaderOptions";
 import {UserSelector} from "../../store/user/user.selector";
-import {AppDispatch} from "../../store/store";
-import {logoutUser} from "../../store/user/user.slice";
 
 
 export const Header: FC = () => {
@@ -20,15 +18,10 @@ export const Header: FC = () => {
     const showBtn = columns.length > 0 && boardId
     const {showModal, toggleModal} = useModal()
     const navigate = useNavigate();
-    const dispatch = useDispatch<AppDispatch>()
-    const logout = () => {
-        dispatch(logoutUser())
-        navigate('/')
-    }
     return (
         <>
             <HeaderComponents title={title} showBtn={!!showBtn} toggleModal={toggleModal} navigate={navigate}
-                              isAuth={isAuth} logout={logout}>
+                              isAuth={isAuth}>
                 <HeaderOptions showBtn={!!showBtn} boardId={boardId}/>
             </HeaderComponents>
             <Modal showModal={showModal} setShowModal={toggleModal} title={'Добавить задачу'}><AddTask

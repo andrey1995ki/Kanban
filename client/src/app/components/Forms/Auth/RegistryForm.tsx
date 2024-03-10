@@ -30,7 +30,6 @@ export const RegistryForm: FC<LoginFormProps> = ({toggleModal}) => {
         try {
             await registry({login, name, password: passwordTwo} as ApiRegistration).unwrap()
         } catch (e) {
-            console.log(e);
             setError("login", {
                 type: "manual",
                 message: (e as ErrorResponse).data.message,

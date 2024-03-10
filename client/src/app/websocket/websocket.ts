@@ -1,4 +1,5 @@
 import {WSAddTaskPayload, WSTaskResponse} from "./websocket.model";
+import {getTokenInCooke} from "../store/user/user.utils";
 
 const url = import.meta.env.VITE_BASE_URL || ''
 const port = import.meta.env.VITE_BASE_API_PORT || ''
@@ -36,7 +37,7 @@ export const TaskApi = {
     getTasks(callbackA: (taskData: Array<WSTaskResponse>) => void, callbackB: (messages: string) => void) {
         taskCallback = callbackA
         messagesCallback = callbackB
-        socket.send(JSON.stringify({type: 'read'}));
+        socket.send(JSON.stringify({type: 'read', token: getTokenInCooke()}));
     },
     addTask(taskData: WSAddTaskPayload) {
         socket.send(
@@ -44,7 +45,8 @@ export const TaskApi = {
                 {
                     type: 'create',
                     path: 'task',
-                    data: taskData
+                    data: taskData,
+                    token: getTokenInCooke()
                 }
             )
         );
@@ -55,7 +57,8 @@ export const TaskApi = {
                 {
                     type: 'update',
                     id: taskId,
-                    data: taskData
+                    data: taskData,
+                    token: getTokenInCooke()
                 }
             )
         );
@@ -66,6 +69,7 @@ export const TaskApi = {
                 {
                     type: 'delete',
                     id: taskId,
+                    token: getTokenInCooke()
                 }
             )
         );

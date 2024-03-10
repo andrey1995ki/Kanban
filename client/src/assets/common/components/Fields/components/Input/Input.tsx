@@ -1,4 +1,4 @@
-import {ChangeEvent, forwardRef, useState} from 'react';
+import {ChangeEvent, forwardRef, useEffect, useState} from 'react';
 import style from '../../Fields.module.scss'
 import {InputProps} from "../../Fields.model";
 
@@ -18,6 +18,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
             setInputType('password')
         }
     }
+    useEffect(() => {
+        setInputType(isPassword ? 'password' : 'text')
+    }, [isPassword])
     return (
         <div className={`${style.input} ${!label ? style.withOutLabel : ''}`}>
             {

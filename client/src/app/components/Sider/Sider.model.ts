@@ -16,6 +16,9 @@ export interface SiderComponentProps {
     setShowModal: () => void
     setDisplaySider: (displaySider: boolean) => void
     isAuth: boolean
+    logout: () => void
+    name?: string
+    login?: string
 }
 
 export interface SiderButtonProps {

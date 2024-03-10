@@ -15,7 +15,6 @@ export const HeaderOptions: FC<HeaderOptionsProps> = ({showBtn, boardId}) => {
         setModalContent(param)
         toggleModal()
     }
-    console.log(boardId);
     let headerOptions: Array<OptionsArray> = [{
         callback: () => setModalData({title: 'Настрйка досок', child: <EditBoards/>}),
         title: 'Настрйка досок'

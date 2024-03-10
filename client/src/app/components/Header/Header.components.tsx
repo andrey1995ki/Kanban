@@ -5,7 +5,6 @@ import {FaPlus} from "react-icons/fa6";
 import {FC} from "react";
 import {HeaderComponentProps} from "./Header.model";
 import {AuthBlock} from "./components/AuthBlock";
-import {RiLogoutBoxRFill} from "react-icons/ri";
 
 export const HeaderComponents: FC<HeaderComponentProps> = ({
                                                                title,
@@ -13,7 +12,6 @@ export const HeaderComponents: FC<HeaderComponentProps> = ({
                                                                navigate,
                                                                toggleModal,
                                                                isAuth,
-                                                               logout,
                                                                children
                                                            }) => {
     return (
@@ -39,9 +37,6 @@ export const HeaderComponents: FC<HeaderComponentProps> = ({
                                     }
                                 </div>
                                 {children}
-                                <div className={style.logout} onClick={()=>logout()}>
-                                    <RiLogoutBoxRFill/>
-                                </div>
                             </>
                             : <AuthBlock/>
                     }
