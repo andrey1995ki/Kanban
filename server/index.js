@@ -19,7 +19,7 @@ app.use(bodyParser.raw({type: 'application/octet-stream'}))
 app.use(cors())
 app.use('/kanban/api', router)
 app.use('/kanban/api/graphql', jsonGraphqlExpress.default(graphql));
-app.use('/kanban/auth',authRouter)
+app.use('/kanban/api/auth',authRouter)
 
 
 app.listen(PORT, () => {

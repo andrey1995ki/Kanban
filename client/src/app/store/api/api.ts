@@ -19,7 +19,7 @@ import Cookies from "js-cookie";
 
 const url = import.meta.env.VITE_BASE_URL || ''
 const port = import.meta.env.VITE_BASE_API_PORT || ''
-const baseUrl = `http://localhost${port}${url}/`
+const baseUrl = `http://localhost${port}${url}/api/`
 export const API = createApi({
     reducerPath: 'API',
     tagTypes: ['Task', 'Boards', 'Column', 'Users'],
@@ -36,7 +36,7 @@ export const API = createApi({
     endpoints: (builder) => ({
         getBoards: builder.query<Array<ApiBoardsResponse>, unknown>({
             query: () => ({
-                url: 'api/board'
+                url: 'board'
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Boards', id} as const)),
@@ -45,7 +45,7 @@ export const API = createApi({
         }),
         getBoardColumn: builder.query<Array<ApiBoardColumnResponse>, string>({
             query: (board_id) => ({
-                url: `api/board_column?board_id=${board_id}`
+                url: `board_column?board_id=${board_id}`
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Column', id} as const)),
@@ -55,7 +55,7 @@ export const API = createApi({
         }),
         getTasks: builder.query<Array<ApiTaskResponse>, string>({
             query: (board_column_id) => ({
-                url: `api/task?board_column_id=${board_column_id}`
+                url: `task?board_column_id=${board_column_id}`
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Task', id} as const)),
@@ -66,7 +66,7 @@ export const API = createApi({
             query(data) {
                 const {taskId, board_column_id} = data
                 return {
-                    url: `api/task/${taskId}`,
+                    url: `task/${taskId}`,
                     method: 'PATCH',
                     body: {
                         board_column_id: board_column_id
@@ -77,7 +77,7 @@ export const API = createApi({
         }),
         addBoard: builder.mutation<ApiBoardsResponse, ApiAddBoardPayload>({
             query: (body) => ({
-                url: 'api/board',
+                url: 'board',
                 method: 'POST',
                 body
             }),
@@ -85,7 +85,7 @@ export const API = createApi({
         }),
         deleteBoard: builder.mutation<ApiBoardsResponse, string>({
             query: (id) => ({
-                url: `api/board/${id}`,
+                url: `board/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Boards', id: 'LIST'}]
@@ -94,7 +94,7 @@ export const API = createApi({
             query(data) {
                 const {title, boardID} = data
                 return {
-                    url: `api/board/${boardID}`,
+                    url: `board/${boardID}`,
                     method: 'PATCH',
                     body: {
                         title: title
@@ -105,7 +105,7 @@ export const API = createApi({
         }),
         addBoardColumn: builder.mutation<ApiBoardColumnResponse, ApiAddBoardColumnPayload>({
             query: (body) => ({
-                url: 'api/board_column',
+                url: 'board_column',
                 method: 'POST',
                 body
             }),
@@ -113,7 +113,7 @@ export const API = createApi({
         }),
         deleteBoardColumn: builder.mutation<ApiBoardColumnResponse, string>({
             query: (id) => ({
-                url: `api/board_column/${id}`,
+                url: `board_column/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Column', id: 'LIST'}]
@@ -122,7 +122,7 @@ export const API = createApi({
             query(data) {
                 const {body, id} = data
                 return {
-                    url: `api/board_column/${id}`,
+                    url: `board_column/${id}`,
                     method: 'PUT',
                     body
                 }
@@ -131,7 +131,7 @@ export const API = createApi({
         }),
         addTask: builder.mutation<ApiTaskResponse, ApiAddTaskPayload>({
             query: (body) => ({
-                url: 'api/task',
+                url: 'task',
                 method: 'POST',
                 body
             }),
@@ -141,7 +141,7 @@ export const API = createApi({
             query(data) {
                 const {body, taskId} = data
                 return {
-                    url: `api/task/${taskId}`,
+                    url: `task/${taskId}`,
                     method: 'PATCH',
                     body: {
                         sub_task: body
@@ -154,7 +154,7 @@ export const API = createApi({
             query(data) {
                 const {taskId, ...body} = data
                 return {
-                    url: `api/task/${taskId}`,
+                    url: `task/${taskId}`,
                     method: 'PUT',
                     body
                 }
@@ -163,7 +163,7 @@ export const API = createApi({
         }),
         deleteTask: builder.mutation<ApiTaskResponse, string>({
             query: (id) => ({
-                url: `api/task/${id}`,
+                url: `task/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: [{type: 'Task', id: 'LIST'}]
@@ -195,12 +195,12 @@ export const API = createApi({
         }),
         getAllUsers: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, unknown>({
             query: () => ({
-                url: `api/users`
+                url: `users`
             }),
         }),
         getUserToBoard: builder.query<Array<Omit<ApiLoginResponse, 'token'>>, string>({
             query: (board_id) => ({
-                url: `api/board/${board_id}/users`
+                url: `board/${board_id}/users`
             }),
             providesTags: (result) => result
                 ? [...result.map(({id}) => ({type: 'Users', id} as const)),
@@ -211,7 +211,7 @@ export const API = createApi({
             query(data) {
                 const {user_id, board_id} = data
                 return {
-                    url: `api/board/${board_id}/users`,
+                    url: `board/${board_id}/users`,
                     method: 'PATCH',
                     body: {
                         user_id
@@ -224,7 +224,7 @@ export const API = createApi({
             query(data) {
                 const {user_id, board_id} = data
                 return {
-                    url: `api/board/${board_id}/users`,
+                    url: `board/${board_id}/users`,
                     method: 'DELETE',
                     body: {
                         user_id

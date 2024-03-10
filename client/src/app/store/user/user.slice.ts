@@ -26,7 +26,7 @@ const UserSlice = createSlice({
             state.isAuth = true
         },
         logoutUser: (state) => {
-            Cookies.remove('token', { path: '' })
+            Cookies.remove('token', { path: '/' })
             state.login = undefined
             state.name = undefined
             state.id = undefined
