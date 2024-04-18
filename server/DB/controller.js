@@ -1,6 +1,6 @@
 const db = require('./db')
 
-const selectBoard = 'SELECT CAST(board.id as TEXT) as id,board.title from board'
+const selectBoard = 'SELECT DISTINCT CAST(board.id as TEXT) as id,board.title from board'
 const selectColumn = 'SELECT CAST(id as TEXT) as id,board_id,title,color,final_stage from board_column'
 const selectSubTask = 'SELECT CAST(id as TEXT) as id,title,"final",task_id from sub_task'
 
@@ -16,6 +16,7 @@ class SQLController {
         try {
             const query = selectBoard + ` join user_to_borad on user_to_borad.board_id = board.id WHERE user_to_borad.user_id = ${userid}`
             const data = await db.prepare(query)
+            console.log(data.all());
             res.json(data.all())
         } catch (e) {
             res.status(504).json(e)

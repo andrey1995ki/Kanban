@@ -1,0 +1,18 @@
+@import "assetsStyles";
+
+:host{
+  display: block;
+  height: 100vh;
+}
+.layout{
+  height: 100%;
+}
+.layout-header{
+  height: $header-height;
+}
+.layout-container{
+  height: calc(100% - $header-height);
+}
+.layout-container__drawer{
+  width: 300px;
+}
