@@ -4,7 +4,8 @@ const SQLController = require('./DB/controller')
 const authenticateToken = require('./Auth/middleware')
 
 // board api
-router.get('/board', authenticateToken, SQLController.boards)
+router.get('/board', SQLController.boards)
+// router.get('/board', authenticateToken, SQLController.boards)
 router.post('/board', authenticateToken, SQLController.addBoard)
 router.delete('/board/:id', authenticateToken, SQLController.deleteBoard)
 router.patch('/board/:id', authenticateToken, SQLController.changeBoardName)

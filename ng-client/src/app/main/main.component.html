@@ -3,9 +3,16 @@
     <span>kanban</span>
   </mat-toolbar>
   <mat-drawer-container class="layout-container">
-    <mat-drawer mode="side" class="layout-container__drawer" #drawer>Drawer content</mat-drawer>
-    <mat-drawer-content>
-      <button (click)="drawer.toggle()">Открыть</button>
+    <mat-drawer mode="side" class="container-drawer" opened="{{drawerIsOpen}}">
+      <app-drawer (hideDrawer)="setOpenedDrawer($event)"></app-drawer>
+    </mat-drawer>
+    <mat-drawer-content class="layout-content">
+      <router-outlet></router-outlet>
+      <div class="content-drawer-toggle" *ngIf="!drawerIsOpen">
+        <button mat-mini-fab (click)="setOpenedDrawer(true)" color="primary">
+          <mat-icon>menu_open</mat-icon>
+        </button>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

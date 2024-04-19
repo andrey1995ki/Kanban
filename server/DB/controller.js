@@ -12,7 +12,8 @@ class SQLController {
     _userID = undefined
 
     async boards(req, res) {
-        const {userid} = req.user
+        // const {userid} = req.user
+        const userid = 1
         try {
             const query = selectBoard + ` join user_to_borad on user_to_borad.board_id = board.id WHERE user_to_borad.user_id = ${userid}`
             const data = await db.prepare(query)

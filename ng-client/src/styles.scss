@@ -34,9 +34,10 @@ $light-theme: mat.define-light-theme((
     accent: mat.define-palette(mat.$pink-palette),
   ),
 ));
+
+
 body {
-  @include mat.all-component-themes($dark-theme);
-}
+  @include mat.all-component-themes($dark-theme);}
 
 body.light-theme {
   @include mat.all-component-colors($light-theme);

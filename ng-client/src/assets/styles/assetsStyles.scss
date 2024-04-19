@@ -1,1 +1,8 @@
-$header-height: 91px
+//Общая разметка
+$header-height: 91px;
+
+//Общие цвета
+$primary-color: var(--mat-option-selected-state-label-text-color);
+$background-color: var(--mat-app-background-color);
+$alternative-color: var(--mat-minimal-pseudo-checkbox-disabled-selected-checkmark-color);
+$text-color: var(--mat-app-text-color)
