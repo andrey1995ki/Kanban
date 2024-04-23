@@ -1,20 +1,20 @@
 import {Action} from "@ngrx/store";
-import {Board} from "../../Interface/store.interface";
+import {Board} from "./board.model";
 
-export enum AppActions {
+export enum BoardActions {
   GetBoards = '[App] GetBoards',
   SetBoards = '[App] SetBoards',
 }
 
 export class GetBoards implements Action {
-  readonly type = AppActions.GetBoards
+  readonly type = BoardActions.GetBoards
 }
 
 export class SetBoards implements Action {
-  readonly type = AppActions.SetBoards
+  readonly type = BoardActions.SetBoards
 
   constructor(public payload: Board[]) {
   }
 }
 
-export type AppActionsType = GetBoards | SetBoards
+export type BoardsActionsType = GetBoards | SetBoards

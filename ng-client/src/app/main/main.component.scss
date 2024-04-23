@@ -11,6 +11,8 @@
 
 .layout-header {
   height: $header-height;
+  width: 100vw;
+  padding: 0 !important;
 }
 
 .layout-container {
@@ -18,7 +20,7 @@
 }
 
 .container-drawer {
-  width: 300px;
+  width: $drawer-width;
 }
 
 .layout-content {

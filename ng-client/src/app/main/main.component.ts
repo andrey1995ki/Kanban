@@ -6,10 +6,11 @@ import {RouterOutlet} from "@angular/router";
 import {MatMiniFabButton} from "@angular/material/button";
 import {MatIconModule} from '@angular/material/icon';
 import {NgIf} from "@angular/common";
+import {HeaderComponent} from "./layout/header/header.component";
 
 
 @Component({
-  selector: 'app-main',
+  selector: 'board-main',
   standalone: true,
   imports: [
     MatToolbar,
@@ -18,7 +19,8 @@ import {NgIf} from "@angular/common";
     RouterOutlet,
     MatMiniFabButton,
     MatIconModule,
-    NgIf
+    NgIf,
+    HeaderComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'

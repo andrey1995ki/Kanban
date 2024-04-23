@@ -1,6 +1,6 @@
 @import "assetsStyles";
 
-:host{
+:host {
   display: block;
   height: 100%;
 }
@@ -17,17 +17,17 @@
   font-stretch: ultra-expanded;
   grid-area: menu;
 
-  .menu-board_count {
+  .menu-board-count {
     padding: 10px 0 10px 20px;
   }
 
-  .menu-board_list {
+  .menu-board-list {
     overflow-y: auto;
     max-height: 570px;
     margin-bottom: 5px;
   }
 
-  .menu-board_create {
+  .menu-board-item {
     display: grid;
     padding: 10px 0 10px 20px;
     margin: 2.5px 15px 2.5px 0;
@@ -36,18 +36,35 @@
     border-radius: 0 20px 20px 0;
     grid-template-columns: 25px 1fr;
     align-items: center;
-    .board_create-text{
-      display: grid;
-      grid-template-columns: 26px 1fr;
+
+    .board-text {
       align-items: center;
     }
+
+    .board_create-text {
+      @extend .board-text;
+      display: grid;
+      grid-template-columns: 26px 1fr;
+
+    }
+
     &:hover {
       border-color: $primary-color;
       cursor: pointer;
     }
   }
+
+  .menu-board__active {
+    background: $primary-color;
+    color: white;
+
+    .menu-board-icon {
+      color: white !important;
+    }
+  }
 }
-.drawer-action{
+
+.drawer-action {
   grid-area: actions;
   display: grid;
   grid-template: 40px 20px /1fr;
@@ -55,7 +72,7 @@
   align-content: center;
   gap: 5px;
 
-  .action-theme{
+  .action-theme {
     background: $background-color;
     height: 40px;
     width: 178px;
@@ -65,7 +82,8 @@
     justify-items: center;
     border-radius: 5px;
   }
-  .action-drawer_toggle{
+
+  .action-drawer_toggle {
     display: grid;
     align-items: center;
     grid-template-columns: 15px 1fr;
@@ -73,12 +91,14 @@
     cursor: pointer;
     font-size: 15px;
     color: $alternative-color;
-    &:hover{
+
+    &:hover {
       color: $primary-color;
     }
   }
 }
-.drawer-user{
+
+.drawer-user {
   font-size: 12px;
   grid-area: user;
   display: grid;
@@ -86,14 +106,17 @@
   grid-template-columns: 1fr 20px;
   padding-inline: 10px;
   background: $background-color;
-  .user-logout{
+
+  .user-logout {
     color: $primary-color;
-    &:hover{
+
+    &:hover {
       color: $text-color;
       cursor: pointer;
     }
   }
 }
-.active-theme{
+
+.active-theme {
   color: $primary-color
 }

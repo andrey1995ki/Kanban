@@ -1,32 +1,35 @@
 <div class="drawer">
   <div class="drawer-menu">
-    <div class="menu-board_count">
-      Все доски
-      <span *ngIf="boards$ | async let boards">{{boards.length}}</span>
-    </div>
-    <div class="menu-board_list" *ngFor="let board of boards$ | async">
-      <div class="menu-board_create">
-        <mat-icon aria-label="add_column" fontIcon="view_column" color="primary"></mat-icon>
-        <div class="board_create-text">
-          <span></span>
-          <span>{{board.title}}</span>
+    <app-skeleton-board *ngIf="boardsLoading$ |async; else boards"></app-skeleton-board>
+    <ng-template #boards>
+      <div class="menu-board-count">
+        Все доски
+        <span *ngIf="boards$ | async let boards">{{ boards.length }}</span>
+      </div>
+      <div class="menu-board-list" *ngFor="let board of boards$ | async">
+        <div class="menu-board-item" [routerLink]="['/kanban','board',board.id]" routerLinkActive="menu-board__active">
+          <mat-icon aria-label="add_column" fontIcon="view_column" color="primary" class="menu-board-icon"></mat-icon>
+          <div class="board-text">
+            <span>{{ board.title }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="menu-board_create">
-      <mat-icon aria-label="add_column" fontIcon="view_column" color="primary"></mat-icon>
-      <div class="board_create-text">
-        <mat-icon aria-label="add_column" fontIcon="add" color="primary"></mat-icon>
-        <span>Создать новую доску</span>
+      <div class="menu-board-item">
+        <mat-icon aria-label="add_column" fontIcon="view_column" color="primary"></mat-icon>
+        <div class="board_create-text">
+          <mat-icon aria-label="add_column" fontIcon="add" color="primary"></mat-icon>
+          <span>Создать новую доску</span>
+        </div>
       </div>
-    </div>
+    </ng-template>
   </div>
   <div class="drawer-action">
     <div class="action-theme">
       <mat-icon aria-label="light-theme" fontIcon="sunny" [class.active-theme]="!checkedDarkTheme"></mat-icon>
       <mat-slide-toggle color="primary" checked="{{checkedDarkTheme}}"
                         (change)="setTheme($event.checked)"></mat-slide-toggle>
-      <mat-icon aria-label="dark-theme" fontIcon="bedtime" [class.active-theme]="checkedDarkTheme"></mat-icon>
+      <mat-icon aria-label="dark-theme" fontIcon="dark_mode" [class.active-theme]="checkedDarkTheme"
+                mat-edit-fill="false"></mat-icon>
     </div>
     <div class="action-drawer_toggle" (click)="setHideDrawer()">
       <mat-icon aria-label="hide-drawer" fontIcon="visibility_off"></mat-icon>
@@ -34,9 +37,9 @@
     </div>
   </div>
   <div class="drawer-user">
-    <span>Пользователь П.П.</span>
+    <span>{{ currentUser | titlecase }}</span>
     <div class="user-logout">
-      <mat-icon aria-label="user-logout" fontIcon="logout"></mat-icon>
+      <mat-icon aria-label="user-logout" fontIcon="logout" (click)="logout()"></mat-icon>
     </div>
   </div>
 </div>

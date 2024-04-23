@@ -1,0 +1,15 @@
+<div class="colum" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div class="column-title">
+    <span class="title-color" [style.background]="bkcolor"></span>
+    <div class="title-text">
+      <span>Колонка</span>
+    </div>
+  </div>
+  <div class="column-tasks">
+    <app-task cdkDrag></app-task>
+    <app-task cdkDrag></app-task>
+    <app-task cdkDrag></app-task>
+    <app-task cdkDrag></app-task>
+    <app-task cdkDrag></app-task>
+  </div>
+</div>

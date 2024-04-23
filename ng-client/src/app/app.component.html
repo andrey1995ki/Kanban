@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<app-loader *ngIf="isLoading$ | async; else router"></app-loader>
+<ng-template #router>
+  <router-outlet></router-outlet>
+</ng-template>
+
+

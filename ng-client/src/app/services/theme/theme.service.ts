@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CookieService} from "ngx-cookie-service";
-import {ThemeScheme} from "../../Interface/theme.interface";
+import {ThemeScheme} from "./theme.model";
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class ThemeService {
 
   toggleTheme(isDarkTheme: boolean) {
     const selectScheme: ThemeScheme = isDarkTheme ? "dark-theme" : "light-theme"
-    this.cookieService.set('Theme', selectScheme);
+    this.cookieService.set('Theme', selectScheme, { expires: 200, path: '/'});
     this.changeTheme(this.scheme)
   }
 

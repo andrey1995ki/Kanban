@@ -1,4 +1,6 @@
 export interface ApiGetBoardResponse {
-  id:string,
+  id: string,
   title: string
 }
+
+

@@ -1,13 +1,19 @@
 import {ActionReducerMap} from "@ngrx/store";
-import * as AppReducers from './app/app.reducers'
-import {AppActionsType} from "./app/app.actions";
+import * as BoardReducers from './board/board.reducers'
+import {BoardsActionsType} from "./board/board.actions";
+import {BoardState} from "./board/board.model";
+import {AuthState} from "./auth/auth.model";
+import * as AuthReducers from './auth/auth.reducers'
+import {AuthActionsType} from "./auth/auth.actions";
 
 
-export interface State {
-  app: AppReducers.AppState
+export interface AppState {
+  board: BoardState,
+  auth: AuthState
 }
 
-export type UnionAction = AppActionsType
-export const reducers: ActionReducerMap<State, UnionAction> = {
-  app: AppReducers.appReducer
+export type UnionAction = BoardsActionsType & AuthActionsType
+export const reducers: ActionReducerMap<AppState, UnionAction> = {
+  board: BoardReducers.boardReducer,
+  auth: AuthReducers.authReducer
 }

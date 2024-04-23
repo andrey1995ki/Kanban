@@ -4,15 +4,23 @@ import {routes} from "./app-routes/app-routes";
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {CookieService} from "ngx-cookie-service";
 import {provideStore, StoreModule} from '@ngrx/store';
-import {provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from "@angular/common/http";
 import {reducers} from "./store/store";
 import {EffectsModule} from '@ngrx/effects';
-import {AppEffects} from "./store/app/app.effects";
+import {BoardEffects} from "./store/board/board.effects";
+import {AuthEffects} from "./store/auth/auth.effects";
+import {AppRoutesInterceptor} from "./app-routes/app-routes.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), CookieService, provideStore(),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(StoreModule.forRoot(reducers)
-      , EffectsModule.forRoot(AppEffects)
-    )]
+      , EffectsModule.forRoot(BoardEffects, AuthEffects)
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppRoutesInterceptor,
+      multi: true,
+    }
+  ]
 };

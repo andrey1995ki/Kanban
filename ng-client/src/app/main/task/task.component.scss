@@ -1,0 +1,21 @@
+@import "assetsStyles.scss";
+
+:host{
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 25px;
+  padding: 15px 10px 10px 15px;
+  border-radius: 15px;
+  margin: 10px;
+  cursor: pointer;
+}
+.task{
+  &:hover{
+    box-shadow: 0 0 15px $primary-color
+  }
+}
+.task-title{
+  margin: 0;
+}

@@ -1,0 +1,30 @@
+<div class="header">
+  <div class="header-app-title">
+    <div class="app-title-icon">
+
+    </div>
+    <div class="app-title">
+      <h2>kanban</h2>
+    </div>
+  </div>
+  <div class="header-data">
+    <div class="data-title">
+      <h2>{{ title }}</h2>
+    </div>
+    <div class="data-action">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>add</mat-icon>
+          <span>Добавить колонку</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Редактировать колонки</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</div>
