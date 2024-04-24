@@ -1,12 +1,13 @@
-<div class="colum" cdkDropList (cdkDropListDropped)="drop($event)">
+<div class="colum">
   <div class="column-title">
-    <span class="title-color" [style.background]="bkcolor"></span>
+    <span class="title-color" [style.background]="column.color"></span>
     <div class="title-text">
-      <span>Колонка</span>
+      <span>{{ column.title }}</span>
+      <mat-icon class="title-text__done" fontIcon="done" *ngIf="column.final_stage"></mat-icon>
     </div>
   </div>
-  <div class="column-tasks">
-    <app-task cdkDrag></app-task>
+  <div class="column-tasks" cdkDropList (cdkDropListDropped)="drop($event)">
+    <app-task cdkDrag [cdkDragDisabled]="!!column.final_stage"></app-task>
     <app-task cdkDrag></app-task>
     <app-task cdkDrag></app-task>
     <app-task cdkDrag></app-task>

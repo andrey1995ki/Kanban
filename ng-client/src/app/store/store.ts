@@ -5,15 +5,20 @@ import {BoardState} from "./board/board.model";
 import {AuthState} from "./auth/auth.model";
 import * as AuthReducers from './auth/auth.reducers'
 import {AuthActionsType} from "./auth/auth.actions";
+import {ColumnState} from "./column/column.model";
+import * as ColumReducers from "./column/column.redusers"
+import {ColumnActionsType} from "./column/column.actions";
 
 
 export interface AppState {
   board: BoardState,
-  auth: AuthState
+  auth: AuthState,
+  column: ColumnState,
 }
 
-export type UnionAction = BoardsActionsType & AuthActionsType
+export type UnionAction = BoardsActionsType & AuthActionsType & ColumnActionsType
 export const reducers: ActionReducerMap<AppState, UnionAction> = {
   board: BoardReducers.boardReducer,
-  auth: AuthReducers.authReducer
+  auth: AuthReducers.authReducer,
+  column: ColumReducers.columnReducer
 }

@@ -10,12 +10,17 @@ import {EffectsModule} from '@ngrx/effects';
 import {BoardEffects} from "./store/board/board.effects";
 import {AuthEffects} from "./store/auth/auth.effects";
 import {AppRoutesInterceptor} from "./app-routes/app-routes.interceptor";
+import {ColumnEffects} from "./store/column/column.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), CookieService, provideStore(),
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(StoreModule.forRoot(reducers)
-      , EffectsModule.forRoot(BoardEffects, AuthEffects)
+      , EffectsModule.forRoot(
+        BoardEffects,
+        AuthEffects,
+        ColumnEffects
+      )
     ),
     {
       provide: HTTP_INTERCEPTORS,

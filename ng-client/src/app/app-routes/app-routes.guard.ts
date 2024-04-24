@@ -6,6 +6,7 @@ import {AppState} from "../store/store";
 import {ToggleLoading} from "../store/auth/auth.actions";
 import {GetToken} from "../store/auth";
 import {getBoardById} from "../store/board";
+import {getLoadingColumns} from "../store/column";
 
 export const AppRoutesGuard: CanActivateFn = () => {
   const auth = inject(AuthService)
@@ -35,8 +36,12 @@ export const BoardGuard: CanActivateChildFn = (route: ActivatedRouteSnapshot) =>
   const router = inject(Router)
   const id = route.params['id']
   let boardExist: Array<any> = []
+  let loadingColumns = false
   store.select(getBoardById, id).subscribe(b => boardExist = b)
-  console.log(boardExist);
+  store.select(getLoadingColumns, id).subscribe(l => loadingColumns = l)
+  if (loadingColumns) {
+    return false
+  }
   if (!boardExist.length) {
     router.navigate(['/kanban'])
     return false

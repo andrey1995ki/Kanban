@@ -7,7 +7,7 @@
         <span *ngIf="boards$ | async let boards">{{ boards.length }}</span>
       </div>
       <div class="menu-board-list" *ngFor="let board of boards$ | async">
-        <div class="menu-board-item" [routerLink]="['/kanban','board',board.id]" routerLinkActive="menu-board__active">
+        <div class="menu-board-item" [routerLink]="['/kanban','board',board.id]" routerLinkActive="menu-board__active" >
           <mat-icon aria-label="add_column" fontIcon="view_column" color="primary" class="menu-board-icon"></mat-icon>
           <div class="board-text">
             <span>{{ board.title }}</span>

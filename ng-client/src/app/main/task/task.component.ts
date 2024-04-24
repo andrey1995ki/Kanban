@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
   standalone: true,
   imports: [MatCardModule],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.scss'
+  styleUrl: './task.component.scss',
 })
 export class TaskComponent {
 

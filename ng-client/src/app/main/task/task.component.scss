@@ -12,9 +12,14 @@
   cursor: pointer;
 }
 .task{
+  padding: 5px 10px;
   &:hover{
     box-shadow: 0 0 15px $primary-color
   }
+}
+.task-content{
+  color: $alternative-color;
+  font-size: 17px;
 }
 .task-title{
   margin: 0;

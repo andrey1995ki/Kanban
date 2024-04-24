@@ -1,3 +1,9 @@
+:host{
+  overflow-y: hidden;
+  width: 100%;
+  display: block;
+  height: 98%;
+}
 .board {
   display: grid;
   justify-content: start;
