@@ -133,6 +133,7 @@ class SQLController {
     }
 
     async taskWS(ws, currentUserId) {
+        console.log(currentUserId);
         let query = `SELECT CAST(t.id as TEXT) as id, CAST(t.board_column_id as TEXT) as board_column_id, CAST(t.board_id as TEXT) as board_id,t.title,t.description from task t 
                     join user_to_borad utb on utb.board_id = t.board_id  WHERE utb.user_id = ${currentUserId}`
         try {

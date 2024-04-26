@@ -23,7 +23,7 @@ export class SetColumn implements Action {
 export class ToggleLoading implements Action {
   readonly type = ColumnActions.ToggleLoading
 
-  constructor(public payload: any) {
+  constructor(public payload: boolean) {
   }
 }
 

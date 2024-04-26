@@ -9,6 +9,7 @@ import {AsyncPipe, NgIf} from "@angular/common";
 import {isLoading} from "./store/auth";
 import {Actions, ofType} from "@ngrx/effects";
 import {AuthActions} from "./store/auth/auth.actions";
+import {TaskService} from "./services/task/task.service";
 
 @Component({
   selector: 'app-root',
@@ -24,12 +25,15 @@ export class AppComponent implements OnInit {
               private authService: AuthService,
               private store: Store<AppState>,
               private actions$: Actions,
-              private router: Router) {
+              private router: Router,
+              private taskWS: TaskService
+              ) {
   }
 
   ngOnInit(): void {
-    this.themeService.setTheme()
     this.authService.getTokenFromCache()
+    this.taskWS.connect()
+    this.themeService.setTheme()
     this.actions$.pipe(
       ofType(AuthActions.SetError)
     ).subscribe(

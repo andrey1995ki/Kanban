@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, delay, Observable} from "rxjs";
+import {BehaviorSubject, delay, Observable, tap} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ApiGetBoardResponse} from "./board.model";
 import {environment} from "../../../environments/environment";
@@ -13,6 +13,6 @@ export class BoardService {
   constructor(private http: HttpClient) { }
 
   getBoard(): Observable<ApiGetBoardResponse[]>{
-    return this.http.get<ApiGetBoardResponse[]>(`${environment.apiUrl}/board`).pipe(delay(3000))
+    return this.http.get<ApiGetBoardResponse[]>(`${environment.apiUrl}/board`).pipe(delay(3000),tap(r=>console.log(r)))
   }
 }

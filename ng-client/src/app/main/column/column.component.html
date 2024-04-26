@@ -7,10 +7,6 @@
     </div>
   </div>
   <div class="column-tasks" cdkDropList (cdkDropListDropped)="drop($event)">
-    <app-task cdkDrag [cdkDragDisabled]="!!column.final_stage"></app-task>
-    <app-task cdkDrag></app-task>
-    <app-task cdkDrag></app-task>
-    <app-task cdkDrag></app-task>
-    <app-task cdkDrag></app-task>
+    <app-task cdkDrag [cdkDragDisabled]="!!column.final_stage" *ngFor="let t of task" [task]="t"></app-task>
   </div>
 </div>

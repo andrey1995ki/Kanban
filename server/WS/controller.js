@@ -7,13 +7,14 @@ const WSController = function (app) {
     const aWss = WSServer(app).getWss()
     app.ws('/kanban/socket', (ws) => {
         console.log('start ws server')
-        ws.send('succses')
+        ws.send(JSON.stringify('succses'))
         let message = undefined
         const setMessage = (msg) => {
             message = msg
         }
         ws.on('message', (msg) => {
             const {type, id, data, token} = JSON.parse(msg)
+            console.log(type, id, data, token);
             if (token) {
                 const {userid} = jwt.verify(token, process.env.TOKEN_SECRET)
                 ws.user_id = userid

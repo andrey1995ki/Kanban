@@ -30,6 +30,7 @@ export class AuthService {
       this.store.dispatch(new SetToken({token: this.token}))
       this.store.dispatch(new GetUser())
     }
+    return this.token
   }
 
   login(user: User): Observable<ApiLoginResponse> {

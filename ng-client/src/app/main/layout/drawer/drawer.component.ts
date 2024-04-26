@@ -13,6 +13,7 @@ import {AuthService} from "../../../services/auth/auth.service";
 import {GetBoards} from "../../../store/board/board.actions";
 import {getUser} from "../../../store/auth";
 import {SkeletonBoardComponent} from "../../shared/loading/skeleton-board/skeleton-board.component";
+import {GetTask} from "../../../store/task/task.actions";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class DrawerComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetBoards())
     this.store.select(getUser).subscribe((user) => this.currentUser = user)
-
+    this.store.dispatch(new GetTask())
   }
 
   setHideDrawer() {

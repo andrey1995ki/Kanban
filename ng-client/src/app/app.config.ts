@@ -11,6 +11,7 @@ import {BoardEffects} from "./store/board/board.effects";
 import {AuthEffects} from "./store/auth/auth.effects";
 import {AppRoutesInterceptor} from "./app-routes/app-routes.interceptor";
 import {ColumnEffects} from "./store/column/column.effects";
+import {TaskEffects} from "./store/task/task.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), CookieService, provideStore(),
@@ -19,7 +20,8 @@ export const appConfig: ApplicationConfig = {
       , EffectsModule.forRoot(
         BoardEffects,
         AuthEffects,
-        ColumnEffects
+        ColumnEffects,
+        TaskEffects
       )
     ),
     {
