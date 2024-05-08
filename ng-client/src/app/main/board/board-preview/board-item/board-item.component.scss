@@ -1,0 +1,9 @@
+:host{
+  margin-block: 2px;
+}
+.board-item{
+  display: grid;
+  grid-template-columns: 1fr 49px 49px;
+  align-items: center;
+  gap: 2px
+}

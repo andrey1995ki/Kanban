@@ -15,4 +15,8 @@ export class ColumnService {
   getColumn(board_id: string) {
     return this.http.get<ApiGetColumnResponse[]>(`${environment.apiUrl}/board_column?board_id=${board_id}`).pipe(delay(3000))
   }
+
+  addColumn(column: Omit<ApiGetColumnResponse, 'id'>) {
+    return this.http.post<ApiGetColumnResponse>(`${environment.apiUrl}/board_column`, column).pipe(delay(1000))
+  }
 }

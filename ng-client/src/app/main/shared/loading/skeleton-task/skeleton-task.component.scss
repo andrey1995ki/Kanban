@@ -15,13 +15,9 @@
 
 .skeleton-tasks {
   display: grid;
-  justify-content: start;
-  align-items: center;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 25px;
-  padding: 15px 10px 10px 15px;
-  border-radius: 15px;
-  margin: 10px;
+  margin: 15px;
+  height: 133px;
   cursor: default !important;
 }
 
@@ -31,7 +27,7 @@
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  height: 78px;
+  height: 133px;
 }
 
 .skeleton-card::before {

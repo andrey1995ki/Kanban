@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {catchError, distinctUntilChanged, EMPTY, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, distinctUntilChanged, EMPTY, Observable, tap} from "rxjs";
 import {webSocket} from "rxjs/webSocket";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/store";
 import {GetToken} from "../../store/auth";
-import {WSGetTaskResponse} from "./task.model";
+import {WSAddTaskPayload, WSEditTaskPayload, WSGetTaskMessages, WSGetTaskResponse} from "./task.model";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,8 @@ import {WSGetTaskResponse} from "./task.model";
 export class TaskService {
   private webSocket$: any
   private token: string | undefined
+
+  public selectedTask$ = new BehaviorSubject<undefined | string>(undefined)
 
   constructor(private store: Store<AppState>) {
     store.select(GetToken).subscribe(t => this.token = t)
@@ -32,7 +34,10 @@ export class TaskService {
           this.webSocket$.next({type: 'connect'})
         }
       },
-      deserializer: ({data}) => JSON.parse(data).data
+      deserializer: ({data}) => {
+        const dataRes: Array<any> | undefined = JSON.parse(data).data
+        return dataRes || JSON.parse(data)
+      }
     })
     this.webSocket$.subscribe()
   }
@@ -43,12 +48,38 @@ export class TaskService {
     }
   }
 
-  getTask(): Observable<WSGetTaskResponse[]> {
+  getTask(): Observable<WSGetTaskResponse[] | WSGetTaskMessages> {
     this.webSocket$.next({type: 'read', token: this.token})
     return this.webSocket$.pipe(
       distinctUntilChanged(),
       tap(r => console.log(r)),
       catchError(_ => EMPTY)
     )
+  }
+
+  editTask(taskId: string, taskData: WSEditTaskPayload) {
+    this.webSocket$.next({
+      type: 'update',
+      id: taskId,
+      data: taskData,
+      token: this.token
+    })
+  }
+
+  createTask(taskData: WSAddTaskPayload) {
+    this.webSocket$.next({
+      type: 'create',
+      path: 'task',
+      data: taskData,
+      token: this.token
+    })
+  }
+
+  deleteTask(taskId: string){
+    this.webSocket$.next({
+      type: 'delete',
+      id: taskId,
+      token: this.token
+    })
   }
 }

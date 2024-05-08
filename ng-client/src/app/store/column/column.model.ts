@@ -4,5 +4,6 @@ export type Colum = ApiGetColumnResponse
 
 export interface ColumnState {
   column: Colum[]
+  board_id: string | undefined
   isLoading: boolean
 }

@@ -1,8 +1,11 @@
-<mat-card class="task">
+<mat-card class="task" (click)="openTask()">
   <mat-card-title class="task-title">
     <h4>{{ task.title }}</h4>
   </mat-card-title>
-  <mat-card-content>
-    <span class="task-content"> {{doneSubTask}} из {{subTaskLength}} подзадач</span>
+  <mat-card-content class="task-content">
+    <div class="task-description">
+      {{task.description}}
+    </div>
+    <span class="task-sub-task"> {{doneSubTask}} из {{subTaskLength}} подзадач</span>
   </mat-card-content>
 </mat-card>

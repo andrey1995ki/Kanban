@@ -37,7 +37,6 @@ export class AuthService {
     return this.http.post<ApiLoginResponse>(`${environment.apiUrl}/auth/login`, user).pipe(
       delay(3000),
       tap(response => {
-        console.log(response);
         this.cookieService.set('Token', response.token, {expires: 24, path: '/'})
       }),
       catchError(this.handleError.bind(this))

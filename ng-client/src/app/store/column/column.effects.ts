@@ -12,9 +12,20 @@ export class ColumnEffects {
       exhaustMap(
         (value) =>
           this.columnService.getColumn(value['payload']).pipe(
-            map((columns) => ({type: ColumnActions.SetColumn, payload: columns})),
+            map((columns) => ({type: ColumnActions.SetColumn, payload: {column: columns, boardId: value['payload']}})),
             catchError(() => EMPTY)
           )
+      )
+    )
+  )
+  addColum$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(ColumnActions.AddColumn),
+      exhaustMap(
+        (value) => this.columnService.addColumn(value['payload']).pipe(
+          map((column) => ({type: ColumnActions.SetNewColumn, payload: column})),
+          catchError(() => EMPTY)
+        )
       )
     )
   )

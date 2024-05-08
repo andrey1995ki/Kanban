@@ -1,0 +1,21 @@
+.column-form{
+  display: flex;
+  flex-direction: column;
+}
+.column-form-content{
+  display: flex;
+  flex-direction: column;
+}
+.column-loading{
+  display: flex;
+  justify-content: center;
+}
+.column-color{
+  background: transparent;
+  border: 0;
+}
+.column-attribute{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-evenly;
+}

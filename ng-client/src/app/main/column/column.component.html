@@ -6,7 +6,17 @@
       <mat-icon class="title-text__done" fontIcon="done" *ngIf="column.final_stage"></mat-icon>
     </div>
   </div>
-  <div class="column-tasks" cdkDropList (cdkDropListDropped)="drop($event)">
-    <app-task cdkDrag [cdkDragDisabled]="!!column.final_stage" *ngFor="let t of task" [task]="t"></app-task>
+  <div  cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.id" (cdkDropListEntered)="enter()" (cdkDropListExited)="exited()" >
+    <div class="column-tasks" *ngIf="lengthTask!==0; else emptyTask">
+      <app-task cdkDrag  *ngFor="let t of task" [cdkDragDisabled]="!!column.final_stage" [task]="t" [id]="t.id"></app-task>
+      <div *cdkDragPlaceholder></div>
+    </div>
+    <ng-template #emptyTask>
+      <div *ngIf="!dragEnter" class="empty-task">
+        <mat-icon fontIcon="web_asset" class="empty-icon"></mat-icon>
+        <span>Нет задач</span>
+      </div>
+    </ng-template>
   </div>
+
 </div>

@@ -3,7 +3,8 @@ import {TaskActions, TaskActionsType} from "./task.actions";
 
 const initialState: TaskState = {
   tasks: [],
-  isLoading: false
+  isLoading: false,
+  messages: undefined
 }
 export const taskReducer = (state = initialState, actions: TaskActionsType): TaskState => {
   switch (actions.type) {
@@ -14,6 +15,7 @@ export const taskReducer = (state = initialState, actions: TaskActionsType): Tas
       }
     case TaskActions.SetTask:
       return {
+        ...state,
         tasks: actions.payload,
         isLoading: false
       }
@@ -21,6 +23,16 @@ export const taskReducer = (state = initialState, actions: TaskActionsType): Tas
       return {
         ...state,
         isLoading: actions.payload
+      }
+    case TaskActions.EditTask:
+      return {
+        ...state,
+        tasks: state.tasks.filter(t => t.id !== actions.payload.taskId)
+      }
+    case TaskActions.SetMessages:
+      return {
+        ...state,
+        messages: actions.payload
       }
     default:
       return state

@@ -16,7 +16,6 @@ export class Login implements Action {
   readonly type = AuthActions.Login
 
   constructor(public payload: User) {
-    console.log(payload)
   }
 }
 
@@ -24,7 +23,6 @@ export class SetAuth implements Action {
   readonly type = AuthActions.SetAuth
 
   constructor(public payload: AuthData) {
-    console.log(payload)
   }
 }
 

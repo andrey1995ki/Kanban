@@ -1,0 +1,29 @@
+.task-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-subTask {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.content-subTask-input {
+  width: 100%;
+}
+
+.content-subTask-btn {
+  top: -10px;
+}
+
+.content-subTask-data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

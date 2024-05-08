@@ -14,7 +14,6 @@ const WSController = function (app) {
         }
         ws.on('message', (msg) => {
             const {type, id, data, token} = JSON.parse(msg)
-            console.log(type, id, data, token);
             if (token) {
                 const {userid} = jwt.verify(token, process.env.TOKEN_SECRET)
                 ws.user_id = userid
@@ -44,7 +43,6 @@ async function sendMessage(aWss, currentUserId, message) {
             SQLController.availableUserBoards = client.user_id
             const availableBoard = await SQLController.availableUserBoards
             if (availableBoard.find(board => Number(board.board_id) === Number(message.board))) {
-                console.log(message.message);
                 client.send(JSON.stringify({'messages': message.message}))
             }
         }

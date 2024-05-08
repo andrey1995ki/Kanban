@@ -1,0 +1,28 @@
+<app-modal [title]="'Создание колонки'" [showActions]="true" (onAccept)="submit()" (onDismiss)="modal?.closeModal()">
+  <form [formGroup]="form" class="column-form" *ngIf="!submitted; else loading">
+    <h4>Новая колонка:</h4>
+    <mat-card>
+      <mat-card-content class="column-form-content">
+        <mat-form-field>
+          <mat-label>Название</mat-label>
+          <input matInput formControlName="title" #title maxlength="20">
+          <mat-hint align="end">{{ title.value.length }} / 20</mat-hint>
+        </mat-form-field>
+        <div class="column-attribute">
+          <mat-form-field>
+            <mat-label>Цвет этапа</mat-label>
+            <input matInput type='color' formControlName="color" class="column-color"/>
+          </mat-form-field>
+          <mat-slide-toggle formControlName="final_stage" color="primary">Финальный этап</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+  <ng-template #loading>
+    <div class="column-loading">
+      <mat-spinner>
+      </mat-spinner>
+    </div>
+  </ng-template>
+</app-modal>
+

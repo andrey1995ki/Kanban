@@ -2,6 +2,14 @@
 <ng-template #columns>
   <div class="board" cdkDropListGroup>
     <app-column *ngFor="let column of column$ | async" [column]="column"></app-column>
+    <div class="board-add-column">
+      <div class="add-column" (click)="addColumn()">
+        <h3>
+          <mat-icon class="mat-icon-rtl-mirror" fontIcon="add"></mat-icon>
+          <span>Добавление колонки</span>
+        </h3>
+      </div>
+    </div>
   </div>
 </ng-template>
 

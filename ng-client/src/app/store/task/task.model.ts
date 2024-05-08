@@ -1,7 +1,13 @@
-import {WSGetTaskResponse} from "../../services/task/task.model";
+import {WSAddTaskPayload, WSEditTaskPayload, WSGetTaskResponse} from "../../services/task/task.model";
 
 export type Task = WSGetTaskResponse
-export interface TaskState{
+
+export type ChangeTaskData = WSEditTaskPayload
+
+export type CreateTaskData = WSAddTaskPayload
+
+export interface TaskState {
   tasks: Task[],
-  isLoading: boolean
+  isLoading: boolean,
+  messages: string | undefined
 }

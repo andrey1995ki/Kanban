@@ -6,15 +6,15 @@
         Все доски
         <span *ngIf="boards$ | async let boards">{{ boards.length }}</span>
       </div>
-      <div class="menu-board-list" *ngFor="let board of boards$ | async">
-        <div class="menu-board-item" [routerLink]="['/kanban','board',board.id]" routerLinkActive="menu-board__active" >
+      <div class="menu-board-list">
+        <div class="menu-board-item" [routerLink]="['/kanban','board',board.id]" routerLinkActive="menu-board__active"  *ngFor="let board of boards$ | async">
           <mat-icon aria-label="add_column" fontIcon="view_column" color="primary" class="menu-board-icon"></mat-icon>
           <div class="board-text">
             <span>{{ board.title }}</span>
           </div>
         </div>
       </div>
-      <div class="menu-board-item">
+      <div class="menu-board-item" (click)="openModal()">
         <mat-icon aria-label="add_column" fontIcon="view_column" color="primary"></mat-icon>
         <div class="board_create-text">
           <mat-icon aria-label="add_column" fontIcon="add" color="primary"></mat-icon>

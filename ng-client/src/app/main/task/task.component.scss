@@ -2,14 +2,10 @@
 
 :host{
   display: grid;
-  justify-content: start;
-  align-items: center;
   grid-template-columns: 1fr;
-  grid-template-rows: 40px 25px;
-  padding: 15px 10px 10px 15px;
-  border-radius: 15px;
-  margin: 10px;
+  margin: 15px;
   cursor: pointer;
+  height: 133px;
 }
 .task{
   padding: 5px 10px;
@@ -17,10 +13,22 @@
     box-shadow: 0 0 15px $primary-color
   }
 }
-.task-content{
+.task-sub-task{
   color: $alternative-color;
   font-size: 17px;
 }
-.task-title{
-  margin: 0;
+.task-title:is(h4){
+}
+.task-description{
+  max-height: 40px;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  margin-bottom: 10px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.task-content{
+  padding: 5px 0 16px 0;
 }

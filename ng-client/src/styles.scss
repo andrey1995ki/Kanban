@@ -17,12 +17,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-mat.$theme-ignore-duplication-warnings: true;
+mat.$theme-ignore-duplication-warnings:true;
 
 $dark-theme: mat.define-dark-theme((
   color: (
-    primary: mat.define-palette(mat.$deep-purple-palette),
-    accent: mat.define-palette(mat.$blue-grey-palette),
+    primary: mat.define-palette(mat.$blue-grey-palette),
+    accent: mat.define-palette(mat.$deep-purple-palette),
   ),
   typography: mat.define-typography-config(),
   density: 0,

@@ -1,12 +1,44 @@
-:host{
+@import "assetsStyles";
+
+
+:host {
   overflow-y: hidden;
   width: 100%;
   display: block;
   height: 98%;
 }
+
 .board {
   display: grid;
   justify-content: start;
   gap: 25px;
   height: 100%;
+}
+
+.board-add-column {
+  grid-row: 1 / 2;
+  width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .add-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, $primary-color 5%, transparent);
+    height: 97%;
+    width: 90%;
+    border-radius: 20px;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 15px $primary-color
+    }
+
+    h3 {
+      color: $primary-color;
+      display: flex;
+    }
+  }
 }

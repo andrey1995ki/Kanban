@@ -1,5 +1,5 @@
 import {BoardState} from "./board.model";
-import {BoardsActionsType, BoardActions} from "./board.actions";
+import {BoardActions, BoardsActionsType} from "./board.actions";
 
 
 const initialState: BoardState = {
@@ -16,9 +16,28 @@ export const boardReducer = (state = initialState, action: BoardsActionsType): B
       }
     case BoardActions.SetBoards:
       return {
-        ...state,
         boardsLoading: false,
         boards: action.payload
+      }
+    case BoardActions.SetNewBoard:
+      return {
+        ...state,
+        boards: [...state.boards, action.payload]
+      }
+    case BoardActions.DeleteBoard:
+      return {
+        ...state,
+        boards: state.boards.filter(board => board.id !== action.payload)
+      }
+    case BoardActions.ChangeBoard:
+      return {
+        ...state,
+        boards: state.boards.map(board => {
+          if (board.id === action.payload.id) {
+            return {...action.payload}
+          }
+          return board
+        })
       }
     default:
       return state

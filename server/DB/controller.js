@@ -16,7 +16,6 @@ class SQLController {
         try {
             const query = selectBoard + ` join user_to_borad on user_to_borad.board_id = board.id WHERE user_to_borad.user_id = ${userid}`
             const data = await db.prepare(query)
-            console.log(data.all());
             res.json(data.all())
         } catch (e) {
             res.status(504).json(e)
@@ -63,7 +62,11 @@ class SQLController {
             const insert = await db.prepare('INSERT INTO board (title) VALUES (?)').run(title)
             const lastId = await insert.lastInsertRowid
             const data = await db.prepare(selectBoard + ` where id=${lastId}`).all()
-            db.prepare('INSERT INTO user_to_borad (user_id, board_id) VALUES(1, ?), (?, ?);').run(lastId, userid, lastId)
+            if (userid === 1) {
+                db.prepare('INSERT INTO user_to_borad (user_id, board_id) VALUES(1, ?);').run(lastId)
+            } else {
+                db.prepare('INSERT INTO user_to_borad (user_id, board_id) VALUES(1, ?), (?, ?);').run(lastId, userid, lastId)
+            }
             res.json(data[0])
         } catch (e) {
             res.status(504).json(e)
@@ -133,7 +136,6 @@ class SQLController {
     }
 
     async taskWS(ws, currentUserId) {
-        console.log(currentUserId);
         let query = `SELECT CAST(t.id as TEXT) as id, CAST(t.board_column_id as TEXT) as board_column_id, CAST(t.board_id as TEXT) as board_id,t.title,t.description from task t 
                     join user_to_borad utb on utb.board_id = t.board_id  WHERE utb.user_id = ${currentUserId}`
         try {

@@ -1,0 +1,56 @@
+<app-modal [title]="editable ? 'Изменение задачи' : 'Создание задачи'" (onAccept)="submit()"
+           [acceptTitle]="editable ? 'Измененить' : 'Создать'" (onDismiss)="onDismiss()"
+           [dismissTitle]="editable ? 'Отменить' : 'Очистить'" [showActions]="true">
+  <form [formGroup]="form" class="task-form">
+    <h4 class="preview-title">Задача:</h4>
+    <mat-card>
+      <mat-card-content class="task-form-content">
+        <mat-form-field>
+          <mat-label>Название</mat-label>
+          <input matInput formControlName="title" #title maxlength="50">
+          <mat-hint align="end">{{ title.value.length }} / 50</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Описание</mat-label>
+          <textarea matInput formControlName="description" maxlength="400" #description cdkTextareaAutosize></textarea>
+          <mat-hint align="end">{{ description.value.length }} / 400</mat-hint>
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <h4 class="preview-title">Подзадачи:</h4>
+    <mat-card>
+      <mat-card-content class="task-form-content">
+        <div class="content-subTask">
+          <mat-form-field class="content-subTask-input">
+            <mat-label>Подзадача</mat-label>
+            <input matInput #subTask maxlength="40">
+            <mat-hint align="end">{{ subTask.value.length }} / 40</mat-hint>
+          </mat-form-field>
+          <button mat-icon-button class="content-subTask-btn" (click)="addSubTask()" >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let task of form.get('subTask')?.value; let idx = index">
+            <div class="content-subTask-data">
+              {{ task.title}}
+              <button mat-icon-button (click)="removeSubTask(idx)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+    <h4 class="preview-title">Статус:</h4>
+    <mat-card>
+      <mat-card-content class="task-form-content">
+        <mat-select formControlName="status">
+          @for (status of availableStatus; track status) {
+            <mat-option [value]="status.id">{{ status.title }}</mat-option>
+          }
+        </mat-select>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</app-modal>

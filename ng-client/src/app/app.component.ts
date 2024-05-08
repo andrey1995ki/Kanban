@@ -10,6 +10,7 @@ import {isLoading} from "./store/auth";
 import {Actions, ofType} from "@ngrx/effects";
 import {AuthActions} from "./store/auth/auth.actions";
 import {TaskService} from "./services/task/task.service";
+import {NotificatorService} from "./services/notificator/notificator.service";
 
 @Component({
   selector: 'app-root',
@@ -26,14 +27,16 @@ export class AppComponent implements OnInit {
               private store: Store<AppState>,
               private actions$: Actions,
               private router: Router,
-              private taskWS: TaskService
+              private taskWS: TaskService,
+              private notificator: NotificatorService
               ) {
   }
 
   ngOnInit(): void {
-    this.authService.getTokenFromCache()
+    this.notificator.init()
     this.taskWS.connect()
     this.themeService.setTheme()
+    this.authService.getTokenFromCache()
     this.actions$.pipe(
       ofType(AuthActions.SetError)
     ).subscribe(

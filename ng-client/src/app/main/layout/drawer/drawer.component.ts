@@ -14,6 +14,9 @@ import {GetBoards} from "../../../store/board/board.actions";
 import {getUser} from "../../../store/auth";
 import {SkeletonBoardComponent} from "../../shared/loading/skeleton-board/skeleton-board.component";
 import {GetTask} from "../../../store/task/task.actions";
+import {MatDialog} from "@angular/material/dialog";
+import {modalConfig} from "../../shared/modal/modal.config";
+import {BoardFormComponent} from "../../shared/forms/board-form/board-form.component";
 
 
 @Component({
@@ -31,7 +34,7 @@ export class DrawerComponent implements OnInit {
   boardsLoading$: Observable<boolean> = this.store.select(getLoadingBoards)
   currentUser: string | undefined
 
-  constructor(public themeService: ThemeService, private store: Store<AppState>, private router: Router, private authService: AuthService) {
+  constructor(public themeService: ThemeService, private store: Store<AppState>, private router: Router, private authService: AuthService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -54,5 +57,9 @@ export class DrawerComponent implements OnInit {
   logout() {
     this.authService.logout()
     this.router.navigate(['/kanban', 'login'])
+  }
+
+  openModal() {
+    this.dialog.open(BoardFormComponent, modalConfig)
   }
 }
