@@ -24,12 +24,12 @@ export const boardReducer = (state = initialState, action: BoardsActionsType): B
         ...state,
         boards: [...state.boards, action.payload]
       }
-    case BoardActions.DeleteBoard:
+    case BoardActions.SetDeleteBoard:
       return {
         ...state,
         boards: state.boards.filter(board => board.id !== action.payload)
       }
-    case BoardActions.ChangeBoard:
+    case BoardActions.SetChangeBoard:
       return {
         ...state,
         boards: state.boards.map(board => {

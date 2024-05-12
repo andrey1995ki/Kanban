@@ -13,6 +13,8 @@ import {getBoardsLength} from "../../../store/board";
 import {getColumnsLength} from "../../../store/column";
 import {Subject, takeUntil} from "rxjs";
 import {BoardPreviewComponent} from "../../board/board-preview/board-preview.component";
+import {ColumnPreviewComponent} from "../../column/column-preview/column-preview.component";
+import {BoardAccessComponent} from "../../board/board-access/board-access.component";
 
 
 @Component({
@@ -47,7 +49,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   addTask() {
     this.modal.open(TaskFormComponent, modalConfig)
   }
-  showBoards(){
+
+  showBoards() {
     this.modal.open(BoardPreviewComponent, modalConfig)
+  }
+
+  showColumns() {
+    this.modal.open(ColumnPreviewComponent, modalConfig)
+  }
+
+  showAccess(){
+    this.modal.open(BoardAccessComponent, modalConfig)
   }
 }

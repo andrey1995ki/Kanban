@@ -12,6 +12,7 @@ import {ChangeBoard, DeleteBoard} from "../../../../store/board/board.actions";
 import {Subject, takeUntil} from "rxjs";
 import {getCurrentBoardId} from "../../../../store/column";
 import {Router} from "@angular/router";
+import {BoardService} from "../../../../services/board/board.service";
 
 @Component({
   selector: 'app-board-item',
@@ -29,7 +30,7 @@ export class BoardItemComponent implements OnInit, OnDestroy {
   currentBoard: string | undefined
   private destroyed$ = new Subject<null>()
 
-  constructor(private store: Store<AppState>, private route: Router) {
+  constructor(private store: Store<AppState>, private route: Router, private boardService: BoardService) {
   }
 
   ngOnDestroy(): void {
@@ -48,6 +49,7 @@ export class BoardItemComponent implements OnInit, OnDestroy {
 
   deleteBoard() {
     if (this.board.id === this.currentBoard) {
+      this.boardService.boardTitle$.next('')
       this.route.navigate(['/kanban'])
     }
     this.store.dispatch(new DeleteBoard(this.board.id))

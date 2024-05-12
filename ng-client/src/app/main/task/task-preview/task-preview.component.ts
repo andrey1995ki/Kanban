@@ -18,6 +18,7 @@ import {MatOption, MatSelect, MatSelectChange} from "@angular/material/select";
 import {DeleteTask, EditTask} from "../../../store/task/task.actions";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {TaskFormComponent} from "../../shared/forms/task-form/task-form.component";
+import {StatusConversionPipe} from "../../../pipes/status-conversion/status-conversion.pipe";
 
 @Component({
   selector: 'app-task-preview',
@@ -38,7 +39,8 @@ import {TaskFormComponent} from "../../shared/forms/task-form/task-form.componen
     MatSelect,
     MatOption,
     MatProgressSpinner,
-    TaskFormComponent
+    TaskFormComponent,
+    StatusConversionPipe
   ],
   templateUrl: './task-preview.component.html',
   styleUrl: './task-preview.component.scss'

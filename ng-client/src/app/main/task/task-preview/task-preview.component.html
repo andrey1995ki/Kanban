@@ -25,7 +25,7 @@
       <mat-card>
         <mat-selection-list disabled="{{editable}}" (selectionChange)="changeSubTask($event)">
           @for (task of taskData.sub_task; track task) {
-            <mat-list-option [selected]="!!task.final" [value]="task.id">{{ task.title }}</mat-list-option>
+            <mat-list-option [selected]="task.final | statusConversion" [value]="task.id">{{ task.title }}</mat-list-option>
           }
         </mat-selection-list>
       </mat-card>

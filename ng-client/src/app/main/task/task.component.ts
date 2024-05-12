@@ -5,12 +5,13 @@ import {TaskPreviewComponent} from "./task-preview/task-preview.component";
 import {modalConfig} from "../shared/modal/modal.config";
 import {MatDialog} from "@angular/material/dialog";
 import {TaskService} from "../../services/task/task.service";
+import {NgIf} from "@angular/common";
 
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, NgIf],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })

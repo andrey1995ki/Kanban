@@ -15,6 +15,7 @@ import {MatIcon} from "@angular/material/icon";
 import {MatDialog} from "@angular/material/dialog";
 import {ColumnFormComponent} from "../shared/forms/column-form/column-form.component";
 import {modalConfig} from "../shared/modal/modal.config";
+import {FilterColumnPipe} from "../../pipes/filter-column/filter-column.pipe";
 
 @Component({
   selector: 'app-board',
@@ -26,7 +27,8 @@ import {modalConfig} from "../shared/modal/modal.config";
     NgForOf,
     NgIf,
     SkeletonColumnComponent,
-    MatIcon
+    MatIcon,
+    FilterColumnPipe
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'

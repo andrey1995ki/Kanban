@@ -4,8 +4,8 @@
   </mat-card-title>
   <mat-card-content class="task-content">
     <div class="task-description">
-      {{task.description}}
+      {{ task.description }}
     </div>
-    <span class="task-sub-task"> {{doneSubTask}} из {{subTaskLength}} подзадач</span>
+    <span class="task-sub-task" *ngIf="subTaskLength>0"> {{ doneSubTask }} из {{ subTaskLength }} подзадач</span>
   </mat-card-content>
 </mat-card>

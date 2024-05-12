@@ -11,19 +11,24 @@ import {ColumnActionsType} from "./column/column.actions";
 import {TaskState} from "./task/task.model";
 import {TaskActionsType} from "./task/task.actions";
 import * as TaskReducers from "./task/task.reducers";
+import {UsersState} from "./users/users.model";
+import {UsersActionsType} from "./users/users.actions";
+import * as UsersReducers from "./users/users.reducers";
 
 
 export interface AppState {
   board: BoardState,
   auth: AuthState,
   column: ColumnState,
-  task: TaskState
+  task: TaskState,
+  users: UsersState
 }
 
-export type UnionAction = BoardsActionsType & AuthActionsType & ColumnActionsType & TaskActionsType
+export type UnionAction = BoardsActionsType & AuthActionsType & ColumnActionsType & TaskActionsType & UsersActionsType
 export const reducers: ActionReducerMap<AppState, UnionAction> = {
   board: BoardReducers.boardReducer,
   auth: AuthReducers.authReducer,
   column: ColumReducers.columnReducer,
-  task: TaskReducers.taskReducer
+  task: TaskReducers.taskReducer,
+  users: UsersReducers.usersReducer
 }

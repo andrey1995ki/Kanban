@@ -33,6 +33,21 @@ export const columnReducer = (state = initialState, actions: ColumnActionsType):
         ...state,
         column: [...state.column, actions.payload]
       }
+    case ColumnActions.SetChangeColumn:
+      return {
+        ...state,
+        column: state.column.map(column => {
+          if (column.id === actions.payload.id) {
+            return actions.payload
+          }
+          return column
+        })
+      }
+    case ColumnActions.SetDeleteColumn:
+      return {
+        ...state,
+        column: state.column.filter(column => column.id !== actions.payload)
+      }
     default:
       return state
   }

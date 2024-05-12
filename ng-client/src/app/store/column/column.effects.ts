@@ -29,6 +29,28 @@ export class ColumnEffects {
       )
     )
   )
+  editColumn$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(ColumnActions.ChangeColumn),
+      exhaustMap(
+        (value) => this.columnService.editColumn(value['payload']).pipe(
+          map(() => ({type: ColumnActions.SetChangeColumn, payload: value['payload']})),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  )
+  deleteColumn$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(ColumnActions.DeleteColumn),
+      exhaustMap(
+        (value) => this.columnService.deleteColumn(value['payload']).pipe(
+          map(() => ({type: ColumnActions.SetDeleteColumn, payload: value['payload']})),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  )
 
   constructor(private actions$: Actions, private columnService: ColumnService) {
   }

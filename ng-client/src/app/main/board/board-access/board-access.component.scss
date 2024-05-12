@@ -1,0 +1,42 @@
+@import "assetsStyles";
+
+.accessBlock {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 600px;
+  gap: 20px;
+}
+
+.accessBlock-column {
+  height: 95%;
+  max-width: 275px;
+}
+
+mat-list-item {
+  height: auto !important;
+}
+
+.accessBlock-user {
+  font-size: 13px;
+  display: grid;
+
+  .user-name {
+    white-space: break-spaces;
+  }
+
+  .user-login {
+    color: $alternative-color;
+  }
+}
+.empty-block{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty-icon {
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
+}

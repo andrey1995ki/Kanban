@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {TaskComponent} from "../task/task.component";
-import {CdkDrag, CdkDragDrop, CdkDragEnter, CdkDragPlaceholder, CdkDropList} from "@angular/cdk/drag-drop";
-import {Colum} from "../../store/column/column.model";
+import {CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList} from "@angular/cdk/drag-drop";
+import {Column} from "../../store/column/column.model";
 import {MatIcon} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {Store} from "@ngrx/store";
@@ -10,6 +10,7 @@ import {getTaskByColumn} from "../../store/task";
 import {Task} from "../../store/task/task.model";
 import {EditTask} from "../../store/task/task.actions";
 import {Subject, takeUntil} from "rxjs";
+import {StatusConversionPipe} from "../../pipes/status-conversion/status-conversion.pipe";
 
 @Component({
   selector: 'app-column',
@@ -21,7 +22,8 @@ import {Subject, takeUntil} from "rxjs";
     MatIcon,
     NgIf,
     NgForOf,
-    CdkDragPlaceholder
+    CdkDragPlaceholder,
+    StatusConversionPipe
   ],
   templateUrl: './column.component.html',
   styleUrl: './column.component.scss'
@@ -29,7 +31,7 @@ import {Subject, takeUntil} from "rxjs";
 export class ColumnComponent implements OnInit, OnDestroy {
 
   @Input()
-  column!: Colum
+  column!: Column
   task!: Task[]
   lengthTask!: Number
   dragEnter = false

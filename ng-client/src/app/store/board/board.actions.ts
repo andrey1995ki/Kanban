@@ -7,7 +7,9 @@ export enum BoardActions {
   AddBoard = '[App] AddBoard',
   SetNewBoard = '[App] SetNewBoard',
   DeleteBoard = '[App] DeleteBoard',
-  ChangeBoard = '[App] ChangeBoard'
+  SetDeleteBoard = '[App] SetDeleteBoard',
+  ChangeBoard = '[App] ChangeBoard',
+  SetChangeBoard = '[App] SetChangeBoard'
 }
 
 export class GetBoards implements Action {
@@ -42,6 +44,13 @@ export class DeleteBoard implements Action {
   }
 }
 
+export class SetDeleteBoard implements Action {
+  readonly type = BoardActions.SetDeleteBoard
+
+  constructor(public payload: String) {
+  }
+}
+
 export class ChangeBoard implements Action {
   readonly type = BoardActions.ChangeBoard
 
@@ -49,4 +58,19 @@ export class ChangeBoard implements Action {
   }
 }
 
-export type BoardsActionsType = GetBoards | SetBoards | SetNewBoard | AddBoard | DeleteBoard | ChangeBoard
+export class SetChangeBoard implements Action {
+  readonly type = BoardActions.SetChangeBoard
+
+  constructor(public payload: Board) {
+  }
+}
+
+export type BoardsActionsType =
+  GetBoards
+  | SetBoards
+  | SetNewBoard
+  | AddBoard
+  | DeleteBoard
+  | ChangeBoard
+  | SetDeleteBoard
+  | SetChangeBoard

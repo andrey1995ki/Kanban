@@ -8,7 +8,7 @@
   </div>
   <div  cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.id" (cdkDropListEntered)="enter()" (cdkDropListExited)="exited()" >
     <div class="column-tasks" *ngIf="lengthTask!==0; else emptyTask">
-      <app-task cdkDrag  *ngFor="let t of task" [cdkDragDisabled]="!!column.final_stage" [task]="t" [id]="t.id"></app-task>
+      <app-task cdkDrag  *ngFor="let t of task" [cdkDragDisabled]="column.final_stage | statusConversion" [task]="t" [id]="t.id"></app-task>
       <div *cdkDragPlaceholder></div>
     </div>
     <ng-template #emptyTask>

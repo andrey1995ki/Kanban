@@ -22,7 +22,7 @@
         </button>
       </div>
       <div>
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
@@ -30,11 +30,11 @@
             <mat-icon>edit_note</mat-icon>
             <span>Редактировать доски</span>
           </button>
-          <button mat-menu-item *ngIf="availableBoards">
+          <button mat-menu-item *ngIf="title.length>0" (click)="showAccess()">
             <mat-icon>account_box</mat-icon>
             <span>Настройка доступа</span>
           </button>
-          <button mat-menu-item *ngIf="availableColumns">
+          <button mat-menu-item *ngIf="availableColumns" (click)="showColumns()">
             <mat-icon>edit</mat-icon>
             <span>Редактировать колонки</span>
           </button>
