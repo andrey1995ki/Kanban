@@ -17,6 +17,7 @@ import {GetTask} from "../../../store/task/task.actions";
 import {MatDialog} from "@angular/material/dialog";
 import {modalConfig} from "../../shared/modal/modal.config";
 import {BoardFormComponent} from "../../shared/forms/board-form/board-form.component";
+import {AppRoutesEnum} from "../../../app-routes/app-routes.enum";
 
 
 @Component({
@@ -62,4 +63,6 @@ export class DrawerComponent implements OnInit {
   openModal() {
     this.dialog.open(BoardFormComponent, modalConfig)
   }
+
+  protected readonly AppRoutesEnum = AppRoutesEnum;
 }

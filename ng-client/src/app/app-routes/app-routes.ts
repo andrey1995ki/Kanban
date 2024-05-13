@@ -4,6 +4,7 @@ import {MainComponent} from "../main/main.component";
 import {BoardComponent} from "../main/board/board.component";
 import {AuthComponent} from "../main/auth/auth.component";
 import {AppRoutesGuard, BoardGuard, LoginGuard} from "./app-routes.guard";
+import {ChartComponent} from "../main/chart/chart.component";
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     component: MainComponent,
     canActivate: [AppRoutesGuard],
     children: [
+      {
+        path:'',
+        component: ChartComponent
+      },
       {
         path: AppRoutesEnum.Board,
         component: BoardComponent,

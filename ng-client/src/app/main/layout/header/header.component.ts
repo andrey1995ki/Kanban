@@ -15,12 +15,14 @@ import {Subject, takeUntil} from "rxjs";
 import {BoardPreviewComponent} from "../../board/board-preview/board-preview.component";
 import {ColumnPreviewComponent} from "../../column/column-preview/column-preview.component";
 import {BoardAccessComponent} from "../../board/board-access/board-access.component";
+import {Router, RouterLink} from "@angular/router";
+import {AppRoutesEnum} from "../../../app-routes/app-routes.enum";
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatMenuModule, MatIcon, MatIconButton, NgIf, MatButton, NgOptimizedImage],
+  imports: [MatMenuModule, MatIcon, MatIconButton, NgIf, MatButton, NgOptimizedImage, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -61,4 +63,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showAccess(){
     this.modal.open(BoardAccessComponent, modalConfig)
   }
+
+  protected readonly AppRoutesEnum = AppRoutesEnum;
 }
