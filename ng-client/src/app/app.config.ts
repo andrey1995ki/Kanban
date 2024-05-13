@@ -13,6 +13,7 @@ import {AppRoutesInterceptor} from "./app-routes/app-routes.interceptor";
 import {ColumnEffects} from "./store/column/column.effects";
 import {TaskEffects} from "./store/task/task.effects";
 import {UsersEffects} from "./store/users/users.effects";
+import {ChartEffects} from "./store/chart/chart.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), CookieService, provideStore(),
@@ -23,7 +24,8 @@ export const appConfig: ApplicationConfig = {
         AuthEffects,
         ColumnEffects,
         TaskEffects,
-        UsersEffects
+        UsersEffects,
+        ChartEffects
       )
     ),
     {

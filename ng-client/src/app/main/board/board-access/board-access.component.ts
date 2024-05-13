@@ -58,7 +58,6 @@ export class BoardAccessComponent implements OnInit, OnDestroy {
   drop(event$: CdkDragDrop<string, any>) {
     const newColumn = event$.container.data
     const userID = event$.item.element.nativeElement.id
-    console.log(newColumn, userID,newColumn==='access')
     if(newColumn==='access'){
       this.store.dispatch(new AddBoardUser({'boardId':this.currentBoard,'user_id':userID}))
     }

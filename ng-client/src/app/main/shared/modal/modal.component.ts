@@ -44,7 +44,6 @@ export class ModalComponent {
 
   onAcceptEvent() {
     this.onAccept.emit()
-    console.log(this.closeModalBtn?.nativeElement);
   }
 
   closeModal(){

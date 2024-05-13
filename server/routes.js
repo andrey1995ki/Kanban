@@ -22,5 +22,6 @@ router.put('/board_column/:id', authenticateToken, SQLController.editBoardColumn
 router.get('/task', SQLController.task)
 router.get('/users', authenticateToken, SQLController.users)
 
+router.get('/chart/board',authenticateToken, SQLController.boardStatistic)
 
 module.exports = router

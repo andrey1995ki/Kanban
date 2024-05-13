@@ -14,7 +14,6 @@ export class AppRoutesInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token: string | undefined
     this.store.select(GetToken).subscribe((t) => token = t)
-    console.log(token);
     if (token) {
       if (!req.url.includes('user') || !req.url.includes('registration')) {
         const authReq = req.clone({

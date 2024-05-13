@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, distinctUntilChanged, EMPTY, Observable, tap} from "rxjs";
+import {BehaviorSubject, catchError, distinctUntilChanged, EMPTY, Observable} from "rxjs";
 import {webSocket} from "rxjs/webSocket";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/store";
@@ -52,7 +52,6 @@ export class TaskService {
     this.webSocket$.next({type: 'read', token: this.token})
     return this.webSocket$.pipe(
       distinctUntilChanged(),
-      tap(r => console.log(r)),
       catchError(_ => EMPTY)
     )
   }
@@ -75,7 +74,7 @@ export class TaskService {
     })
   }
 
-  deleteTask(taskId: string){
+  deleteTask(taskId: string) {
     this.webSocket$.next({
       type: 'delete',
       id: taskId,

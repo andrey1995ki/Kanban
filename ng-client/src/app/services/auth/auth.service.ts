@@ -71,7 +71,6 @@ export class AuthService {
   }
   private handleRegistrError(error: HttpErrorResponse): ObservableInput<any> {
     const {message} = error.error
-    console.log(message);
     this.registrError$.next(message)
     return throwError(() => error)
   }

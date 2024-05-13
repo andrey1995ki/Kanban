@@ -27,7 +27,6 @@ export class BoardService {
   }
 
   deleteBoard(id: string): Observable<any> {
-    console.log(id);
     return this.http.delete(`${environment.apiUrl}/board/${id}`)
   }
 }

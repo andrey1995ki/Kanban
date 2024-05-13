@@ -67,6 +67,5 @@ export class ColumnComponent implements OnInit, OnDestroy {
 
   exited() {
     this.dragEnter = false
-    console.log(this.dragEnter, this.lengthTask !== 0 || !this.dragEnter)
   }
 }

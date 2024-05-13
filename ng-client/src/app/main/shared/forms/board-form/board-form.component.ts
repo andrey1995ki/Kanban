@@ -65,7 +65,6 @@ export class BoardFormComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed$),
       ofType(BoardActions.SetNewBoard)
     ).subscribe((data) => {
-      console.log(data['payload']['id']);
       this.submitted = false
       this.modal?.closeModal()
       this.router.navigate(['/kanban', 'board', data['payload']['id']])

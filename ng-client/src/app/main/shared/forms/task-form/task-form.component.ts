@@ -120,7 +120,6 @@ export class TaskFormComponent implements OnInit, OnDestroy {
     if (!taskData.board_id) {
       this.store.select(getCurrentBoardId).pipe(takeUntil(this.destroyed$)).subscribe(boardId => taskData.board_id = boardId)
     }
-    console.log(taskData);
     if (this.editable) {
       this.store.dispatch(new EditTask({taskData: taskData as ChangeTaskData, taskId: this.taskData.id!}))
       this.modal?.closeModal()

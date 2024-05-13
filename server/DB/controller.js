@@ -318,6 +318,31 @@ class SQLController {
         )()
     }
 
+    async boardStatistic(req, res) {
+        const {userid} = req.user
+        try {
+            const query = `with q as(
+                                    SELECT b.id,COUNT(t2.id) as 'done' from board b
+                                    join user_to_borad on user_to_borad.board_id = b.id 
+                                    LEFT join board_column bc ON bc.board_id = b.id and bc.final_stage = 1
+                                    left JOIN task t2 ON t2.board_column_id = bc.id
+                                    WHERE user_to_borad.user_id = ${userid}
+                                    GROUP BY 1
+                                    )
+                                    SELECT b.title, COUNT(t.id) as 'all', q.done as 'done' from board b
+                                    join user_to_borad on user_to_borad.board_id = b.id 
+                                    left JOIN task t on t.board_id = b.id
+                                    join q on q.id = b.id
+                                    WHERE user_to_borad.user_id = ${userid}
+                                    GROUP BY 1,3
+                                    ORDER by b.id `
+            const data = await db.prepare(query)
+            res.json(data.all())
+        } catch (e) {
+            res.status(504).json(e)
+        }
+    }
+
 }
 
 module.exports = new SQLController()

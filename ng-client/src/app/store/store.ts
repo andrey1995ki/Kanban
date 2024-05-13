@@ -14,21 +14,31 @@ import * as TaskReducers from "./task/task.reducers";
 import {UsersState} from "./users/users.model";
 import {UsersActionsType} from "./users/users.actions";
 import * as UsersReducers from "./users/users.reducers";
-
+import {ChartState} from "./chart/chart.model";
+import * as ChartReducers from "./chart/chart.reducers";
 
 export interface AppState {
   board: BoardState,
   auth: AuthState,
   column: ColumnState,
   task: TaskState,
-  users: UsersState
+  users: UsersState,
+  chart: ChartState
 }
 
-export type UnionAction = BoardsActionsType & AuthActionsType & ColumnActionsType & TaskActionsType & UsersActionsType
+export type UnionAction =
+  BoardsActionsType
+  & AuthActionsType
+  & ColumnActionsType
+  & TaskActionsType
+  & UsersActionsType
+
+
 export const reducers: ActionReducerMap<AppState, UnionAction> = {
   board: BoardReducers.boardReducer,
   auth: AuthReducers.authReducer,
   column: ColumReducers.columnReducer,
   task: TaskReducers.taskReducer,
-  users: UsersReducers.usersReducer
+  users: UsersReducers.usersReducer,
+  chart: ChartReducers.chartReducer,
 }
