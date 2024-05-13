@@ -1,0 +1,53 @@
+<form class="auth-form" [formGroup]="form">
+  <mat-form-field class="auth-form-field">
+    <mat-label>Логин</mat-label>
+    <input matInput
+           id="login"
+           formControlName="login"
+           required
+    >
+    <mat-error>Поле бязательно</mat-error>
+  </mat-form-field>
+  <mat-form-field class="auth-form-field">
+    <mat-label>Имя пользователя</mat-label>
+    <input matInput
+           id="name"
+           formControlName="name"
+           required
+    >
+    <mat-error>Поле бязательно</mat-error>
+  </mat-form-field>
+  <mat-form-field class="auth-form-field">
+    <mat-label>Пароль</mat-label>
+    <input matInput
+           id="password"
+           type="password"
+           formControlName="password"
+           required
+    >
+    <mat-error>Поле бязательно</mat-error>
+  </mat-form-field>
+  <mat-form-field class="auth-form-field">
+    <mat-label>Повторите пароль</mat-label>
+    <input matInput
+           id="confirmPassword"
+           type="password"
+           formControlName="confirmPassword"
+           required
+    >
+    <mat-error>
+      @if (form.get('confirmPassword')?.errors?.['misMatch']) {
+        Введённые пароли не совпадают
+      } @else {
+        Повторите пароль
+      }
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="registration()" [disabled]="submitted">
+    <span *ngIf="!submitted; else loading;">Зарегистрироваться</span>
+    <ng-template #loading>
+      <mat-spinner diameter="20"></mat-spinner>
+    </ng-template>
+  </button>
+</form>
+<mat-card-footer *ngIf="auth.registrError$ | async as error" class="auth-form__error">{{error}}</mat-card-footer>

@@ -1,5 +1,5 @@
 import {Action} from "@ngrx/store";
-import {AuthData, UserData} from "./auth.model";
+import {AuthData, RegistrationData, UserData} from "./auth.model";
 import {User} from "../../services/auth/auth.model";
 
 export enum AuthActions {
@@ -9,7 +9,9 @@ export enum AuthActions {
   SetUser = '[Auth] SetUser',
   SetToken = '[Auth] SetToken',
   ToggleLoading = '[Auth] ToggleLoading',
-  SetError = '[Auth] SetError'
+  SetError = '[Auth] SetError',
+  Registration = '[Auth] Registration',
+  SuccessRegist = '[Auth] SuccessRegist'
 }
 
 export class Login implements Action {
@@ -55,4 +57,14 @@ export class SetError implements Action {
   readonly type = AuthActions.SetError
 }
 
-export type AuthActionsType = Login | SetAuth | GetUser | SetUser | SetToken | ToggleLoading | SetError
+export class Registration implements Action {
+  readonly type = AuthActions.Registration
+
+  constructor(public payload: RegistrationData) {
+  }
+}
+export class SuccessRegist implements Action{
+  readonly type = AuthActions.SuccessRegist
+
+}
+export type AuthActionsType = Login | SetAuth | GetUser | SetUser | SetToken | ToggleLoading | SetError | Registration | SuccessRegist

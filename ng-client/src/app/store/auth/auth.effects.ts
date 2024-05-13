@@ -24,9 +24,20 @@ export class AuthEffects {
       exhaustMap(
         () => this.authService.getUserData().pipe(
           map(user => ({type: AuthActions.SetUser, payload: user})),
-          catchError(() => of({ type: AuthActions.SetError }))
+          catchError(() => of({type: AuthActions.SetError}))
         )
       )
+    )
+  )
+
+  registration$ = createEffect(
+    () => this.action$.pipe(
+      ofType(AuthActions.Registration),
+      exhaustMap(
+        (value) => this.authService.registration(value['payload']).pipe(
+          map(() => ({type: AuthActions.SuccessRegist})),
+          catchError(() => of({type: AuthActions.SetError}))
+        )),
     )
   )
 

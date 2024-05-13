@@ -6,7 +6,7 @@ import {AppState} from "../../store/store";
 import {GetUser, SetToken, ToggleLoading} from "../../store/auth/auth.actions";
 import {environment} from "../../../environments/environment";
 import {catchError, delay, Observable, ObservableInput, Subject, tap, throwError} from "rxjs";
-import {ApiGetUserResponse, ApiLoginResponse, User} from "./auth.model";
+import {ApiGetUserResponse, ApiLoginResponse, ApiUserRegistration, User} from "./auth.model";
 import {GetToken} from "../../store/auth";
 
 @Injectable({
@@ -14,6 +14,7 @@ import {GetToken} from "../../store/auth";
 })
 export class AuthService {
   error$: Subject<string> = new Subject<string>()
+  registrError$: Subject<string> = new Subject<string>()
   private token = this.cookieService.get('Token') || undefined
 
   constructor(private http: HttpClient, private cookieService: CookieService, private store: Store<AppState>) {
@@ -48,6 +49,13 @@ export class AuthService {
     this.cookieService.delete('Token', '/')
   }
 
+  registration(user: ApiUserRegistration): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/registration`, user).pipe(
+      delay(3000),
+      catchError(this.handleRegistrError.bind(this))
+    )
+  }
+
   getUserData(): Observable<ApiGetUserResponse> {
     this.store.dispatch(new ToggleLoading(true))
     return this.http.get<ApiGetUserResponse>(`${environment.apiUrl}/auth/user`).pipe(
@@ -59,6 +67,12 @@ export class AuthService {
   private handleError(error: HttpErrorResponse): ObservableInput<any> {
     const {message} = error.error
     this.error$.next(message)
+    return throwError(() => error)
+  }
+  private handleRegistrError(error: HttpErrorResponse): ObservableInput<any> {
+    const {message} = error.error
+    console.log(message);
+    this.registrError$.next(message)
     return throwError(() => error)
   }
 }

@@ -15,11 +15,14 @@ import {Actions, ofType} from "@ngrx/effects";
 import {AuthService} from "../../services/auth/auth.service";
 import {isLoading} from "../../store/auth";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {MatTabsModule} from '@angular/material/tabs';
+import {RegistrationComponent} from "./registration/registration.component";
+
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInput, MatCardModule, MatButton, NgIf, AsyncPipe, MatProgressSpinner],
+  imports: [ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInput, MatCardModule, MatButton, NgIf, AsyncPipe, MatProgressSpinner, MatTabsModule, RegistrationComponent],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
