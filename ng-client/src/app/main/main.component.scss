@@ -1,18 +1,39 @@
 @import "assetsStyles";
 
-:host{
+:host {
   display: block;
   height: 100vh;
 }
-.layout{
+
+.layout {
   height: 100%;
 }
-.layout-header{
+
+.layout-header {
   height: $header-height;
+  width: 100vw;
+  padding: 0 !important;
 }
-.layout-container{
+
+.layout-container {
   height: calc(100% - $header-height);
 }
-.layout-container__drawer{
-  width: 300px;
+
+.container-drawer {
+  width: $drawer-width;
+}
+
+.layout-content {
+  overflow-x: auto;
+  position: relative;
+  padding: 15px;
+
+  .content-drawer-toggle {
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+  }
 }

@@ -1,0 +1,39 @@
+<div class="auth">
+  <mat-card class="auth-block">
+    <mat-tab-group dynamicHeight="240px">
+      <mat-tab label="Атвторизация">
+        <form class="auth-form" [formGroup]="form">
+          <mat-form-field class="auth-form-field">
+            <mat-label>Логин</mat-label>
+            <input matInput
+                   id="login"
+                   formControlName="login"
+                   required
+            >
+            <mat-error>Поле бязательно</mat-error>
+          </mat-form-field>
+          <mat-form-field class="auth-form-field">
+            <mat-label>Пароль</mat-label>
+            <input matInput
+                   id="password"
+                   type="password"
+                   formControlName="password"
+                   required
+            >
+            <mat-error>Поле бязательно</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="login()" [disabled]="submitted">
+            <span *ngIf="!submitted; else loading;">Войти</span>
+            <ng-template #loading>
+              <mat-spinner diameter="20"></mat-spinner>
+            </ng-template>
+          </button>
+        </form>
+        <mat-card-footer *ngIf="auth.error$ | async as error" class="auth-form__error">{{error}}</mat-card-footer>
+      </mat-tab>
+      <mat-tab label="Регистрация">
+        <app-registration></app-registration>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

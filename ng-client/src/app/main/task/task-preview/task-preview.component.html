@@ -1,0 +1,47 @@
+<app-modal [title]="taskTitle || ''" *ngIf="!isEdit; else edit">
+  <div class="preview-task" *ngIf="taskData">
+    <mat-card class="task-description">
+      <mat-card-content>
+        {{ taskData.description }}
+      </mat-card-content>
+      <div class="task-actions">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="isEdit=true" *ngIf="!editable">
+            <mat-icon>edit</mat-icon>
+            <span>Изменить задачу</span>
+          </button>
+          <button mat-menu-item (click)="deleteTask()">
+            <mat-icon class="task-delete">delete</mat-icon>
+            <span class="task-delete">Удалить задачу</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-card>
+    <div *ngIf="taskData.sub_task.length>0">
+      <h4 class="preview-title">Подзадачи:</h4>
+      <mat-card>
+        <mat-selection-list disabled="{{editable}}" (selectionChange)="changeSubTask($event)">
+          @for (task of taskData.sub_task; track task) {
+            <mat-list-option [selected]="task.final | statusConversion" [value]="task.id">{{ task.title }}</mat-list-option>
+          }
+        </mat-selection-list>
+      </mat-card>
+    </div>
+    <div>
+      <h4 class="preview-title">Статус:</h4>
+      <mat-card class="task-status">
+        <mat-select [value]="taskData.board_column_id" (selectionChange)="changeTaskStatus($event)">
+          @for (status of availableStatus; track status) {
+            <mat-option [value]="status.id">{{ status.title }}</mat-option>
+          }
+        </mat-select>
+      </mat-card>
+    </div>
+  </div>
+</app-modal>
+<ng-template #edit>
+  <app-task-form [editable]="true" [taskData]="taskData" (closeEdit)="isEdit=false"></app-task-form>
+</ng-template>

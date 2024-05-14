@@ -1,0 +1,50 @@
+<app-modal [title]="'Управление доступом ' + title">
+  <div class="accessBlock" cdkDropListGroup>
+    <div>
+      <h4>Доступно:</h4>
+      <mat-card class="accessBlock-column" cdkDropList [cdkDropListData]="'access'"
+                (cdkDropListDropped)="drop($event)">
+        @if (accessUsers.length > 0) {
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let user of accessUsers">
+                <div class="accessBlock-user" cdkDrag [id]="user.id">
+                  <span class="user-name">{{ user.name }}</span>
+                  <span class="user-login">{{ user.login }}</span>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        } @else {
+          <div class="empty-block">
+            <mat-icon class="empty-icon">person_off</mat-icon>
+            <span>Пользователи отсутствуют</span>
+          </div>
+        }
+      </mat-card>
+    </div>
+    <div>
+      <h4>Не доступно:</h4>
+      <mat-card class="accessBlock-column" cdkDropList [cdkDropListData]="'nonAccess'"
+                (cdkDropListDropped)="drop($event)">
+        @if ((allUsers |filterUsers : accessUsers).length > 0) {
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item *ngFor="let user of allUsers |filterUsers : accessUsers">
+                <div class="accessBlock-user" cdkDrag [id]="user.id">
+                  <span class="user-name">{{ user.name }}</span>
+                  <span class="user-login">{{ user.login }}</span>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        } @else {
+          <div class="empty-block">
+            <mat-icon class="empty-icon">person_off</mat-icon>
+            <span>Пользователи отсутствуют</span>
+          </div>
+        }
+      </mat-card>
+    </div>
+  </div>
+</app-modal>

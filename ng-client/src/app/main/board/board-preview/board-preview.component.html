@@ -1,0 +1,8 @@
+<app-modal [title]="'Редактирование досок'">
+  <h4>Доступные доски ({{boardsLength}})</h4>
+  <mat-list role="list" class="board-list">
+    <app-board-item *ngFor="let board of boards" [board]="board" >
+
+    </app-board-item>
+  </mat-list>
+</app-modal>

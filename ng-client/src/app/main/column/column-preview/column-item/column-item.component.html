@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-content class="column-item" *ngIf="!editBoard; else edit">
+      <span>
+        {{ column.title }}
+      </span>
+    <button mat-icon-button (click)="toggleEdit(true)" color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteColumn()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-content>
+  <ng-template #edit>
+    <mat-card-content>
+      <div class="column-item">
+        <mat-form-field>
+          <input matInput type="text" [(ngModel)]="editColumn.title" maxlength="20" #title>
+          <mat-hint align="end">{{ title.value.length }} / 20</mat-hint>
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="changeColumn()">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button (click)="endEdit()" color="warn">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="column-item-attribute">
+        <mat-form-field>
+          <mat-label>Цвет этапа</mat-label>
+          <input matInput type='color' class="column-color" [(ngModel)]="editColumn.color"/>
+        </mat-form-field>
+        <mat-slide-toggle color="primary" [(ngModel)]="editColumn.final_stage">Финальный
+          этап
+        </mat-slide-toggle>
+      </div>
+    </mat-card-content>
+  </ng-template>
+</mat-card>

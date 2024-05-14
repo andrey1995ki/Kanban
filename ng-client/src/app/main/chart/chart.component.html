@@ -1,0 +1,16 @@
+<div id="chart" class="chart">
+  <h3>Статистика по доскам</h3>
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [plotOptions]="chartOptions.plotOptions"
+    [xaxis]="chartOptions.xaxis"
+    [theme]="{mode: (themeService.theme$|async) ==='dark-theme' ?'dark':'light'}"
+    *ngIf="!BSLoading; else loading"
+  ></apx-chart>
+  <ng-template #loading>
+    <div class="chart-loading">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</div>

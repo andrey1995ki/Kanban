@@ -1,0 +1,28 @@
+@import "../../../../assets/styles/assetsStyles";
+
+.preview-task {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-description {
+  min-height: 100px;
+  position: relative;
+  white-space: pre-line;
+}
+
+.preview-title {
+  margin: 5px 10px;
+}
+
+.task-actions {
+  position: absolute;
+  right: 0;
+}
+
+.task-delete {
+  color: darkred;
+}
+.task-status{
+  padding: 15px;
+}

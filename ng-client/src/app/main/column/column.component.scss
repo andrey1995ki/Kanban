@@ -1,0 +1,63 @@
+@import "assetsStyles";
+
+:host {
+  grid-row: 1 / 2;
+}
+
+.colum {
+  height: 99%;
+  width: 350px;
+  display: grid;
+  padding: 5px;
+  grid-template-rows: 30px 1fr;
+}
+
+.column-title {
+  display: grid;
+  grid-template-columns: 19px 1fr 12px;
+  align-items: center;
+  justify-content: start;
+  gap: 4px;
+
+  .title-color {
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid $border-color;
+  }
+
+  .title-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .title-text__done {
+      color: $primary-color
+    }
+  }
+}
+
+.column-tasks {
+  height: 79vh;
+  overflow-y: auto;
+  margin: 0 2px 2px 2px;
+}
+
+.empty-task {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.empty-icon {
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
+}

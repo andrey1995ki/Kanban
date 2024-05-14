@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content class="board-item" *ngIf="!editBoard; else edit">
+      <span>
+        {{ board.title }}
+      </span>
+    <button mat-icon-button (click)="toggleEdit(true)" color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" (click)="deleteBoard()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-content>
+  <ng-template #edit>
+    <mat-card-content class="board-item">
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="boardTitle" maxlength="30" #title>
+        <mat-hint align="end">{{ title.value.length }} / 30</mat-hint>
+      </mat-form-field>
+      <button mat-icon-button color="primary" (click)="changeBoard()">
+        <mat-icon>done</mat-icon>
+      </button>
+      <button mat-icon-button (click)="toggleEdit(false)" color="warn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-content>
+  </ng-template>
+</mat-card>

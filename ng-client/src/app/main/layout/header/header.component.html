@@ -1,0 +1,45 @@
+<div class="header">
+  <div class="header-app-title" [routerLink]="['/'+AppRoutesEnum.Main]">
+    <div class="app-title-icon">
+      <img
+        class="icon"
+        ngSrc="./assets/img/favicon.png"
+        alt="kanban" height="24" width="24"/>
+    </div>
+    <div class="app-title">
+      <h2>Kanban</h2>
+    </div>
+  </div>
+  <div class="header-data">
+    <div class="data-title">
+      <h2>{{ title }}</h2>
+    </div>
+    <div class="data-action" *ngIf="availableColumns || availableBoards">
+      <div>
+        <button mat-flat-button (click)="addTask()" *ngIf="availableColumns">
+          <mat-icon>add</mat-icon>
+          <span>Создать задачу</span>
+        </button>
+      </div>
+      <div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngIf="availableBoards" (click)="showBoards()">
+            <mat-icon>edit_note</mat-icon>
+            <span>Редактировать доски</span>
+          </button>
+          <button mat-menu-item *ngIf="title.length>0" (click)="showAccess()">
+            <mat-icon>account_box</mat-icon>
+            <span>Настройка доступа</span>
+          </button>
+          <button mat-menu-item *ngIf="availableColumns" (click)="showColumns()">
+            <mat-icon>edit</mat-icon>
+            <span>Редактировать колонки</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="colum">
+  <div class="column-title">
+    <span class="title-color" [style.background]="column.color"></span>
+    <div class="title-text">
+      <span>{{ column.title }}</span>
+      <mat-icon class="title-text__done" fontIcon="done" *ngIf="column.final_stage"></mat-icon>
+    </div>
+  </div>
+  <div  cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.id" (cdkDropListEntered)="enter()" (cdkDropListExited)="exited()" >
+    <div class="column-tasks" *ngIf="lengthTask!==0; else emptyTask">
+      <app-task cdkDrag  *ngFor="let t of task" [cdkDragDisabled]="column.final_stage | statusConversion" [task]="t" [id]="t.id"></app-task>
+      <div *cdkDragPlaceholder></div>
+    </div>
+    <ng-template #emptyTask>
+      <div *ngIf="!dragEnter" class="empty-task">
+        <mat-icon fontIcon="web_asset" class="empty-icon"></mat-icon>
+        <span>Нет задач</span>
+      </div>
+    </ng-template>
+  </div>
+
+</div>

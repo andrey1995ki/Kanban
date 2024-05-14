@@ -7,7 +7,6 @@ const WSController = function (app) {
     const aWss = WSServer(app).getWss()
     app.ws('/kanban/socket', (ws) => {
         console.log('start ws server')
-        ws.send('succses')
         let message = undefined
         const setMessage = (msg) => {
             message = msg
@@ -43,7 +42,6 @@ async function sendMessage(aWss, currentUserId, message) {
             SQLController.availableUserBoards = client.user_id
             const availableBoard = await SQLController.availableUserBoards
             if (availableBoard.find(board => Number(board.board_id) === Number(message.board))) {
-                console.log(message.message);
                 client.send(JSON.stringify({'messages': message.message}))
             }
         }

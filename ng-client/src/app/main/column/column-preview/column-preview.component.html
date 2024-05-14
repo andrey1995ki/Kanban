@@ -1,0 +1,8 @@
+<app-modal [title]="'Редактирование колонок'">
+  <h4>Колонки на этой доске ({{columnLength}})</h4>
+  <mat-list role="list" class="column-list">
+    <app-column-item *ngFor="let column of columns" [column]="column">
+
+    </app-column-item>
+  </mat-list>
+</app-modal>
