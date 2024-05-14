@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3001/kanban/api/',
-  wsUrl: 'ws://localhost:3001/kanban/socket'
+  apiUrl: 'http://localhost/kanban/api',
+  wsUrl: 'ws://localhost/kanban/socket'
 };

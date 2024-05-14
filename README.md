@@ -59,9 +59,25 @@
 - Websockets
   - [express-ws](https://github.com/HenningM/express-ws) для реализации Websocket сервара
 
+### NG-Клиент:
+
+Клиентска часть вэб-приложения реализованная на Angular повторяет аналогчиный функционал React клиента
+
+#### Реализация:
+
+- Фреймворк :
+  - [Angular](https://angular.io/)
+- Стейт менеджер:
+  - [NGRX](https://ngrx.io/)
+- Бибилиотека компонентов:
+  - [Angular Material](https://material.angular.io/)
+- График:
+  - [APEXCHARTS.JS](https://apexcharts.com/)
+
 ## Сборка проекта
 
 [Сервер](./server/Dockerfile) и [Клиент](./client/Dockerfile) собираются в свой _Docker_ контейнер и после разворачиваются через [_Docker Compose_](./docker-compose.yml)
+> Сборка [клиента Angular](./ng-client/Dockerfile) происходит через файл [_ng-docker-compose.yml_](./ng-docker-compose.yml)
 
 В клиентской части сначала происходит сборка проекта, а после сборка storybook. В последствии всё это запускается через _Nginx_
 

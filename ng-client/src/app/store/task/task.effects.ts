@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {TaskService} from "../../services/task/task.service";
-import {SetMessages, TaskActions} from "./task.actions";
-import {catchError, EMPTY, exhaustMap, map, tap} from "rxjs";
+import {TaskActions} from "./task.actions";
+import {catchError, EMPTY, map, switchMap, tap} from "rxjs";
 import {WSGetTaskMessages} from "../../services/task/task.model";
 
 @Injectable()
@@ -10,16 +10,19 @@ export class TaskEffects {
   getTask$ = createEffect(
     () => this.actions$.pipe(
       ofType(TaskActions.GetTask),
-      exhaustMap(
+      switchMap(
         () =>
           this.taskWS.getTask().pipe(
             map((task) => {
-              if((task as WSGetTaskMessages)?.messages){
+              if ((task as WSGetTaskMessages)?.messages) {
                 return ({type: TaskActions.SetMessages, payload: (task as WSGetTaskMessages).messages})
               }
               return ({type: TaskActions.SetTask, payload: task})
             }),
-            catchError(() => EMPTY)
+            catchError(() => {
+              console.log('Ошибка получения задач')
+              return EMPTY
+            })
           )
       )
     )

@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, catchError, distinctUntilChanged, EMPTY, Observable} from "rxjs";
+import {BehaviorSubject, catchError, distinctUntilChanged, EMPTY, Observable, ObservableInput} from "rxjs";
 import {webSocket} from "rxjs/webSocket";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../store/store";
 import {GetToken} from "../../store/auth";
 import {WSAddTaskPayload, WSEditTaskPayload, WSGetTaskMessages, WSGetTaskResponse} from "./task.model";
+import {environment} from "../../../environments/environment";
+import {HttpErrorResponse} from "@angular/common/http";
+import {GetTask} from "../../store/task/task.actions";
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +26,22 @@ export class TaskService {
     this.create()
   }
 
+  private handleError(error: HttpErrorResponse): ObservableInput<any> {
+    console.warn('Ошибка работы WS')
+    console.warn(error);
+    console.log('Переподключение')
+    this.close()
+    this.connect()
+    this.store.dispatch(new GetTask())
+    return EMPTY
+  }
+
   private create() {
     if (this.webSocket$) {
-      this.webSocket$.unsubscribe()
+      this.close()
     }
     this.webSocket$ = webSocket({
-      url: 'ws://localhost:3001/kanban/socket',
+      url: environment.wsUrl,
       openObserver: {
         next: () => {
           this.webSocket$.next({type: 'connect'})
@@ -39,8 +52,11 @@ export class TaskService {
         return dataRes || JSON.parse(data)
       }
     })
-    this.webSocket$.subscribe()
+    this.webSocket$.pipe(
+      catchError(() => EMPTY)
+    ).subscribe()
   }
+
 
   close() {
     if (this.webSocket$) {
@@ -52,7 +68,7 @@ export class TaskService {
     this.webSocket$.next({type: 'read', token: this.token})
     return this.webSocket$.pipe(
       distinctUntilChanged(),
-      catchError(_ => EMPTY)
+      catchError(this.handleError.bind(this))
     )
   }
 

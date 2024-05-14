@@ -7,7 +7,6 @@ const WSController = function (app) {
     const aWss = WSServer(app).getWss()
     app.ws('/kanban/socket', (ws) => {
         console.log('start ws server')
-        ws.send(JSON.stringify('succses'))
         let message = undefined
         const setMessage = (msg) => {
             message = msg
